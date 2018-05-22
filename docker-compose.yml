@@ -50,7 +50,7 @@ services:
         ports:
             - "8983:8983" 
     masternode:
-        build: ./master
+        build: ./masternode
         expose:
             - 7557
             - 8002
