@@ -3,15 +3,35 @@ services:
     nginx:
         build:
             context: ./nginx
+        logging:
+          driver: json-file
+          options:
+              max-size: "10m"
+              max-file: "5" 
+#        volumes:
+            #- ./ssl:/etc/nginx/ssl
+            #- ./nginx/etc/local-8000-service.conf:/etc/nginx/conf.d/local-8000-service.conf
+            # - ./etc/service-example-2.conf:/etc/nginx/service2.conf # more services, should be service*.conf              
         expose:
             - 80
             - 443
+            - 8000
         ports:
             - "80:80"     
-            - "443:443"     
+            - "443:443"   
+            - "8000:8000"
+        environment:
+            - TZ=Europe/Paris
+            - SSL_ENABLED=false
+            - LETSENCRYPT=false
+            - LE_EMAIL=jordi.escudero@worldline.com
+            - LE_FQDN=www.wlilab.eu,bloomen.wlilab.eu
+            - USER=bloomen
+            - PASSWORD=12345
         links:
             - admin-portal
-            - api            
+            - api
+            - solr
     admin-portal:
         build:
             context: ./admin-portal
@@ -21,6 +41,11 @@ services:
               RPC_USER: "multichainrpc"
               RPC_PASSWORD: "this-is-insecure-change-it"
               MASTER_NODE: "masternode"
+        logging:
+          driver: json-file
+          options:
+              max-size: "10m"
+              max-file: "5"   
         expose:
             - 80
         ports:
@@ -32,6 +57,11 @@ services:
     api:
         build:
             context: ./api
+        logging:
+          driver: json-file
+          options:
+              max-size: "10m"
+              max-file: "5"   
         expose:
             - 3000
         ports:
@@ -43,14 +73,27 @@ services:
             - slavenode            
             - solr
     solr:
-        build:
-            context: ./solr            
+        image: solr:7.3-slim
+        logging:
+          driver: json-file
+          options:
+              max-size: "10m"
+              max-file: "5"   
         expose:
             - 8983
         ports:
             - "8983:8983" 
+        entrypoint:
+            - docker-entrypoint.sh
+            - solr-precreate
+            - demo-bloomen-registry-claim-m12
     masternode:
         build: ./masternode
+        logging:
+          driver: json-file
+          options:
+              max-size: "10m"
+              max-file: "5"   
         expose:
             - 7557
             - 8002
@@ -67,6 +110,11 @@ services:
             PARAM_ANYONE_CAN_CONNECT: anyone-can-connect|true
     slavenode:
         build: ./slavenode
+        logging:
+          driver: json-file
+          options:
+              max-size: "10m"
+              max-file: "5"   
         expose:
             - 7557
             - 8002
