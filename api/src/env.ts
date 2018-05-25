@@ -74,4 +74,16 @@ export const env = {
         username: getOsEnv('MONITOR_USERNAME'),
         password: getOsEnv('MONITOR_PASSWORD'),
     },
+    solr: {
+        host: getOsEnv('SOLR_HOST'),
+        port: toNumber(getOsEnv('SOLR_PORT')),
+        core: getOsEnv('SOLR_CORE'),
+        path: getOsEnv('SOLR_PATH'),
+    },
+    multichain: {
+        host: getOsEnv('MULTICHAIN_HOST'),
+        port: toNumber(getOsEnv('MULTICHAIN_PORT')),
+        user: getOsEnv('MULTICHAIN_USER'),
+        pass: getOsEnv('MULTICHAIN_PASS'),
+    },
 };

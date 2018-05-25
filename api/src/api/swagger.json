@@ -16,6 +16,9 @@
     "schemes": [],
     "tags": [
       {
+        "name": "Wallet"
+      },
+      {
         "name": "Search"
       },
       {
@@ -26,6 +29,74 @@
       }
     ],
     "paths": {
+      "/wallet": {
+        "get": {
+          "tags": [
+            "Wallet"
+          ],
+          "summary": "",
+          "description": "",
+          "responses": {
+            "200": {
+              "description": "ok",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "success": {
+                    "type": "boolean"
+                  },
+                  "message": {
+                    "type": "string"
+                  },
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/definitions/Address"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "tags": [
+            "Wallet"
+          ],
+          "summary": "",
+          "description": "",
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Create a new Address on the wallet",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/NewAddress"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "ok",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "success": {
+                    "type": "boolean"
+                  },
+                  "message": {
+                    "type": "string"
+                  },
+                  "data": {
+                    "$ref": "#/definitions/Address"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "/search": {
         "get": {
           "tags": [
@@ -412,6 +483,14 @@
             }
           }
       },
+      "NewAddress": {
+        "type": "object",
+        "properties": {
+            "name": {
+                "type":"string"
+            }
+          }
+      },
       "NewClaim": {
         "type": "object",
         "properties": {
@@ -465,6 +544,22 @@
           },
           {
             "$ref": "#/definitions/NewAsset"
+          }
+        ]
+      },
+      "Address": {
+        "title": "Address",
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+                "id": {
+                "type": "string"
+                }
+            }
+          },
+          {
+            "$ref": "#/definitions/NewAddress"
           }
         ]
       },

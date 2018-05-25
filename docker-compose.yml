@@ -97,8 +97,6 @@ services:
         expose:
             - 7557
             - 8002
-        ports:
-            - "8002:8002" 
         environment:
             CHAINNAME: MyChain
             NETWORK_PORT: 7557
@@ -118,6 +116,8 @@ services:
         expose:
             - 7557
             - 8002
+        ports:
+            - "8002:8002"
         environment:
             CHAINNAME: MyChain
             NETWORK_PORT: 7557
