@@ -16,7 +16,6 @@ export const swaggerLoader: MicroframeworkLoader = (settings: MicroframeworkSett
             description: env.app.description,
             version: env.app.version,
         };
-		
         swaggerFile.host = `${env.app.host}:${env.app.port}`;
         swaggerFile.basePath = env.app.routePrefix;
         swaggerFile.schemes = [env.app.schema];
@@ -30,15 +29,11 @@ export const swaggerLoader: MicroframeworkLoader = (settings: MicroframeworkSett
                 challenge: true,
             }) : (req, res, next) => next(),
             swaggerUi.serve,
-			
-			
-			
-//            swaggerUi.setup(swaggerFile)
-			function(req, res) {
-				swaggerFile.host = req.get('host'); // Replace hardcoded host information in Swagger file
-				swaggerFile.schemes = [req.protocol]; // Replace hardcoded protocol information in Swagger file
-				swaggerUi.setup(swaggerFile)(req, res);
-			  }
+                 (req: any, res: any): void => {
+                    swaggerFile.host = req.get('host'); // Replace hardcoded host information in Swagger file
+                    swaggerFile.schemes = [req.protocol]; // Replace hardcoded protocol information in Swagger file
+                    swaggerUi.setup(swaggerFile)(req, res);
+                }
 
         );
 
