@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 import { HeroService } from '../services/hero.service';
 import { DialogComponent } from './../dialog/dialog.component';
@@ -16,17 +16,20 @@ import { AddressModel } from '../Models/Address.model';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
+
+
 /**
  * S'encarrega de mostrar un llistat en funcio de la busqueda que es faci al cercador
  */
 export class HomeComponent implements OnInit {
 
+  @ViewChild('searchname') searchname;
   public isLoading: boolean;
   public heroes: Object[];
   public valor: string = "";
   private last_cerca: string = "";
   private quant: number;
-  
+
   private currentAddress: AddressModel;
 
   private offset: number;
@@ -36,8 +39,8 @@ export class HomeComponent implements OnInit {
 
 
   constructor(
-    private quoteService: QuoteService, 
-    private heroService: HeroService, 
+    private quoteService: QuoteService,
+    private heroService: HeroService,
     public dialog: MatDialog,
     private addressStore: AddressStore
   ) {
@@ -62,7 +65,7 @@ export class HomeComponent implements OnInit {
   }
 
   /**
-   * Cada cop que es prem una tecla al cercador s'encarrega d'invalidar el llistat anterior si no correspon amb 
+   * Cada cop que es prem una tecla al cercador s'encarrega d'invalidar el llistat anterior si no correspon amb
    * l'actual cerca a més permet fer reload de la llista per cada tecla que afegim a la cerca
    */
   checkinput() {
@@ -76,7 +79,8 @@ export class HomeComponent implements OnInit {
   /**
    * S'encarrega de fer la crida al servei per tal d'obtenir el nou llistat en funcio de la cerca
    */
-  getStoriesInput() { 
+  getStoriesInput() {
+    this.searchname.nativeElement.blur();
     return new Promise<any>((resolve, reject) => {
       if (this.valor) {
         this.isLoading = true;
@@ -112,13 +116,13 @@ export class HomeComponent implements OnInit {
           reject(error);
         })
       }
-      
+
     })
 
   }
 
   /**
-   * S'encarrega d'incrementar el llistat en funcio del scroll que s'esta fent 
+   * S'encarrega d'incrementar el llistat en funcio del scroll que s'esta fent
    */
   private _processData(news: any, quant: number) {
     this.offset += 4;
