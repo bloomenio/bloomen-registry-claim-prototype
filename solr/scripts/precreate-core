@@ -39,7 +39,7 @@ if [[ ! -d $coredir ]]; then
     cp -r "$CONFIG_SOURCE/" "$coredir"
     touch "$coredir/core.properties"
 # 	 '<!-- <copyField source="*" dest="_text_"/> -->'
-#	 sed -i 's/<!-- <copyField source="*" dest="_text_"/> -->/<copyField source="*" dest="_text_"/>/g' "$coredir/conf/managed-schema"
+	sed -i 's/<!-- <copyField source="\*" dest="_text_"\/> -->/<copyField source="\*\" dest="_text_"\/\>/' "$coredir/conf/managed-schema"
 
     echo created "$CORE"
 else
