@@ -1,5 +1,7 @@
 import { Service } from 'typedi';
 
+import { Address } from '../models/Address';
+
 @Service()
 export class MultichainService {
 
@@ -12,24 +14,31 @@ export class MultichainService {
 
      public setInstance(multichainInstance: any): any {  this.multichainInstance = multichainInstance; }
 
-     public sayHello(): void {
-        this.multichainInstance.getAddresses((err, addresses) => {
-            console.log(addresses);
-            try {
-                this.multichainInstance.issue(
-                    {address: addresses[0], asset: {name: 'koko8', open: true}, qty: 50000, units: 0.01, details: {hello: 'world'}},
-                     (err2, res) => {
-                         console.log(res);
-                     });
-            } catch (error) {
-                console.log(error);
-            }
-
+    public getAddress(): Promise<Address[]> {
+        const resultPromise = new Promise<Address[]>((resolve, reject) => {
+            this.multichainInstance.getAddresses((err, addresses) => {
+                console.log(addresses);
+                const data: Address[] = [];
+                for (const addr of addresses) {
+                    const item = new Address(addr);
+                    data.push(item);
+                }
+                resolve(data);
+            });
         });
-
-        console.log('hello');
+        return resultPromise;
     }
 
-     public sayHello2(): void { console.log(this.multichainInstance); }
+    public createAddress(): Promise<Address> {
+        const resultPromise = new Promise<Address>((resolve, reject) => {
+            this.multichainInstance.getNewAddress((err, addr) => {
+                const item = new Address(addr);
+                resolve(item);
+            });
+        });
+        return resultPromise;
+    }
+
+     public sayHello(): void { console.log(this.multichainInstance); }
 
 }

@@ -7,6 +7,11 @@ export class Address {
     @IsNotEmpty()
     public name: string;
 
+    constructor(name: string) {
+        this.id = name;
+        this.name = name;
+    }
+
     public toString(): string {
         return `${this.name}`;
     }

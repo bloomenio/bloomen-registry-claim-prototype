@@ -1,19 +1,18 @@
 import { Get, JsonController, QueryParam } from 'routing-controllers';
 
 import { Asset } from '../models/Asset';
-import { MultichainService } from '../services/MultichainService';
+import { SolrService } from '../services/SolrService';
 
 @JsonController('/search')
 export class SearchController {
 
     constructor(
-        private multichainService: MultichainService
+        private solrService: SolrService
     ) { }
 
     @Get()
-    public find(@QueryParam('q') q: string): Promise<Asset[]> {
-        this.multichainService.sayHello();
-        return undefined;
+    public find(@QueryParam('q') q: string, @QueryParam('limit') limit: number, @QueryParam('offset') offset: number): Promise<Asset[]> {
+        return this.solrService.getSearch(q, limit, offset);
     }
 
 }

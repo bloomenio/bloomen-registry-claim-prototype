@@ -65,17 +65,6 @@
           ],
           "summary": "",
           "description": "",
-          "parameters": [
-            {
-              "in": "body",
-              "name": "body",
-              "description": "Create a new Address on the wallet",
-              "required": true,
-              "schema": {
-                "$ref": "#/definitions/NewAddress"
-              }
-            }
-          ],
           "responses": {
             "200": {
               "description": "ok",
@@ -89,7 +78,10 @@
                     "type": "string"
                   },
                   "data": {
-                    "$ref": "#/definitions/Address"
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/definitions/Address"
+                    }
                   }
                 }
               }
@@ -483,14 +475,6 @@
             }
           }
       },
-      "NewAddress": {
-        "type": "object",
-        "properties": {
-            "name": {
-                "type":"string"
-            }
-          }
-      },
       "NewClaim": {
         "type": "object",
         "properties": {
@@ -555,11 +539,11 @@
             "properties": {
                 "id": {
                 "type": "string"
+                },
+                "name": {
+                "type":"string"
                 }
             }
-          },
-          {
-            "$ref": "#/definitions/NewAddress"
           }
         ]
       },

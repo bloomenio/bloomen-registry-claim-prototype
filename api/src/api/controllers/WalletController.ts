@@ -12,13 +12,12 @@ export class WalletController {
 
     @Get()
     public find(): Promise<Address[]> {
-        this.multichainService.sayHello();
-        return undefined;
+        return this.multichainService.getAddress();
     }
 
     @Post()
-    public create( @Body() claim: Address): Promise<Address> {
-        return undefined;
+    public create( @Body() claim: Address): Promise<Address[]> {
+        return this.multichainService.createAddress().then(() => this.find());
     }
 
 }
