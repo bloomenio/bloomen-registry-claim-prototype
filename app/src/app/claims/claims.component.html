@@ -1,0 +1,33 @@
+<div class="container">
+    <mat-card>
+        <mat-card-content>
+            <p>
+                <img class="logo" src="assets/Bloomen-Logo-on-website-300x115.png" alt="angular logo" />
+            </p>
+        </mat-card-content>
+    </mat-card>
+
+    <div *ngFor="let hero of claims">
+        <mat-card class="item-card">
+            <mat-card-header class="header">
+                <img class="avatar" mat-card-avatar src="{{hero.thumbnail.path}}.{{hero.thumbnail.extension}}">
+                <mat-card-title class="title">{{hero.name}}</mat-card-title>
+                <div class="button">
+                    <button mat-icon-button (click)="openDialog()">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                    <button mat-icon-button (click)="openDialog()">
+                        <mat-icon>remove</mat-icon>
+                    </button>
+                </div>
+            </mat-card-header>
+            <mat-card-content class="content">
+                {{hero.description}}
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    <mat-card class="spinner" *ngIf="isLoading">
+        <mat-spinner></mat-spinner>
+    </mat-card>
+</div>

@@ -1,0 +1,21 @@
+{
+  "generator-ngx-rocket": {
+    "version": "4.2.0",
+    "props": {
+      "location": "path",
+      "appName": "Bloomen",
+      "target": [
+        "web"
+      ],
+      "pwa": true,
+      "ui": "material",
+      "layout": "side-menu",
+      "auth": true,
+      "lazy": false,
+      "angulartics": false,
+      "projectName": "bloomen",
+      "packageManager": "npm",
+      "mobile": []
+    }
+  }
+}

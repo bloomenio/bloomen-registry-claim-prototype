@@ -1,0 +1,25 @@
+<div class="dialog">
+    <h1 mat-dialog-title> Reasons </h1>
+    <mat-dialog-content class="example-container">
+        <form (ngSubmit)="onSubmit()" #claimsForm="ngForm">
+            <div>
+                <mat-form-field>
+                    <input matInput type="text" id="newadd" required [(ngModel)]="newadd" name="name" #name="ngModel" placeholder="Insert your new address">
+                </mat-form-field>
+            </div>
+            <mat-dialog-actions>
+                <button mat-raised-button type="button" (click)="close()"> Close </button>
+                <button mat-raised-button type="submit" [disabled]="!claimsForm.form.valid"> Submit </button>
+            </mat-dialog-actions>
+        </form>
+        <br>
+        <div [hidden]="!submitted">
+            <h2>You submitted the following:</h2>
+            <div>
+                <div> New Address: {{ newadd }} </div>
+            </div>
+            <br>
+            <button mat-raised-button (click)="submitted=false">Edit</button>
+        </div>
+    </mat-dialog-content>
+</div>

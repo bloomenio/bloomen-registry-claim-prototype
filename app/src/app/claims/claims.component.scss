@@ -1,0 +1,41 @@
+.container {
+  text-align: center;
+  padding: 1em;
+}
+
+.logo {
+  width: 300px;
+  height: auto;
+  margin: 0 auto;
+}
+
+q {
+  font-style: italic;
+  quotes: "« " " »";
+}
+
+.item {
+  margin-top: 20px;
+}
+
+.title {
+  margin: 0 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.content {
+  margin-top: 20px;
+}
+
+.item-card {
+  margin: 20px 0;
+}
+
+.spinner {
+  display: flex;
+  justify-content: space-around;
+}

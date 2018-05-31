@@ -1,0 +1,56 @@
+.container {
+  text-align: center;
+  padding: 1em;
+}
+
+.logo {
+  width: 300px;
+  height: auto;
+  margin: 0 auto;
+}
+
+q {
+  font-style: italic;
+  quotes: "« " " »";
+}
+
+.item-card {
+  margin: 20px 0;
+}
+
+.title {
+  margin: 0 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.content {
+  margin-top: 20px;
+}
+
+.fab {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+}
+
+.spinner {
+  display: flex;
+  justify-content: space-around;
+}
+
+.scroll {
+  -ms-overflow-style: none;  // IE 10+
+  overflow: -moz-scrollbars-none;  // Firefox
+}
+
+.scroll::-webkit-scrollbar { 
+  display: none;  // Safari and Chrome
+}
+
+.scroll {
+  overflow: auto;
+}
