@@ -73,7 +73,8 @@ services:
             - slavenode            
             - solr
     solr:
-        image: solr:7.3-slim
+        build:
+            context: ./solr
         logging:
           driver: json-file
           options:
