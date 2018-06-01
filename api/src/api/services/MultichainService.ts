@@ -7,11 +7,6 @@ export class MultichainService {
 
     private multichainInstance: any;
 
-    constructor(
-    ) {
-        console.log('create');
-    }
-
      public setInstance(multichainInstance: any): any {  this.multichainInstance = multichainInstance; }
 
     public getAddress(): Promise<Address[]> {
@@ -38,7 +33,5 @@ export class MultichainService {
         });
         return resultPromise;
     }
-
-     public sayHello(): void { console.log(this.multichainInstance); }
 
 }

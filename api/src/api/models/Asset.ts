@@ -6,6 +6,12 @@ export class Asset {
 
     @IsNotEmpty()
     public name: string;
+    @IsNotEmpty()
+    public author: string;
+    @IsNotEmpty()
+    public description: string;
+    @IsNotEmpty()
+    public date: Date;
 
     public toString(): string {
         return `${this.name}`;

@@ -15,8 +15,10 @@ export const scheduleLoader: MicroframeworkLoader = (settings: MicroframeworkSet
             for (let i = 0; i <= 10 ; i++ ) {
                 const doc = {
                     id : 12345 + i,
-                    title_t : 'Title ' + i,
+                    name_t : 'Title ' + i,
+                    author_t : 'Author' + i,
                     description_t : 'Text' + i + 'Alice',
+                    date_dt: new Date(),
                 };
                 docs.push(doc);
             }

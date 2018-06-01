@@ -13,7 +13,7 @@ export class ClaimController {
 
     @Get()
     public find(): Promise<Claim[]> {
-        this.multichainService.sayHello();
+        this.multichainService.getAddress();
         return undefined;
     }
 

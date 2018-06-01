@@ -14,7 +14,7 @@ export class RegistryController {
     @Get('/:id')
     @OnUndefined(AssetNotFoundError)
     public one( @Param('id') id: string): Promise<Asset | undefined> {
-        this.multichainService.sayHello();
+        this.multichainService.getAddress();
         return undefined;
     }
 

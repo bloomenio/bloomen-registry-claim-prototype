@@ -7,24 +7,37 @@ export class SolrService {
 
     private solrClient: any;
 
-    constructor(
-    ) {
-        console.log('create');
-    }
-
     public setInstance(solrClient: any): any {  this.solrClient = solrClient; }
 
     public getSearch(query: string= '*', limit: number= 50, offset: number= 0): Promise<Asset[]> {
         const resultPromise = new Promise<Asset[]>((resolve, reject) => {
             console.log(query);
-            resolve(undefined);
+
             const queryObj = this.solrClient.createQuery()
-                                .q(query)
+                                .q( {_text_: query} )
                                 .start(offset)
                                 .rows(limit);
 
-            this.solrClient.search(queryObj, (err, obj) => console.log(err, obj));
+            this.solrClient.search(queryObj, (err, obj) => {
 
+                if (obj) {
+                    const resultData: Asset[] = [];
+
+                    for (const doc of obj.response.docs) {
+                        const asset = new Asset();
+                        asset.id = doc.id;
+                        asset.name = doc.name_t;
+                        asset.author = doc.author_t;
+                        asset.description = doc.description_t;
+                        asset.date = doc.date_dt;
+                        resultData.push(asset);
+                    }
+
+                    console.log(resultData);
+                    resolve(resultData);
+                }
+
+            });
         });
         return resultPromise;
     }
