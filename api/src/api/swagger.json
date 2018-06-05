@@ -154,7 +154,7 @@
           }
         }
       },
-      "/registry": {
+      "/wallet/{address}/registry": {
         "post": {
           "tags": [
             "Registry"
@@ -163,9 +163,9 @@
           "description": "",
           "parameters": [
             {
-              "name": "id",
+              "name": "address",
               "in": "path",
-              "description": "ID of asset to return",
+              "description": "address used",
               "required": true,
               "type": "string"
             },
@@ -200,7 +200,7 @@
           }
         }
       },
-      "/registry/{id}": {
+      "/wallet/{address}/registry/{id}": {
         "get": {
           "tags": [
             "Registry"
@@ -208,6 +208,20 @@
           "summary": "",
           "description": "",
           "parameters": [
+            {
+              "name": "address",
+              "in": "path",
+              "description": "address used",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "address",
+              "in": "path",
+              "description": "address used",
+              "required": true,
+              "type": "string"
+            },
             {
               "name": "id",
               "in": "path",
@@ -241,6 +255,20 @@
             "Registry"
           ],
           "parameters": [
+            {
+              "name": "address",
+              "in": "path",
+              "description": "address used",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "address",
+              "in": "path",
+              "description": "address used",
+              "required": true,
+              "type": "string"
+            },
             {
               "name": "id",
               "in": "path",
@@ -279,7 +307,7 @@
           }
         }
       },
-      "/claim": {
+      "/wallet/{address}/claim": {
         "get": {
           "tags": [
             "Claim"
@@ -287,6 +315,13 @@
           "summary": "",
           "description": "",
           "parameters": [
+            {
+              "name": "address",
+              "in": "path",
+              "description": "address used",
+              "required": true,
+              "type": "string"
+            },
             {
               "in": "query",
               "name": "limit",
@@ -375,7 +410,7 @@
           }
         }
       },
-      "/claim/{id}": {
+      "/wallet/{address}/claim/{id}": {
         "get": {
           "tags": [
             "Claim"
@@ -383,6 +418,13 @@
           "summary": "",
           "description": "",
           "parameters": [
+            {
+              "name": "address",
+              "in": "path",
+              "description": "address used",
+              "required": true,
+              "type": "string"
+            },
             {
               "name": "id",
               "in": "path",
@@ -419,6 +461,13 @@
           "description": "",
           "parameters": [
             {
+              "name": "address",
+              "in": "path",
+              "description": "address used",
+              "required": true,
+              "type": "string"
+            },
+            {
               "name": "id",
               "in": "path",
               "description": "ID of claim to update",
@@ -449,6 +498,54 @@
                   },
                   "data": {
                     "$ref": "#/definitions/Claim"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "patch": {
+          "tags": [
+            "Claim"
+          ],
+          "summary": "",
+          "description": "",
+          "parameters": [
+            {
+              "name": "address",
+              "in": "path",
+              "description": "address used",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "id",
+              "in": "path",
+              "description": "ID of claim to update",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Claim object that needs to be updated",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/ClaimResponse"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "ok",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "success": {
+                    "type": "boolean"
+                  },
+                  "message": {
+                    "type": "string"
                   }
                 }
               }
@@ -558,6 +655,19 @@
             "type": "object",
             "properties": {
               "id": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "ClaimResponse": {
+        "title": "ClaimResponse",
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "name": {
                 "type": "string"
               }
             }
