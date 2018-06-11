@@ -380,6 +380,13 @@
           "description": "",
           "parameters": [
             {
+              "name": "address",
+              "in": "path",
+              "description": "address used",
+              "required": true,
+              "type": "string"
+            },
+            {
               "in": "body",
               "name": "body",
               "description": "Claim object that needs to be added",
