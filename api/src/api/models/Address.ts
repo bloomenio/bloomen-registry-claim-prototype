@@ -1,19 +1,11 @@
 import { IsNotEmpty } from 'class-validator';
 
 export class Address {
-
+    @IsNotEmpty()
     public id: string;
 
-    @IsNotEmpty()
-    public name: string;
-
-    constructor(name: string) {
-        this.id = name;
-        this.name = name;
-    }
-
-    public toString(): string {
-        return `${this.name}`;
+    constructor(id: string) {
+        this.id = id;
     }
 
 }

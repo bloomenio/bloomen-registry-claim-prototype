@@ -2,16 +2,13 @@ import { IsNotEmpty } from 'class-validator';
 
 export class Task {
 
-    public id: string;
+    public issueId: string;
+    public claimId: string;
+    public claimOwner: string;
+
+    public from: string;
+    public to: string;
 
     @IsNotEmpty()
     public description: string;
-
-    public issueRef: string;
-
-    @IsNotEmpty()
-    public assetRef: string;
-    @IsNotEmpty()
-    public ownerRef: string;
-
 }

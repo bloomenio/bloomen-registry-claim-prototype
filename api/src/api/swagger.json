@@ -538,7 +538,7 @@
           }
         }
       },
-      "/wallet/{address}/tasks/{id}": {
+      "/wallet/{address}/tasks/{issueId}": {
         "put": {
           "tags": [
             "Tasks"
@@ -554,9 +554,9 @@
               "type": "string"
             },
             {
-              "name": "id",
+              "name": "issueId",
               "in": "path",
-              "description": "ID of claim to update",
+              "description": "ID of issue to update",
               "required": true,
               "type": "string"
             },
@@ -566,7 +566,7 @@
               "description": "Claim object that needs to be updated",
               "required": true,
               "schema": {
-                "$ref": "#/definitions/Task"
+                "$ref": "#/definitions/ResponseTask"
               }
             }
           ],
@@ -583,7 +583,7 @@
                     "type": "string"
                   },
                   "data": {
-                    "$ref": "#/definitions/Claim"
+                    "$ref": "#/definitions/Task"
                   }
                 }
               }
@@ -593,6 +593,19 @@
       }
     },
     "definitions": {
+      "Address": {
+        "title": "Address",
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+                "id": {
+                "type": "string"
+                }
+            }
+          }
+        ]
+      },
       "NewAsset": {
         "type": "object",
         "properties": {
@@ -604,30 +617,8 @@
             },
             "description": {
                 "type":"string"
-            },
-            "date": {
-              "type": "string",
-              "format": "date-time"
             }
           }
-      },
-      "NewClaim": {
-        "type": "object",
-        "properties": {
-          "date": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "assetRef":{
-              "type" :"string"
-          },
-          "ownerRef":{
-              "type" :"string"
-          },
-          "description": {
-              "type":"string"
-          }
-        }
       },
       "Asset": {
         "title": "Asset",
@@ -635,8 +626,11 @@
           {
             "type": "object",
             "properties": {
-                "id": {
-                "type": "string"
+                "assetId": {
+                  "type": "string"
+                },
+                "assetOwner": {
+                  "type": "string"
                 }
             }
           },
@@ -645,21 +639,19 @@
           }
         ]
       },
-      "Address": {
-        "title": "Address",
-        "allOf": [
-          {
-            "type": "object",
-            "properties": {
-                "id": {
-                "type": "string"
-                },
-                "name": {
-                "type":"string"
-                }
-            }
+      "NewClaim": {
+        "type": "object",
+        "properties": {
+          "assetId":{
+              "type" :"string"
+          },
+          "assetOwner":{
+              "type" :"string"
+          },
+          "description": {
+              "type":"string"
           }
-        ]
+        }
       },
       "Claim": {
         "title": "Claim",
@@ -672,6 +664,37 @@
             "properties": {
               "id": {
                 "type": "string"
+              },
+              "claimId": {
+                "type": "string"
+              },
+              "claimOwner": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+
+      "NewTask": {
+        "type": "object",
+        "properties": {
+          "description":{
+              "type" :"string"
+          }
+        }
+      },
+      "ResponseTask": {
+        "title": "ResponseTask",
+        "allOf": [
+          {
+            "$ref": "#/definitions/NewTask"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "to": {
+                "type": "string"
               }
             }
           }
@@ -681,12 +704,21 @@
         "title": "Task",
         "allOf": [
           {
+            "$ref": "#/definitions/ResponseTask"
+          },
+          {
             "type": "object",
             "properties": {
-              "id": {
+              "issueId": {
                 "type": "string"
               },
-              "description": {
+              "claimId": {
+                "type": "string"
+              },
+              "claimOwner": {
+                "type": "string"
+              },
+              "from": {
                 "type": "string"
               }
             }

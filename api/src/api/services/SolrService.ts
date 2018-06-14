@@ -25,11 +25,11 @@ export class SolrService {
 
                     for (const doc of obj.response.docs) {
                         const asset = new Asset();
-                        asset.id = doc.id;
+                        asset.assetId = doc.id;
+                        asset.assetOwner = doc.assetOwner;
                         asset.name = doc.name_t;
                         asset.author = doc.author_t;
                         asset.description = doc.description_t;
-                        asset.date = doc.date_dt;
                         resultData.push(asset);
                     }
 

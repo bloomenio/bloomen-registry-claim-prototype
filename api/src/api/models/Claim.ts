@@ -2,16 +2,15 @@ import { IsNotEmpty } from 'class-validator';
 
 export class Claim {
 
-    public id: string;
+    public claimId: string;
+    public claimOwner: string;
+
+    public assetId: string;
+    public assetOwner: string;
+
+    public issueId: string;
 
     @IsNotEmpty()
     public description: string;
-
-    public issueRef: string;
-
-    @IsNotEmpty()
-    public assetRef: string;
-    @IsNotEmpty()
-    public ownerRef: string;
 
 }

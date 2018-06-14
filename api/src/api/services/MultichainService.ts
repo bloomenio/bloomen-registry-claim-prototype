@@ -64,12 +64,11 @@ export class MultichainService {
     public createAsset(address: string, asset: Asset): Promise<Asset> {
         const resultPromise = new Promise<Asset>((resolve, reject) => {
             this.checkAccount(address).then( () => {
-                asset.id = this.generateAssetId(address, asset);
+                asset.assetId = this.generateAssetId(address, asset);
                 this.multichainInstance.publishFrom({from: address, stream: this.generateAssetsStreamName(address),
-                                                key: asset.id , data: new Buffer(JSON.stringify(asset)).toString('hex') }).then( () => {
+                                                key: asset.assetId , data: new Buffer(JSON.stringify(asset)).toString('hex') }).then( () => {
                     resolve(asset);
                 }, (err) => {
-                   // Error in publish
                    reject(err);
                 });
             });
@@ -80,12 +79,11 @@ export class MultichainService {
     public updateAsset(address: string, id: string, asset: Asset): Promise<Asset> {
         // TODO: check if the user has permissions to publish a new version of the asset
         const resultPromise = new Promise<Asset>((resolve, reject) => {
-            asset.id = id;
+            asset.assetId = id;
             this.multichainInstance.publishFrom({from: address, stream: this.generateAssetsStreamName(address),
-                                            key: asset.id , data: new Buffer(JSON.stringify(asset)).toString('hex') }).then( () => {
+                                            key: asset.assetId , data: new Buffer(JSON.stringify(asset)).toString('hex') }).then( () => {
                 resolve(asset);
             }, (err) => {
-               // Error in publish
                reject(err);
             });
         });
@@ -139,6 +137,8 @@ export class MultichainService {
                        claims.push(claim);
                     }
                     resolve(claims);
+                }, (err) => {
+                    reject(err);
                 });
         });
         return resultPromise;
@@ -161,29 +161,32 @@ export class MultichainService {
 
     public createClaim(address: string, claim: Claim): Promise<Claim> {
         const resultPromise = new Promise<Claim>((resolve, reject) => {
-            claim.id = this.generateClaimId(address, claim);
-            claim.issueRef = this.generateClaimIssueName(address, claim);
+            claim.claimId = this.generateClaimId(address, claim);
+            claim.issueId = this.generateClaimIssueName(address, claim);
+            claim.claimOwner = address;
             this.checkAccount(address).then( () => {
                 // Issue a token for the concrete claim.
                 return this.multichainInstance.issueFrom(
                     {
-                        from: address,
-                        to: claim.ownerRef,
+                        from: claim.claimOwner,
+                        to: claim.assetOwner,
                         asset: {
-                                name: claim.issueRef,
+                                name: claim.issueId,
                                 open: false,
                                 },
                         qty: 1,
                         details: {
-                                assetRef: claim.id,
-                                ownerRef: claim.ownerRef,
+                                assetId: claim.assetId,
+                                assetOwner: claim.assetOwner,
+                                claimOwner: claim.claimOwner,
+                                issueId: claim.issueId,
                                 },
                     });
             }).then((issuedRef) => {
                 // subscribe to the token
                 return this.multichainInstance.subscribe(
                     {
-                        stream: claim.issueRef,
+                        stream: claim.issueId,
                     });
             })
             .then(() => {
@@ -192,29 +195,33 @@ export class MultichainService {
                     {
                         from: address,
                         stream: this.generateClaimsStreamName(address),
-                        key: claim.id,
+                        key: claim.claimId,
                         data: new Buffer(JSON.stringify(claim)).toString('hex'),
                     });
             }).then(() => {
                 // send the token to the asset owner.
                 const requestAmount = {};
-                requestAmount[claim.issueRef] = 1;
+                requestAmount[claim.issueId] = 1;
                 const task: Task = new Task();
-                task.assetRef = claim.assetRef;
-                task.description = '[TASK] claim free text msg ....';
-                task.issueRef = claim.issueRef;
-                task.ownerRef = claim.ownerRef;
+                task.claimId = claim.claimId;
+                task.description = 'Initial claim msg';
+                task.issueId = claim.issueId;
+                task.claimOwner = claim.claimOwner;
+                task.from = address;
+                task.to = claim.claimOwner;
                 // TODO: not clear that the owner data and reference are correct.
                 return this.multichainInstance.sendWithMetadataFrom(
                     {
-                        from: address,
-                        to: claim.ownerRef,
+                        from: task.from,
+                        to: task.to,
                         amount: requestAmount,
                         data: new Buffer(JSON.stringify(task)).toString('hex'),
                     });
             }).then( () => {
                 resolve(claim);
-            });
+            }, (err) => {
+                reject(err);
+            } );
         });
         return resultPromise;
      }
@@ -223,12 +230,11 @@ export class MultichainService {
         // TODO: update the claim stream with my changes because the scanner only operates over the destiny.
         // TODO: check if the user has permissions to publish a new version of the asset
         const resultPromise = new Promise<Claim>((resolve, reject) => {
-            claim.id = id;
+            claim.claimId = id;
             this.multichainInstance.publishFrom({from: address, stream: this.generateClaimsStreamName(address),
-                                            key: claim.id , data: new Buffer(JSON.stringify(claim)).toString('hex') }).then( () => {
+                                            key: claim.claimId , data: new Buffer(JSON.stringify(claim)).toString('hex') }).then( () => {
                 resolve(claim);
             }, (err) => {
-                // Error in publish
                 reject(err);
             });
         });
@@ -275,21 +281,25 @@ export class MultichainService {
         return resultPromise;
      }
 
-    public updateTask(address: string, id: string,  task: Task): Promise<Task> {
+    public updateTask(address: string, issueId: string,  task: Task): Promise<Task> {
         // TODO: send the token with payload in order to resolve the claim.
         // the history of the token transaction are the interactions that has been made in order to solve the claim
         const resultPromise = new Promise<Task>((resolve, reject) => {
             // send the token to the asset owner.
             const requestAmount = {};
-            requestAmount[id] = 1;
+            requestAmount[issueId] = 1;
+            task.from = address;
+            task.issueId = issueId;
            this.multichainInstance.sendWithMetadataFrom(
                 {
-                    from: address,
-                    to: task.ownerRef,
+                    from: task.from,
+                    to: task.to,
                     amount: requestAmount,
                     data: new Buffer(JSON.stringify(task)).toString('hex'),
                 }).then( () => {
                     resolve(task);
+                }, (err) => {
+                    reject(err);
                 });
 
         });
@@ -343,6 +353,6 @@ export class MultichainService {
     }
 
     private generateClaimIssueName(address: string, claim: Claim): string {
-        return address.substring(1, 10) + claim.id.substring(3, 16);
+        return address.substring(1, 10) + claim.claimId.substring(3, 16);
     }
 }
