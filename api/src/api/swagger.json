@@ -26,6 +26,9 @@
       },
       {
         "name": "Claim"
+      },
+      {
+        "name": "Tasks"
       }
     ],
     "paths": {
@@ -321,20 +324,6 @@
               "description": "address used",
               "required": true,
               "type": "string"
-            },
-            {
-              "in": "query",
-              "name": "limit",
-              "type": "integer",
-              "format": "int64",
-              "default": 50
-            },
-            {
-              "in": "query",
-              "name": "offset",
-              "type": "integer",
-              "format": "int64",
-              "default": 0
             }
           ],
           "responses": {
@@ -510,10 +499,49 @@
               }
             }
           }
-        },
-        "patch": {
+        }
+      },
+      "/wallet/{address}/tasks": {
+        "get": {
           "tags": [
-            "Claim"
+            "Tasks"
+          ],
+          "summary": "",
+          "description": "",
+          "parameters": [
+            {
+              "name": "address",
+              "in": "path",
+              "description": "address used",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "ok",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "success": {
+                    "type": "boolean"
+                  },
+                  "message": {
+                    "type": "string"
+                  },
+                  "data": {
+                    "$ref": "#/definitions/Task"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/wallet/{address}/tasks/{id}": {
+        "put": {
+          "tags": [
+            "Tasks"
           ],
           "summary": "",
           "description": "",
@@ -538,7 +566,7 @@
               "description": "Claim object that needs to be updated",
               "required": true,
               "schema": {
-                "$ref": "#/definitions/ClaimResponse"
+                "$ref": "#/definitions/Task"
               }
             }
           ],
@@ -553,6 +581,9 @@
                   },
                   "message": {
                     "type": "string"
+                  },
+                  "data": {
+                    "$ref": "#/definitions/Claim"
                   }
                 }
               }
@@ -584,39 +615,17 @@
         "type": "object",
         "properties": {
           "date": {
-            "type": "date-time"
+            "type": "string",
+            "format": "date-time"
           },
           "assetRef":{
-              "type" :"object",
-              "properties":{
-                  "id": {
-                    "type":"string"
-                  },
-                  "version": {
-                    "type":"string"
-                  }
-              }
+              "type" :"string"
+          },
+          "ownerRef":{
+              "type" :"string"
           },
           "description": {
               "type":"string"
-          },
-          "history": {
-              "type":"array",
-              "items": {
-                "type":"object",
-                "properties":{
-                    "date":{
-                        "type":"date-time"
-                    },
-                    "description":{
-                        "type":"string"
-                    },
-                    "userId":{
-                        "type":"string"
-                    }
-                }
-              }
-
           }
         }
       },
@@ -668,13 +677,16 @@
           }
         ]
       },
-      "ClaimResponse": {
-        "title": "ClaimResponse",
+      "Task": {
+        "title": "Task",
         "allOf": [
           {
             "type": "object",
             "properties": {
-              "name": {
+              "id": {
+                "type": "string"
+              },
+              "description": {
                 "type": "string"
               }
             }

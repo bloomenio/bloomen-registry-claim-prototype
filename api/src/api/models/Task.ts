@@ -1,6 +1,6 @@
 import { IsNotEmpty } from 'class-validator';
 
-export class Claim {
+export class Task {
 
     public id: string;
 

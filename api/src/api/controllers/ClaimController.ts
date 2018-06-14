@@ -1,10 +1,9 @@
 import {
-    Body, Get, JsonController, OnUndefined, Param, Patch, Post, Put, QueryParam
+    Body, Get, JsonController, OnUndefined, Param, Post, Put, QueryParam
 } from 'routing-controllers';
 
 import { ClaimNotFoundError } from '../errors/ClaimNotFoundError';
 import { Claim } from '../models/Claim';
-import { ClaimResponse } from '../models/ClaimResponse';
 import { MultichainService } from '../services/MultichainService';
 
 @JsonController()
@@ -16,7 +15,7 @@ export class ClaimController {
 
     @Get('/wallet/:address/claim')
     public find(@Param('address') address: string, @QueryParam('limit') limit: number, @QueryParam('offset') offset: number): Promise<Claim[]> {
-        return this.multichainService.getClaims(address, limit, offset);
+        return this.multichainService.getClaims(address);
     }
 
     @Get('/wallet/:address/claim/:id')
@@ -36,8 +35,4 @@ export class ClaimController {
         return this.multichainService.updateClaim(address, id, claim);
     }
 
-    @Patch('/wallet/:address/claim/:id')
-    public responseClaim(@Param('address') address: string, @Param('id') id: string, @Body() claimResponse: ClaimResponse):  Promise<undefined> {
-        return this.multichainService.responseClaim(address, id, claimResponse);
-    }
 }

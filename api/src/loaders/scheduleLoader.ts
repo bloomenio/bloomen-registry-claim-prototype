@@ -17,7 +17,7 @@ export const scheduleLoader: MicroframeworkLoader = (settings: MicroframeworkSet
             // Is needed to make changes in order to allow the indexation of large collections.
 
             console.log('tic-toc!' + new Date());
-             multichainService.getAssets().then( (assets) => {
+             multichainService.getAllBlockchainAssets().then( (assets) => {
                 const assetSolrList = [];
 
                 for (const asset of assets) {

@@ -4,7 +4,7 @@ import { v4 } from 'uuid';
 import { Address } from '../models/Address';
 import { Asset } from '../models/Asset';
 import { Claim } from '../models/Claim';
-import { ClaimResponse } from '../models/ClaimResponse';
+import { Task } from '../models/Task';
 
 @Service()
 export class MultichainService {
@@ -18,15 +18,22 @@ export class MultichainService {
 
     public getAddress(): Promise<Address[]> {
         const resultPromise = new Promise<Address[]>((resolve, reject) => {
-            this.multichainInstance.getAddresses((err, addresses) => {
-                console.log(addresses);
-                const data: Address[] = [];
-                for (const addr of addresses) {
-                    const item = new Address(addr);
-                    data.push(item);
+            this.multichainInstance.getAddresses({verbose: false}).then(
+                (addresses) => {
+                    console.log(addresses);
+                    const data: Address[] = [];
+                    for (const addr of addresses) {
+                        const item = new Address(addr);
+                        // TODO: add the rights to the output in order to show if has the properly set up on the user interface
+                        data.push(item);
+                    }
+                    resolve(data);
+                },
+                (err) => {
+                    console.log(err);
+                    reject(err);
                 }
-                resolve(data);
-            });
+            );
         });
         return resultPromise;
     }
@@ -81,40 +88,58 @@ export class MultichainService {
                // Error in publish
                reject(err);
             });
-            resolve(undefined);
         });
         return resultPromise;
     }
 
-    public getAssets(): Promise<Asset[]> {
+    public getAllBlockchainAssets(): Promise<Asset[]> {
          // TODO: large collections can be annoying
         const resultPromise = new Promise<Asset[]>((resolve, reject) => {
 
-            this.multichainInstance.listStreams((err, streams) => {
+            this.multichainInstance.listStreams((error, streams) => {
+                const promises: Array<Promise<undefined>> = [];
 
                 for (const stream of streams) {
                      if (stream.name.endsWith(MultichainService.STREAM_SUFIX)) {
-                         this.multichainInstance.listStreamKeys({stream: stream.name, verbose: true}).then(
+                        promises.push(this.multichainInstance.listStreamKeys({stream: stream.name, verbose: true}).then(
                                  (keys) => {
-                                     const assets: Asset[] = [];
+                                    const assets: Asset[] = [];
                                      for (const key of keys) {
                                         const asset: Asset = JSON.parse(new Buffer(key.last.data, 'hex').toString());
                                         assets.push(asset);
                                      }
-                                     resolve(assets);
-                                 });
+                                     return assets;
+                                 }));
                      }
                 }
+
+                Promise.all(promises).then((promisesData: Asset[][]) => {
+                    let assets: Asset[] = [];
+                    for (const promiseData of promisesData) {
+                        assets = assets.concat(promiseData);
+                    }
+                    resolve(assets);
+                }, (err) => {
+                    reject(err);
+                });
+
             });
         });
        return resultPromise;
     }
 
-    public getClaims(address: string, limit: number, offset: number): Promise<Claim[]> {
-        // TODO: get all pending claims assigned to me ( balance of my wallet )
-        // and my sent claims with the current status ( MyClaims Stream )
+    public getClaims(address: string): Promise<Claim[]> {
+        // TODO: get my sent claims with the current status ( MyClaims Stream )
         const resultPromise = new Promise<Claim[]>((resolve, reject) => {
-            resolve(undefined);
+            this.multichainInstance.listStreamKeys({stream: this.generateClaimsStreamName(address), verbose: true}).then(
+                (keys) => {
+                    const claims: Claim[] = [];
+                    for (const key of keys) {
+                       const claim: Claim = JSON.parse(new Buffer(key.last.data, 'hex').toString());
+                       claims.push(claim);
+                    }
+                    resolve(claims);
+                });
         });
         return resultPromise;
      }
@@ -135,30 +160,67 @@ export class MultichainService {
      }
 
     public createClaim(address: string, claim: Claim): Promise<Claim> {
-        // TODO: issue a token for the concrete claim.
-        // subscribe to the token
-        // If no claim stream exist create one
-        // Create claim on the stream with the link to the token (ref).
-        // send the token to the asset owner.
         const resultPromise = new Promise<Claim>((resolve, reject) => {
+            claim.id = this.generateClaimId(address, claim);
+            claim.issueRef = this.generateClaimIssueName(address, claim);
             this.checkAccount(address).then( () => {
-                claim.id = this.generateClaimId(address, claim);
-                this.multichainInstance.publishFrom({from: address, stream: this.generateClaimsStreamName(address),
-                                                key: claim.id , data: new Buffer(JSON.stringify(claim)).toString('hex') }).then( () => {
-                    resolve(claim);
-                }, (err) => {
-                   // Error in publish
-                   reject(err);
-                });
+                // Issue a token for the concrete claim.
+                return this.multichainInstance.issueFrom(
+                    {
+                        from: address,
+                        to: claim.ownerRef,
+                        asset: {
+                                name: claim.issueRef,
+                                open: false,
+                                },
+                        qty: 1,
+                        details: {
+                                assetRef: claim.id,
+                                ownerRef: claim.ownerRef,
+                                },
+                    });
+            }).then((issuedRef) => {
+                // subscribe to the token
+                return this.multichainInstance.subscribe(
+                    {
+                        stream: claim.issueRef,
+                    });
+            })
+            .then(() => {
+                // Create claim on the stream with the link to the token (ref).
+                return this.multichainInstance.publishFrom(
+                    {
+                        from: address,
+                        stream: this.generateClaimsStreamName(address),
+                        key: claim.id,
+                        data: new Buffer(JSON.stringify(claim)).toString('hex'),
+                    });
+            }).then(() => {
+                // send the token to the asset owner.
+                const requestAmount = {};
+                requestAmount[claim.issueRef] = 1;
+                const task: Task = new Task();
+                task.assetRef = claim.assetRef;
+                task.description = '[TASK] claim free text msg ....';
+                task.issueRef = claim.issueRef;
+                task.ownerRef = claim.ownerRef;
+                // TODO: not clear that the owner data and reference are correct.
+                return this.multichainInstance.sendWithMetadataFrom(
+                    {
+                        from: address,
+                        to: claim.ownerRef,
+                        amount: requestAmount,
+                        data: new Buffer(JSON.stringify(task)).toString('hex'),
+                    });
+            }).then( () => {
+                resolve(claim);
             });
         });
         return resultPromise;
      }
 
     public updateClaim(address: string, id: string,  claim: Claim): Promise<Claim> {
-        // TODO: Change the state of the claim that I own on "myclaims stream"
-        // send the token to a burden address if positive resolve or return to sender if not
-        // update the claim stream with my changes because the scanner only operates over the destiny.
+        // TODO: update the claim stream with my changes because the scanner only operates over the destiny.
         // TODO: check if the user has permissions to publish a new version of the asset
         const resultPromise = new Promise<Claim>((resolve, reject) => {
             claim.id = id;
@@ -169,21 +231,72 @@ export class MultichainService {
                 // Error in publish
                 reject(err);
             });
-            resolve(undefined);
         });
         return resultPromise;
      }
 
-    public responseClaim(address: string, id: string,  claimResponse: ClaimResponse): Promise<undefined> {
+    public getTasks(_address: string): Promise<Task[]> {
+        // TODO: all pending claims assigned to me ( balance of my wallet )
+        const resultPromise = new Promise<Task[]>((resolve, reject) => {
+
+            this.multichainInstance.getAddressBalances({address: _address}).then(
+                (balances) => {
+
+                    const promises: Array<Promise<any>> = [];
+
+                    for (const balance of balances) {
+                        promises.push(this.multichainInstance.listAssetTransactions({asset: balance.name, count: 1, verbose: true}).then(
+                            (transactions) => {
+                                    return  this.multichainInstance.getRawTransaction({
+                                        txid: transactions[0].txid,
+                                    });
+                                }).then( (data) => {
+                                    return this.multichainInstance.decodeRawTransaction({
+                                        hexstring: data,
+                                    });
+                                }).then( (data) => {
+                                    const task: Task = JSON.parse(new Buffer(data.data[0], 'hex').toString());
+                                    return task;
+                                }));
+                   }
+
+                   Promise.all(promises).then((promisesData: Task[][]) => {
+                    let tasks: Task[] = [];
+                        for (const promiseData of promisesData) {
+                            tasks = tasks.concat(promiseData);
+                        }
+                    resolve(tasks);
+                    });
+
+                }
+            );
+
+        });
+        return resultPromise;
+     }
+
+    public updateTask(address: string, id: string,  task: Task): Promise<Task> {
         // TODO: send the token with payload in order to resolve the claim.
         // the history of the token transaction are the interactions that has been made in order to solve the claim
-        const resultPromise = new Promise<undefined>((resolve, reject) => {
-            resolve(undefined);
+        const resultPromise = new Promise<Task>((resolve, reject) => {
+            // send the token to the asset owner.
+            const requestAmount = {};
+            requestAmount[id] = 1;
+           this.multichainInstance.sendWithMetadataFrom(
+                {
+                    from: address,
+                    to: task.ownerRef,
+                    amount: requestAmount,
+                    data: new Buffer(JSON.stringify(task)).toString('hex'),
+                }).then( () => {
+                    resolve(task);
+                });
+
         });
         return resultPromise;
      }
 
-    private checkAccount(address: string): Promise<undefined> {
+     private checkAccount(address: string): Promise<undefined> {
         const resultPromise = new Promise<undefined>((resolve, reject) => {
             // TODO:
             // Check the account in order to create the Asset and Claim streams
@@ -229,4 +342,7 @@ export class MultichainService {
         return address.substring(1, 18) + MultichainService.CLAIMS_SUFIX;
     }
 
+    private generateClaimIssueName(address: string, claim: Claim): string {
+        return address.substring(1, 10) + claim.id.substring(3, 16);
+    }
 }
