@@ -96,30 +96,35 @@ export class MultichainService {
 
             this.multichainInstance.listStreams((error, streams) => {
                 const promises: Array<Promise<undefined>> = [];
-
-                for (const stream of streams) {
-                     if (stream.name.endsWith(MultichainService.STREAM_SUFIX)) {
-                        promises.push(this.multichainInstance.listStreamKeys({stream: stream.name, verbose: true}).then(
-                                 (keys) => {
-                                    const assets: Asset[] = [];
-                                     for (const key of keys) {
-                                        const asset: Asset = JSON.parse(new Buffer(key.last.data, 'hex').toString());
-                                        assets.push(asset);
-                                     }
-                                     return assets;
-                                 }));
-                     }
+                if ( streams ) {
+                    for (const stream of streams) {
+                        if (stream.name.endsWith(MultichainService.STREAM_SUFIX)) {
+                            promises.push(this.multichainInstance.listStreamKeys({stream: stream.name, verbose: true}).then(
+                                    (keys) => {
+                                        const assets: Asset[] = [];
+                                        for (const key of keys) {
+                                            const asset: Asset = JSON.parse(new Buffer(key.last.data, 'hex').toString());
+                                            assets.push(asset);
+                                        }
+                                        return assets;
+                                    }));
+                        }
+                    }
                 }
 
-                Promise.all(promises).then((promisesData: Asset[][]) => {
-                    let assets: Asset[] = [];
-                    for (const promiseData of promisesData) {
-                        assets = assets.concat(promiseData);
-                    }
-                    resolve(assets);
-                }, (err) => {
-                    reject(err);
-                });
+                if (promises.length > 0) {
+                    Promise.all(promises).then((promisesData: Asset[][]) => {
+                        let assets: Asset[] = [];
+                        for (const promiseData of promisesData) {
+                            assets = assets.concat(promiseData);
+                        }
+                        resolve(assets);
+                    }, (err) => {
+                        reject(err);
+                    });
+                } else {
+                    resolve([]);
+                }
 
             });
         });
