@@ -9,9 +9,7 @@ services:
               max-size: "10m"
               max-file: "5" 
         volumes:
-            - ./ssl:/etc/nginx/ssl
-            #- ./nginx/etc/local-8000-service.conf:/etc/nginx/conf.d/local-8000-service.conf
-            # - ./etc/service-example-2.conf:/etc/nginx/service2.conf # more services, should be service*.conf              
+            - ./ssl:/etc/nginx/ssl         
         expose:
             - 80
             - 443
@@ -21,13 +19,13 @@ services:
             - "443:443"   
             - "8000:8000"
         environment:
-            - TZ=Europe/Paris
-            - SSL_ENABLED=true
-            - LETSENCRYPT=true
-            - LE_EMAIL=jordi.escudero@worldline.com
-            - LE_FQDN=bloomen.wlilab.eu
-            - USER=bloomen
-            - PASSWORD=12345
+            - TZ=${TZ}
+            - SSL_ENABLED=${SSL_ENABLED}
+            - LETSENCRYPT=${LETSENCRYPT}
+            - LE_EMAIL=${LE_EMAIL}
+            - LE_FQDN=${LE_FQDN}
+            - USER=${USER}
+            - PASSWORD=${PASSWORD}
         links:
             - admin-portal
             - api
