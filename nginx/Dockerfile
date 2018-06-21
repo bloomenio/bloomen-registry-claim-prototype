@@ -12,6 +12,8 @@ ADD etc/api-service.srv /etc/nginx/conf.d/api-service.srv
 ADD etc/admin-service.srv /etc/nginx/conf.d/admin-service.srv
 ADD etc/app-service.srv /etc/nginx/conf.d/app-service.srv
 
+ADD home/awesome-landing-page /usr/share/nginx/html
+
 ADD script/entrypoint.sh /entrypoint.sh
 ADD script/le.sh /le.sh
 
