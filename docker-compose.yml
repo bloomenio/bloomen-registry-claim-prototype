@@ -24,8 +24,8 @@ services:
             - LETSENCRYPT=${LETSENCRYPT}
             - LE_EMAIL=${LE_EMAIL}
             - LE_FQDN=${LE_FQDN}
-            - USER=${USER}
-            - PASSWORD=${PASSWORD}
+            - PORTAL_USER=${PORTAL_USER}
+            - PORTAL_PASSWORD=${PORTAL_PASSWORD}
         links:
             - admin-portal
             - api

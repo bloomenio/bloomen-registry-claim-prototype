@@ -4,7 +4,7 @@ echo "start nginx"
 
 if [ ! -f /etc/nginx/.htpasswd ]; then
     echo "create htpasswd"
-    htpasswd -bc /etc/nginx/.htpasswd ${USER} ${PASSWORD}
+    htpasswd -bc /etc/nginx/.htpasswd ${PORTAL_USER} ${PORTAL_PASSWORD}
 fi
 
 #set TZ
