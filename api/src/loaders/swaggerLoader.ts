@@ -31,7 +31,12 @@ export const swaggerLoader: MicroframeworkLoader = (settings: MicroframeworkSett
             swaggerUi.serve,
                  (req: any, res: any): void => {
                     swaggerFile.host = req.get('host'); // Replace hardcoded host information in Swagger file
-                    swaggerFile.schemes = [req.protocol]; // Replace hardcoded protocol information in Swagger file
+                    const reqProto = req.get('X-Forwarded-Proto');
+                    if ( reqProto ) {
+                        swaggerFile.schemes = [reqProto];
+                    } else {
+                        swaggerFile.schemes = [req.protocol]; // Replace hardcoded protocol information in Swagger file
+                    }
                     swaggerUi.setup(swaggerFile)(req, res);
                 }
 

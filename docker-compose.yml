@@ -8,8 +8,8 @@ services:
           options:
               max-size: "10m"
               max-file: "5" 
-#        volumes:
-            #- ./ssl:/etc/nginx/ssl
+        volumes:
+            - ./ssl:/etc/nginx/ssl
             #- ./nginx/etc/local-8000-service.conf:/etc/nginx/conf.d/local-8000-service.conf
             # - ./etc/service-example-2.conf:/etc/nginx/service2.conf # more services, should be service*.conf              
         expose:
@@ -22,10 +22,10 @@ services:
             - "8000:8000"
         environment:
             - TZ=Europe/Paris
-            - SSL_ENABLED=false
-            - LETSENCRYPT=false
+            - SSL_ENABLED=true
+            - LETSENCRYPT=true
             - LE_EMAIL=jordi.escudero@worldline.com
-            - LE_FQDN=www.wlilab.eu,bloomen.wlilab.eu
+            - LE_FQDN=bloomen.wlilab.eu
             - USER=bloomen
             - PASSWORD=12345
         links:
