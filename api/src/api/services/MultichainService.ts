@@ -65,6 +65,7 @@ export class MultichainService {
         const resultPromise = new Promise<Asset>((resolve, reject) => {
             this.checkAccount(address).then( () => {
                 asset.assetId = this.generateAssetId(address, asset);
+                asset.assetOwner = address;
                 this.multichainInstance.publishFrom({from: address, stream: this.generateAssetsStreamName(address),
                                                 key: asset.assetId , data: new Buffer(JSON.stringify(asset)).toString('hex') }).then( () => {
                     resolve(asset);
