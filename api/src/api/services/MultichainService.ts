@@ -81,6 +81,7 @@ export class MultichainService {
         // TODO: check if the user has permissions to publish a new version of the asset
         const resultPromise = new Promise<Asset>((resolve, reject) => {
             asset.assetId = id;
+            asset.assetOwner = address;
             this.multichainInstance.publishFrom({from: address, stream: this.generateAssetsStreamName(address),
                                             key: asset.assetId , data: new Buffer(JSON.stringify(asset)).toString('hex') }).then( () => {
                 resolve(asset);
