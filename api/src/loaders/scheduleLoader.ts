@@ -23,7 +23,7 @@ export const scheduleLoader: MicroframeworkLoader = (settings: MicroframeworkSet
                 for (const asset of assets) {
                     const assetSolr = {
                         id: asset.assetId,
-                        assetOwner: asset.assetOwner,
+                        assetOwner_s: asset.assetOwner,
                         name_t: asset.name,
                         author_t: asset.author,
                         description_t: asset.description,
