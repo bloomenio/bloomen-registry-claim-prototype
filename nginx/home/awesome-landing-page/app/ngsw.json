@@ -1,0 +1,43 @@
+{
+  "configVersion": 1,
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "urls": [
+        "/favicon.ico",
+        "/index.html",
+        "/manifest.json",
+        "/inline.318b50c57b4eba3d437b.bundle.js",
+        "/main.ebb229369c2d511a6400.bundle.js",
+        "/polyfills.d51eaeeba8d6c3e21c42.bundle.js",
+        "/styles.8214eb1655da67c76bfc.bundle.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "urls": [
+        "/assets/Bloomen-Logo-on-website-300x115.png",
+        "/assets/ngx-rocket-logo.png"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/inline.318b50c57b4eba3d437b.bundle.js": "998c6060446975e566fd17509558ddc68d72eec3",
+    "/assets/Bloomen-Logo-on-website-300x115.png": "72049af0aa46c4b666391e13f5f5a654f209631e",
+    "/main.ebb229369c2d511a6400.bundle.js": "f72c1fd6c6c8e1bf355e3315667c19193a7d666a",
+    "/assets/ngx-rocket-logo.png": "0ac53fd27406fe5a36e68285315fb0012e54058e",
+    "/polyfills.d51eaeeba8d6c3e21c42.bundle.js": "182aa34dea6c0f9a3b7d0ac48518503d7dd3229a",
+    "/styles.8214eb1655da67c76bfc.bundle.css": "61da7a1be66835e8d2bf8b875298ced7b0b93fb9",
+    "/favicon.ico": "b65083d46bbf63692d5d2cdd69622e6d7ecae317",
+    "/index.html": "f8216cc78371f84b482f33f5ab6411f0f22854fa",
+    "/manifest.json": "b9d2318dc10cc9d3d903be63339c02ada38024e0"
+  }
+}
