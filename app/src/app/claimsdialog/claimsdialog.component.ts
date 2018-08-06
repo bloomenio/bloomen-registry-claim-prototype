@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { HeroService } from '../services/hero.service';
+import { ApiService } from '../services/api.service';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 @Component({

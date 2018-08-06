@@ -5,7 +5,7 @@ import { Location } from '@angular/common';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 //Services
-import { HeroService } from '../services/hero.service';
+import { ApiService } from '../services/api.service';
 import { AddressStore } from '../services/stores/address.store';
 
 //Models
@@ -56,19 +56,8 @@ export class NewAddressComponent {
    * de claims
    */
   onSubmit() {
-    this.submitted = true;
-    let i: boolean = true;
-    for (let j = 0; j < this.list.length; ++j){
-      if (this.list[j].name == this.newadd) {
-        i = false;
-      }
-    }
-    //Agafem l'ultima llista de adreçes i l'afegim la nova adreça i actualitzem la llista d'adreçes
-    //Aquest subscribe i unsubscribe esta ben col·locat al "onSubmit()"?? funciona pero potser no esta be
-    if (i) {
-      this.list.push({ name: this.newadd});
-      this.addressStore.setListAddress(this.list);
-    }
+    this.addressStore.newAddress();
+    this.dialogRef.close();
   }
 
   ngOnDestroy() {

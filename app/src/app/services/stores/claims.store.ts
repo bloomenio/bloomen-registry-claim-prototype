@@ -9,6 +9,7 @@ import { AddressStore } from './address.store';
 
 //Services
 import { HeroService } from "../../services/hero.service";
+import { ApiService } from '../../services/api.service';
 
 /**
  * It is the store of the claims 
@@ -24,7 +25,7 @@ export class ClaimsStore {
     private offset: number;
 
 
-    constructor(private heroService: HeroService,
+    constructor(private heroService: HeroService, private apiService: ApiService,
         private addressStore: AddressStore) {
         this.offset = 0;
         this.listClaims = new BehaviorSubject<Object[]>([]);
@@ -34,7 +35,7 @@ export class ClaimsStore {
             //Si agafa el valor de currentAddress undefined quan aquest s'inicialitzi el currentAddress es carregaria 
             //2 listclaims 
             if (result != undefined) {    
-                this.setListClaims(this.offset);
+                //this.setListClaims(this.offset);
                 this.offset += 4;
             }
 

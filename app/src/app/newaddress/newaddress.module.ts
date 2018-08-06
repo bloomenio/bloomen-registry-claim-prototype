@@ -7,7 +7,7 @@ import { CoreModule } from '@app/core';
 import { SharedModule } from '@app/shared';
 import { MaterialModule } from '@app/material.module';
 import { NewAddressComponent } from './newaddress.component';
-import { HeroService } from '../services/hero.service';
+import { ApiService } from '../services/api.service';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
@@ -24,7 +24,7 @@ import { FormsModule } from '@angular/forms';
     NewAddressComponent
   ],
   providers: [
-    HeroService
+    ApiService
   ],
   entryComponents: [NewAddressComponent]
 })

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { HeroService } from '../services/hero.service';
+import { ApiService } from '../services/api.service';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 @Component({
@@ -24,7 +25,7 @@ export class DialogComponent {
 
   
 
-  constructor(private dialogRef: MatDialogRef<DialogComponent>, private heroService: HeroService, @Inject(MAT_DIALOG_DATA) public data: any)
+  constructor(private dialogRef: MatDialogRef<DialogComponent>, private heroService: HeroService, private apiService: ApiService, @Inject(MAT_DIALOG_DATA) public data: any)
   {}
 
   /**
@@ -40,7 +41,7 @@ export class DialogComponent {
    */
   onSubmit() {
     this.submitted = true;
-    this.heroService.getForm(this.nametext, this.alterego, this.type)
+    /*this.heroService.getForm(this.nametext, this.alterego, this.type)
           .then(
             (result: any) => {
               console.log(result);
@@ -48,7 +49,7 @@ export class DialogComponent {
             (error) => {
               console.error(error);
             }
-          );
+          );*/
   }
 
 }

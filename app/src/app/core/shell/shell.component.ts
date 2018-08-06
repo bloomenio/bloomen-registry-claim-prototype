@@ -30,6 +30,8 @@ export class ShellComponent implements OnInit {
   //Llista d'adreçes que pertanyen a l'usuari
   public listAddress: AddressModel[];
 
+  private isFirst: Boolean = true;
+
   constructor(private router: Router,
     private titleService: Title,
     private media: ObservableMedia,
@@ -37,24 +39,25 @@ export class ShellComponent implements OnInit {
     private i18nService: I18nService,
     public dialog: MatDialog,
     private addressStore: AddressStore
+
   ) {
     //Començem a escoltar qualsevol canvi que hi hagi al immutable "currentAddress"
     this.addressStore.getCurrentAddress().subscribe((result) => {
-      this.currentAddress = result;
+      if (result != undefined) this.currentAddress = result;
     });
+    this.addressStore.getListAddress().subscribe((result) => {
+      if (result != []) {
+        this.listAddress = result;
+      }
+    })
   }
 
   ngOnInit() {
-    this.listAddress = [
-      { name: '0xFFFFAAAA'},
-      { name: '0xAB'},
-      { name: '0xCA3'},
-      { name: '0xCCC'}
-    ];
-
+    this.listAddress = [];
     //Li donem uns valors als immutables per començar
-    this.addressStore.setCurrentAddress(this.listAddress[0]);
-    this.addressStore.setListAddress(this.listAddress);
+    this.addressStore.setListAddress();
+    this.addressStore.setCurrentAddress(this.listAddress[0]); //quan es fa aquest setCurrentAddress listAddress == [] per tant
+    //no fica inicialment a cap currentAddress
   }
 
   setLanguage(language: string) {

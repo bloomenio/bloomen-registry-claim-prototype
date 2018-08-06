@@ -1,6 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 import { HeroService } from '../services/hero.service';
+import { ApiService } from '../services/api.service';
 import { DialogComponent } from './../dialog/dialog.component';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import { HttpModule } from '@angular/http';
@@ -41,6 +42,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private quoteService: QuoteService,
     private heroService: HeroService,
+    private apiService: ApiService,
     public dialog: MatDialog,
     private addressStore: AddressStore
   ) {
@@ -81,7 +83,7 @@ export class HomeComponent implements OnInit {
    */
   getStoriesInput() {
     this.searchname.nativeElement.blur();
-    return new Promise<any>((resolve, reject) => {
+    /*return new Promise<any>((resolve, reject) => {
       if (this.valor) {
         this.isLoading = true;
         this.last_cerca = this.valor;
@@ -117,9 +119,11 @@ export class HomeComponent implements OnInit {
         })
       }
 
-    })
+    })*/
+
 
   }
+  
 
   /**
    * S'encarrega d'incrementar el llistat en funcio del scroll que s'esta fent

@@ -9,6 +9,7 @@ import { BehaviorSubject, Observable } from "rxjs";
 
 //Services
 import { HeroService } from "../../services/hero.service";
+import { ApiService } from "../../services/api.service";
 
 /**
  * It is the store of the addresses 
@@ -26,7 +27,7 @@ export class AddressStore {
     private listAddress: BehaviorSubject<AddressModel[]>
 
 
-    constructor(private heroService: HeroService) {
+    constructor(private apiService: ApiService, private heroService: HeroService) {
         //El BehaviorSubject permet donar-li un valor inicial a diferencia del Subject
         this.currentAddress = new BehaviorSubject<AddressModel>(undefined);
         this.listAddress = new BehaviorSubject<AddressModel[]>([]);
@@ -58,14 +59,8 @@ export class AddressStore {
     public setCurrentAddress(currentaddress: AddressModel): Promise<any> {
         //Fem una Promise perquè és async i ens permet veure si hi hagut errors o tot ha anat be
         return new Promise<any>((resolve, reject) => {
-            this.heroService.getLatestStories(10).then((result) => {
-                //Do something with the result if needed
-                this.currentAddress.next(currentaddress);
-                resolve();
-            }, (error) => {
-                console.log(error);
-                reject(error);
-            })
+            this.currentAddress.next(currentaddress);
+            resolve();
         })
     }
 
@@ -73,16 +68,25 @@ export class AddressStore {
      * Set the list address attribute in the store
      * @param listaddress is not necessary in case you call the right api
      */
-    public setListAddress(listaddress: AddressModel[]): Promise<any> {
+    public setListAddress(): Promise<any> {
         return new Promise<any>((resolve, reject) => {
-            this.heroService.getLatestStories(10).then((result) => {
-                //Do something with the result if needed
-                this.listAddress.next(listaddress);
+            this.apiService.getAddresses().then((result) => {
+                this.listAddress.next(result);
                 resolve();
             }, (error) => {
-                console.log(error);
                 reject(error);
             })
+        })
+    }
+
+    public newAddress(): Promise<any> {
+        return new Promise<any>((resolve, reject) => {
+            this.apiService.postAddress().then((result) => {
+                this.listAddress.next(result);
+                resolve();
+            }), (error) => {
+                reject(error);
+            }
         })
     }
 }

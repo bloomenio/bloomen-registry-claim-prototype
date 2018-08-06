@@ -30,7 +30,7 @@ const proxyConfig = [
   {
     context: '/api',
     pathRewrite: { '^/api': '' },
-    target: 'https://demo2.bloomen.io',
+    target: 'https://demo2.bloomen.io/api',
     changeOrigin: true,
     secure: false
   }

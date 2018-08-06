@@ -8,6 +8,7 @@ import { SharedModule } from '@app/shared';
 import { MaterialModule } from '@app/material.module';
 import { DialogComponent } from './dialog.component';
 import { HeroService } from '../services/hero.service';
+import { ApiService } from '../services/api.service';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
@@ -24,7 +25,8 @@ import { FormsModule } from '@angular/forms';
     DialogComponent
   ],
   providers: [
-    HeroService
+    HeroService,
+    ApiService
   ],
   entryComponents: [DialogComponent]
 })
