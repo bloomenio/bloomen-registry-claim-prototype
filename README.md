@@ -33,6 +33,7 @@ http://demo2.bloomen.io
 # to deploy
 
 > Install Docker version 17.12.1-ce or higher.
+
 > Install Docker-compose version 1.21.2 or higher.
 
 ### clone
