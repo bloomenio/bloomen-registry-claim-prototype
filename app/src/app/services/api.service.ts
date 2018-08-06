@@ -23,4 +23,8 @@ export class ApiService {
     return this.http.post(`/wallet`, headers).toPromise();
   }
 
+  searchMusic(query: string, offset: number): Promise<any> {
+    return this.http.get(`/search?q=${query}&limit=4&offset=${offset}`).toPromise();
+  }
+
 }

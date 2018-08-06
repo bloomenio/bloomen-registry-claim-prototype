@@ -1,6 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { finalize } from 'rxjs/operators';
-import { HeroService } from '../services/hero.service';
 import { ApiService } from '../services/api.service';
 import { DialogComponent } from './../dialog/dialog.component';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
@@ -26,7 +25,7 @@ export class HomeComponent implements OnInit {
 
   @ViewChild('searchname') searchname;
   public isLoading: boolean;
-  public heroes: Object[];
+  public songs: Object[];
   public valor: string = "";
   private last_cerca: string = "";
   private quant: number;
@@ -41,14 +40,13 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private quoteService: QuoteService,
-    private heroService: HeroService,
     private apiService: ApiService,
     public dialog: MatDialog,
     private addressStore: AddressStore
   ) {
     this.isLoading = false;
     this.offset = 0;
-    this.heroes = [];
+    this.songs = [];
     this.title = 'Angular Infinite Scroller with RxJS';
     this.scrollCallback = this.getStoriesInput.bind(this);
   }
@@ -73,7 +71,7 @@ export class HomeComponent implements OnInit {
   checkinput() {
     if (this.valor != this.last_cerca) {
       this.last_cerca = this.valor;
-      this.heroes = [];
+      this.songs = [];
       this.offset = 0;
     }
   }
@@ -83,18 +81,19 @@ export class HomeComponent implements OnInit {
    */
   getStoriesInput() {
     this.searchname.nativeElement.blur();
-    /*return new Promise<any>((resolve, reject) => {
+    return new Promise<any>((resolve, reject) => {
       if (this.valor) {
         this.isLoading = true;
         this.last_cerca = this.valor;
-        this.heroService.getLatestStoriesInput(this.offset, this.valor)
+        this.apiService.searchMusic(this.valor, this.offset)
           .then(
             (result: any) => {
               console.log(result);
-              if (result.data.results.length != 0) {
-                resolve(this._processData(result, result.data.results.length))
+              if (result.length != 0) {
+                resolve(this._processData(result, result.length))
               }
               this.isLoading = false;
+              resolve();
             },
             (error) => {
               this.isLoading = false;
@@ -103,25 +102,23 @@ export class HomeComponent implements OnInit {
             }
           );
       }
-      else if (!this.valor){
+      /*else if (!this.valor){
         this.last_cerca = this.valor;
         this.isLoading = true;
         this.heroService.getLatestStories(this.offset).then((result: any) => {
           console.log(result);
-          if (result.data.results.length != 0) {
+          /*if (result.data.results.length != 0) {
             resolve(this._processData(result, result.data.results.length))
           }
+          resolve();
           this.isLoading = false;
         }, (error) => {
           this.isLoading = false;
           console.error(error);
           reject(error);
         })
-      }
-
-    })*/
-
-
+      }*/
+    })
   }
   
 
@@ -131,8 +128,8 @@ export class HomeComponent implements OnInit {
   private _processData(news: any, quant: number) {
     this.offset += 4;
     for (let i = 0; i < quant; ++i) {
-      this.heroes.push(news.data.results[i])
+      this.songs.push(news[i])
     }
-    return this.heroes;
+    return this.songs;
   }
 }

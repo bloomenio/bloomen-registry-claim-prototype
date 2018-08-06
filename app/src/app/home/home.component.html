@@ -16,17 +16,17 @@
   </mat-card>
 
   <div appInfiniteScroller scrollPercent="70" [immediateCallback]="false" [scrollCallback]="scrollCallback" class="scroll" style="height:525px;">
-    <div *ngFor="let hero of heroes">
+    <div *ngFor="let song of songs">
       <mat-card class="item-card">
         <mat-card-header class="header">
-            <img class="avatar" mat-card-avatar src="{{hero.thumbnail.path}}.{{hero.thumbnail.extension}}">
-            <mat-card-title class="title">{{hero.name}}</mat-card-title>
+            <img class="avatar" mat-card-avatar src="../../assets/musica.jpg">
+            <mat-card-title class="title">{{song.name}}</mat-card-title>
             <button mat-icon-button (click)="openDialog()">
               <mat-icon class="icon">change_history</mat-icon>
             </button>
         </mat-card-header>
         <mat-card-content class="content">
-          {{hero.description}}
+          {{song.description}}
         </mat-card-content>
       </mat-card>
     </div>
