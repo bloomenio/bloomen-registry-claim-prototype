@@ -12,7 +12,6 @@ export const environment = {
   serverUrl: '/marvel',
   defaultLanguage: 'en-US',
   supportedLanguages: [
-    'en-US',
-    'fr-FR'
+    'en-US'
   ]
 };

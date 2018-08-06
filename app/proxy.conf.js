@@ -8,6 +8,7 @@ const HttpsProxyAgent = require('https-proxy-agent');
  * This is especially useful during app development to avoid CORS issues while running a local server.
  * For more details and options, see https://github.com/angular/angular-cli#proxy-to-backend
  */
+/*
 const proxyConfig = [
   {
     context: '/api',
@@ -20,6 +21,16 @@ const proxyConfig = [
     context: '/marvel',
     pathRewrite: { '^/marvel': '' },
     target: 'https://gateway.marvel.com',
+    changeOrigin: true,
+    secure: false
+  }
+];
+*/
+const proxyConfig = [
+  {
+    context: '/api',
+    pathRewrite: { '^/api': '' },
+    target: 'https://demo2.bloomen.io',
     changeOrigin: true,
     secure: false
   }

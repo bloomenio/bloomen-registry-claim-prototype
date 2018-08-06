@@ -7,7 +7,6 @@ export const environment = {
   serverUrl: 'https://gateway.marvel.com',
   defaultLanguage: 'en-US',
   supportedLanguages: [
-    'en-US',
-    'fr-FR'
+    'en-US'
   ]
 };
