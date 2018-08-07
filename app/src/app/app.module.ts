@@ -15,7 +15,6 @@ import { ClaimsModule } from './claims/claims.module';
 import { LoginModule } from './login/login.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { HeroService } from './services/hero.service';
 import { ApiService } from './services/api.service';
 import { DialogModule } from './dialog/dialog.module';
 import { ClaimsDialogModule } from './claimsdialog/ClaimsDialog.module';
@@ -43,7 +42,6 @@ import { AddressStore } from './services/stores/address.store';
   ],
   declarations: [AppComponent],
   providers: [
-    HeroService,
     ApiService,
     AddressStore
   ],

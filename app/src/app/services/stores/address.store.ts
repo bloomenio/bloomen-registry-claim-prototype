@@ -8,7 +8,6 @@ import { AddressModel } from "../../Models/Address.model";
 import { BehaviorSubject, Observable } from "rxjs";
 
 //Services
-import { HeroService } from "../../services/hero.service";
 import { ApiService } from "../../services/api.service";
 
 /**
@@ -27,7 +26,7 @@ export class AddressStore {
     private listAddress: BehaviorSubject<AddressModel[]>
 
 
-    constructor(private apiService: ApiService, private heroService: HeroService) {
+    constructor(private apiService: ApiService) {
         //El BehaviorSubject permet donar-li un valor inicial a diferencia del Subject
         this.currentAddress = new BehaviorSubject<AddressModel>(undefined);
         this.listAddress = new BehaviorSubject<AddressModel[]>([]);

@@ -11,7 +11,6 @@ import { ClaimsDialogComponent } from './../claimsdialog/claimsdialog.component'
 //Services
 import { ClaimsStore } from '../services/stores/claims.store';
 import { AddressStore } from '../services/stores/address.store';
-import { HeroService } from '../services/hero.service';
 import { ApiService } from '../services/api.service';
 
 @Component({
@@ -31,7 +30,6 @@ export class ClaimsComponent implements OnInit {
 
   constructor(public dialog: MatDialog,
     private claimsStore: ClaimsStore,
-    private heroService: HeroService,
     private apiService: ApiService,
     private addressStore: AddressStore
   ) {

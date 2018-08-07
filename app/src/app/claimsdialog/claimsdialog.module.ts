@@ -7,7 +7,6 @@ import { CoreModule } from '@app/core';
 import { SharedModule } from '@app/shared';
 import { MaterialModule } from '@app/material.module';
 import { ClaimsDialogComponent } from './claimsdialog.component';
-import { HeroService } from '../services/hero.service';
 import { ApiService } from '../services/api.service';
 import { FormsModule } from '@angular/forms';
 
@@ -25,7 +24,6 @@ import { FormsModule } from '@angular/forms';
     ClaimsDialogComponent
   ],
   providers: [
-    HeroService,
     ApiService
   ],
   entryComponents: [ClaimsDialogComponent]

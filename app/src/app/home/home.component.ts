@@ -102,22 +102,6 @@ export class HomeComponent implements OnInit {
             }
           );
       }
-      /*else if (!this.valor){
-        this.last_cerca = this.valor;
-        this.isLoading = true;
-        this.heroService.getLatestStories(this.offset).then((result: any) => {
-          console.log(result);
-          /*if (result.data.results.length != 0) {
-            resolve(this._processData(result, result.data.results.length))
-          }
-          resolve();
-          this.isLoading = false;
-        }, (error) => {
-          this.isLoading = false;
-          console.error(error);
-          reject(error);
-        })
-      }*/
     })
   }
   

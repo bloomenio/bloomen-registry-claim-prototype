@@ -8,7 +8,6 @@ import { BehaviorSubject, Observable } from "rxjs";
 import { AddressStore } from './address.store';
 
 //Services
-import { HeroService } from "../../services/hero.service";
 import { ApiService } from '../../services/api.service';
 
 //Models
@@ -28,7 +27,7 @@ export class ClaimsStore {
     private offset: number;
 
 
-    constructor(private heroService: HeroService, private apiService: ApiService,
+    constructor(private apiService: ApiService,
         private addressStore: AddressStore) {
         this.offset = 0;
         this.listClaims = new BehaviorSubject<Object[]>([]);
