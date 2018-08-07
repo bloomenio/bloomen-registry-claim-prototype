@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Http, Response } from '@angular/http';
+import { HttpHeaders } from '@angular/common/http';
+import { Http,  Response } from '@angular/http';
 import { URLSearchParams } from '@angular/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import 'rxjs/Rx';
@@ -30,6 +31,37 @@ export class ApiService {
 
   getClaims(currentadd: string): Promise<any> {
     return this.http.get(`/wallet/${currentadd}/claim`).toPromise();
+  }
+
+  postClaim(assetId: string, assetOwner: string, description: string, currentadd: String): Promise<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    }
+    console.log(assetId);
+    console.log(assetOwner);
+    console.log(description);
+    return this.http.post(`/wallet/${currentadd}/claim`, 
+    {
+      assetId: assetId,
+      assetOwner: assetOwner,
+      description: description
+    }, httpOptions).toPromise();
+  }
+
+  addRegistry(name: String, author: string, description: string, currentadd: string): Promise<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    }
+    return this.http.post(`/wallet/${currentadd}/registry`, 
+    {
+      name: name,
+      author: author,
+      description: description
+    }, httpOptions).toPromise();
   }
 
 }

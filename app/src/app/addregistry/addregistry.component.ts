@@ -6,27 +6,25 @@ import { ApiService } from '../services/api.service';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 @Component({
-  selector: 'app-dialog',
-  templateUrl: './dialog.component.html',
-  styleUrls: ['./dialog.component.css']
+  selector: 'app-addregistry',
+  templateUrl: './addregistry.component.html',
+  styleUrls: ['./addregistry.component.css']
 })
 /**
  * És el dialeg que s'obre quan premem el boto en forma de triangle de home.html
  */
-export class DialogComponent {
+export class AddRegistryComponent {
 
   public submitted: boolean = false;
-  public assetId: string;
-  public assetOwner: string;
-  public currentAddress: string;
+  public name: string;
+  public author: string;
   public description: string;
+  public currentAddress: string;
 
   
 
-  constructor(private dialogRef: MatDialogRef<DialogComponent>, private apiService: ApiService, @Inject(MAT_DIALOG_DATA) public data: any)
+  constructor(private dialogRef: MatDialogRef<AddRegistryComponent>, private apiService: ApiService, @Inject(MAT_DIALOG_DATA) public data: any)
   {
-    this.assetId = data.assetid;
-    this.assetOwner = data.assetowner;
     this.currentAddress = data.currentadd;
   }
 
@@ -46,8 +44,8 @@ export class DialogComponent {
     this.dialogRef.close();
   }
 
-  postClaim() {
-    this.apiService.postClaim(this.assetId, this.assetOwner, this.description, this.currentAddress);
+  addRegistry() {
+    this.apiService.addRegistry(this.name, this.author, this.description, this.currentAddress);
   }
 
 }

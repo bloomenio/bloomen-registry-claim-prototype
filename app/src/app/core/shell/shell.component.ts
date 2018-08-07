@@ -48,6 +48,7 @@ export class ShellComponent implements OnInit {
     this.addressStore.getListAddress().subscribe((result) => {
       if (result != []) {
         this.listAddress = result;
+        this.addressStore.setCurrentAddress(result[0]);
       }
     })
   }

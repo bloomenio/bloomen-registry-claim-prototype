@@ -21,8 +21,8 @@
         <mat-card-header class="header">
             <img class="avatar" mat-card-avatar src="../../assets/musica.jpg">
             <mat-card-title class="title">{{song.name}}</mat-card-title>
-            <button mat-icon-button (click)="openDialog()">
-              <mat-icon class="icon">change_history</mat-icon>
+            <button mat-icon-button [disabled]="!isnotmine(song.assetOwner)" (click)="postClaim(song.assetId, song.assetOwner)">
+              <mat-icon class="icon" *ngIf="isnotmine(song.assetOwner)">change_history</mat-icon>
             </button>
         </mat-card-header>
         <mat-card-content class="content">
@@ -38,7 +38,7 @@
   </div>
 </div>
 <div>
-    <button class="fab" mat-fab (click)="openDialog()">
+    <button class="fab" mat-fab (click)="addRegistry()">
       <mat-icon>add</mat-icon>
     </button>
 </div>

@@ -17,6 +17,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ApiService } from './services/api.service';
 import { DialogModule } from './dialog/dialog.module';
+import { AddRegistryModule} from './addregistry/addregistry.module';
 import { ClaimsDialogModule } from './claimsdialog/ClaimsDialog.module';
 import { NewAddressModule } from './newaddress/newaddress.module';
 import { AddressStore } from './services/stores/address.store';
@@ -37,6 +38,7 @@ import { AddressStore } from './services/stores/address.store';
     LoginModule,
     AppRoutingModule,
     DialogModule,
+    AddRegistryModule,
     ClaimsDialogModule,
     NewAddressModule
   ],

@@ -45,7 +45,7 @@
     </mat-sidenav>
 
 
-    <mat-sidenav-content style="overflow: hidden;">
+    <mat-sidenav-content>
       <mat-toolbar class="toolbar-fixed" color="primary" class="mat-elevation-z6">
         <button class="menu-button" mat-icon-button (click)="sidenav.toggle()" fxHide.gt-sm>
           <mat-icon>menu</mat-icon>
@@ -56,9 +56,9 @@
           <button mat-icon-button [matMenuTriggerFor]="addressMenu">
             <mat-icon>all_inclusive</mat-icon>
           </button>
-          <mat-menu #addressMenu="matMenu" >
-            <button mat-menu-item *ngFor="let address of listAddress" [disabled]="address === currentAddress" (click)="onSelectedAddress(address)" 
-            [ngClass]="{'selected': address === currentAddress }">
+          <mat-menu #addressMenu="matMenu">
+            <button mat-menu-item *ngFor="let address of listAddress" [disabled]="address === currentAddress" (click)="onSelectedAddress(address)"
+              [ngClass]="{'selected': address === currentAddress }">
               {{address.id}}
             </button>
             <div class="new">

@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 import { ApiService } from '../services/api.service';
 import { DialogComponent } from './../dialog/dialog.component';
+import { AddRegistryComponent } from './../addregistry/addregistry.component';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import { HttpModule } from '@angular/http';
 import { QuoteService } from './quote.service';
@@ -53,15 +54,27 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.addressStore.getCurrentAddress().subscribe((result) => {
-      this.currentAddress = result;
+      this.currentAddress = result; 
     });
   }
 
   /**
    * S'encarrega d'obrir el dialeg quan es clicka el button en forma de triangle
    */
-  openDialog() {
-    this.dialog.open(DialogComponent);
+  postClaim(assetId: string, assetOwner: string) {
+    console.log("HOMECOMPONENT");
+    console.log(assetOwner);
+    this.dialog.open(DialogComponent, {data: {
+      assetid: assetId,
+      assetowner: assetOwner,
+      currentadd: this.currentAddress.id
+    }});
+  }
+
+  addRegistry() {
+    this.dialog.open(AddRegistryComponent, {data: {
+      currentadd: this.currentAddress.id
+    }});
   }
 
   /**
@@ -88,7 +101,6 @@ export class HomeComponent implements OnInit {
         this.apiService.searchMusic(this.valor, this.offset)
           .then(
             (result: any) => {
-              console.log(result);
               if (result.length != 0) {
                 resolve(this._processData(result, result.length))
               }
@@ -116,4 +128,15 @@ export class HomeComponent implements OnInit {
     }
     return this.songs;
   }
+
+  isnotmine(add: string){
+    if (this.currentAddress.id != undefined) {
+      if (add == this.currentAddress.id) 
+          return false;
+      else {
+        return true;
+      }
+    }
+  }
+
 }
