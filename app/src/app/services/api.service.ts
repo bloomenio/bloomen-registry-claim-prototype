@@ -6,6 +6,7 @@ import { URLSearchParams } from '@angular/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
+import { AddressModel } from '@app/Models/Address.model';
 
 @Injectable()
 export class ApiService {
@@ -25,6 +26,10 @@ export class ApiService {
 
   searchMusic(query: string, offset: number): Promise<any> {
     return this.http.get(`/search?q=${query}&limit=4&offset=${offset}`).toPromise();
+  }
+
+  getClaims(currentadd: string): Promise<any> {
+    return this.http.get(`/wallet/${currentadd}/claim`).toPromise();
   }
 
 }

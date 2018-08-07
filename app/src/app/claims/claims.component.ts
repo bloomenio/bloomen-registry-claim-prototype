@@ -31,7 +31,7 @@ export class ClaimsComponent implements OnInit {
 
   constructor(public dialog: MatDialog,
     private claimsStore: ClaimsStore,
-    private heroService: HeroService, 
+    private heroService: HeroService,
     private apiService: ApiService,
     private addressStore: AddressStore
   ) {
@@ -50,17 +50,14 @@ export class ClaimsComponent implements OnInit {
       });
     this.addressStore.getCurrentAddress().subscribe(
       (result) => {
-        if (this.firstime){
-           this.firstime = false;
-        }
-        else {
-          this.isLoading = true;
-          this.claims = [];
-        }
-          
+        this.claims = [];
+        this.isLoading = true;
+        this.claimsStore.setListClaims(result);
+        this.isLoading = false;
+
       },
       (error) => {
-
+        console.log(error);
       }
     );
   }

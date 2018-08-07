@@ -7,11 +7,11 @@
         </mat-card-content>
     </mat-card>
 
-    <div *ngFor="let hero of claims">
+    <div *ngFor="let c of claims">
         <mat-card class="item-card">
             <mat-card-header class="header">
-                <img class="avatar" mat-card-avatar src="{{hero.thumbnail.path}}.{{hero.thumbnail.extension}}">
-                <mat-card-title class="title">{{hero.name}}</mat-card-title>
+                <img class="avatar" mat-card-avatar src="../../assets/musica.jpg">
+                <mat-card-title class="title">{{c.claimId}}</mat-card-title>
                 <div class="button">
                     <button mat-icon-button (click)="openDialog()">
                         <mat-icon>add</mat-icon>
@@ -22,7 +22,7 @@
                 </div>
             </mat-card-header>
             <mat-card-content class="content">
-                {{hero.description}}
+                {{c.claimOwner}}
             </mat-card-content>
         </mat-card>
     </div>
