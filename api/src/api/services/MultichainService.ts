@@ -176,7 +176,7 @@ export class MultichainService {
                 return this.multichainInstance.issueFrom(
                     {
                         from: claim.claimOwner,
-                        to: claim.assetOwner,
+                        to: claim.claimOwner,
                         asset: {
                                 name: claim.issueId,
                                 open: false,
@@ -215,7 +215,7 @@ export class MultichainService {
                 task.issueId = claim.issueId;
                 task.claimOwner = claim.claimOwner;
                 task.from = address;
-                task.to = claim.claimOwner;
+                task.to = claim.assetOwner;
                 // TODO: not clear that the owner data and reference are correct.
                 return this.multichainInstance.sendWithMetadataFrom(
                     {
