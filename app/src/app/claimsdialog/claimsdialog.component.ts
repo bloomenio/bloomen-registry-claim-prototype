@@ -21,15 +21,15 @@ export class ClaimsDialogComponent {
 
   public submitted: boolean = false;
   public reasons: string;
-  private currentad: string;
-  private claimOwner: string;
+  private to: string;
+  private from: string;
   private issueId: string;
 
   constructor(private dialogRef: MatDialogRef<ClaimsDialogComponent>, private claimsStore: ClaimsStore, private apiService: ApiService, @Inject(MAT_DIALOG_DATA) public data: any) {
     this.reasons = "";
     console.log(data);
-    this.currentad = data.currentad;
-    this.claimOwner = data.claimowner;
+    this.to = data.to;
+    this.from = data.from;
     this.issueId = data.issueid;
   }
 
@@ -48,8 +48,8 @@ export class ClaimsDialogComponent {
   }
 
   putTask() {
-    this.apiService.putTask(this.currentad, this.issueId, this.reasons, this.claimOwner);
-    this.claimsStore.setListTasks({id: this.currentad});
+    this.apiService.putTask(this.to, this.issueId, this.reasons, this.from);
+    this.claimsStore.setListTasks({id: this.to});
     this.dialogRef.close();
   }
 

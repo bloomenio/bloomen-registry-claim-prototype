@@ -13,7 +13,7 @@
                 <mat-card class="item-card">
                     <mat-card-header class="header">
                         <img class="avatar" mat-card-avatar src="../../assets/musica.jpg">
-                        <mat-card-title class="title">issueId: {{c.issueId}}</mat-card-title>
+                        <mat-card-title class="title" >issueId: {{c.issueId}}</mat-card-title>
                     </mat-card-header>
                     <mat-card-content class="content">
                         claimOwner: {{c.claimOwner}} assetOwner: {{c.assetOwner }} claimId: {{c.claimId}}
@@ -25,7 +25,7 @@
             <div *ngFor="let t of tasks">
                 <mat-card class="item-card">
                     <mat-card-header class="header">
-                        <img class="avatar" mat-card-avatar src="../../assets/musica.jpg">
+                        <img class="avatar" mat-card-avatar src="../../assets/musicatask.png">
                         <mat-card-title class="title">issueId: {{t.issueId}} claimId: {{t.claimId}}</mat-card-title>
                         <div class="button">
                             <button mat-icon-button (click)="putTask(t.issueId, t.from, t.to)">
