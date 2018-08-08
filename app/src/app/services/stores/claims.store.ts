@@ -24,6 +24,7 @@ export class ClaimsStore {
     */
     //És la llista de Claims que tenim al Controller claims.component.ts
     private listClaims: BehaviorSubject<Object[]>;
+    private listTasks: BehaviorSubject<Object[]>;
     private offset: number;
 
 
@@ -31,6 +32,7 @@ export class ClaimsStore {
         private addressStore: AddressStore) {
         this.offset = 0;
         this.listClaims = new BehaviorSubject<Object[]>([]);
+        this.listTasks = new BehaviorSubject<Object[]>([]);
     }
 
     /**
@@ -42,6 +44,10 @@ export class ClaimsStore {
         return this.listClaims;
     }
 
+    public getListTasks(): Observable<Object[]> {
+        return this.listTasks;
+    }
+
     /**
      * Set the list address attribute in the store
      * @param listaddress is not necessary in case you call the right api
@@ -51,6 +57,20 @@ export class ClaimsStore {
             this.apiService.getClaims(currentadd.id).then(
                 (result) => {
                     this.listClaims.next(result);
+                    resolve();
+                }, (error) => {
+                    console.log(error);
+                    reject(error);
+                }
+            );
+        })
+    }
+
+    public setListTasks(currentadd: AddressModel): Promise<any> {
+        return new Promise<any>((resolve, reject) => {
+            this.apiService.getTask(currentadd.id).then(
+                (result) => {
+                    this.listTasks.next(result);
                     resolve();
                 }, (error) => {
                     console.log(error);

@@ -62,8 +62,6 @@ export class HomeComponent implements OnInit {
    * S'encarrega d'obrir el dialeg quan es clicka el button en forma de triangle
    */
   postClaim(assetId: string, assetOwner: string) {
-    console.log("HOMECOMPONENT");
-    console.log(assetOwner);
     this.dialog.open(DialogComponent, {data: {
       assetid: assetId,
       assetowner: assetOwner,

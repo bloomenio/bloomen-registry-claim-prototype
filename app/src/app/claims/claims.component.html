@@ -7,25 +7,37 @@
         </mat-card-content>
     </mat-card>
 
-    <div *ngFor="let c of claims">
-        <mat-card class="item-card">
-            <mat-card-header class="header">
-                <img class="avatar" mat-card-avatar src="../../assets/musica.jpg">
-                <mat-card-title class="title">{{c.claimId}}</mat-card-title>
-                <div class="button">
-                    <button mat-icon-button (click)="openDialog()">
-                        <mat-icon>add</mat-icon>
-                    </button>
-                    <button mat-icon-button (click)="openDialog()">
-                        <mat-icon>remove</mat-icon>
-                    </button>
-                </div>
-            </mat-card-header>
-            <mat-card-content class="content">
-                {{c.claimOwner}}
-            </mat-card-content>
-        </mat-card>
-    </div>
+    <mat-tab-group>
+        <mat-tab label="Claims">
+            <div *ngFor="let c of claims">
+                <mat-card class="item-card">
+                    <mat-card-header class="header">
+                        <img class="avatar" mat-card-avatar src="../../assets/musica.jpg">
+                        <mat-card-title class="title">issueId: {{c.issueId}}</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content class="content">
+                        claimOwner: {{c.claimOwner}} assetOwner: {{c.assetOwner }} claimId: {{c.claimId}}
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </mat-tab>
+        <mat-tab label="Tasks">
+            <div *ngFor="let t of tasks">
+                <mat-card class="item-card">
+                    <mat-card-header class="header">
+                        <img class="avatar" mat-card-avatar src="../../assets/musica.jpg">
+                        <mat-card-title class="title">issueId: {{t.issueId}} claimId: {{t.claimId}}</mat-card-title>
+                        <div class="button">
+                            <button mat-icon-button (click)="putTask(t.issueId, t.from, t.to)">
+                                <mat-icon>add</mat-icon>
+                            </button>
+                        </div>
+                    </mat-card-header>
+                    <mat-card-content class="content"> claimOwner: {{t.claimOwner}} from: {{t.from}} to: {{t.to}} </mat-card-content>
+                </mat-card>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
 
     <mat-card class="spinner" *ngIf="isLoading">
         <mat-spinner></mat-spinner>

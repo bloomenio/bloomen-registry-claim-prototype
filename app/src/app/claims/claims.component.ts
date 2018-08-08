@@ -25,6 +25,7 @@ export class ClaimsComponent implements OnInit {
 
   public version: string = environment.version;
   public claims: Object[];
+  public tasks: Object[];
   public isLoading: boolean;
   private firstime: boolean = true;
 
@@ -46,11 +47,20 @@ export class ClaimsComponent implements OnInit {
       (error) => {
         console.log(error);
       });
+    this.claimsStore.getListTasks().subscribe(
+      (result) => {
+        this.isLoading = false;
+        this.tasks = result;
+      },
+      (error) => {
+        console.log(error);
+      });
     this.addressStore.getCurrentAddress().subscribe(
       (result) => {
         this.claims = [];
         this.isLoading = true;
         this.claimsStore.setListClaims(result);
+        this.claimsStore.setListTasks(result);
         this.isLoading = false;
 
       },
@@ -63,8 +73,14 @@ export class ClaimsComponent implements OnInit {
   /**
    * S'encarrega d'obrir el dialeg claimsdialog quan es clicka +/-
    */
-  openDialog() {
-    this.dialog.open(ClaimsDialogComponent);
+  putTask(issueid: string, claimowner: string, currentadd: string) {
+    this.dialog.open(ClaimsDialogComponent, {
+      data: {
+        issueid: issueid,
+        currentad: currentadd,
+        claimowner: claimowner
+      }
+    });
   }
 
 }
