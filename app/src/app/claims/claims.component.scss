@@ -1,3 +1,7 @@
+.div {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
 .container {
   text-align: center;
   padding: 1em;
@@ -29,6 +33,7 @@ q {
 
 .content {
   margin-top: 20px;
+  font-size: 15px;
 }
 
 .item-card {
@@ -38,4 +43,8 @@ q {
 .spinner {
   display: flex;
   justify-content: space-around;
+}
+
+#description-task {
+  font-size: 21px;
 }

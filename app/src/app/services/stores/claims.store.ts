@@ -56,7 +56,18 @@ export class ClaimsStore {
         return new Promise<any>((resolve, reject) => {
             this.apiService.getClaims(currentadd.id).then(
                 (result) => {
-                    this.listClaims.next(result);
+                    let s: Object[] = [];
+                    for (let i = 0; i < result.length; ++i) {
+                        this.apiService.getAsset(result[i].assetId, result[i].assetOwner).then(
+                            (resultat) => {
+                                let ob: Object = {
+                                    data: result[i],
+                                    song: resultat
+                                }
+                                s.push(ob);
+                            })
+                    }
+                    this.listClaims.next(s);
                     resolve();
                 }, (error) => {
                     console.log(error);

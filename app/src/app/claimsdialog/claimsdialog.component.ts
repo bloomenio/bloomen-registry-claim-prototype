@@ -27,7 +27,6 @@ export class ClaimsDialogComponent {
 
   constructor(private dialogRef: MatDialogRef<ClaimsDialogComponent>, private claimsStore: ClaimsStore, private apiService: ApiService, @Inject(MAT_DIALOG_DATA) public data: any) {
     this.reasons = "";
-    console.log(data);
     this.to = data.to;
     this.from = data.from;
     this.issueId = data.issueid;

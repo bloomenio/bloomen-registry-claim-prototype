@@ -29,6 +29,10 @@ export class ApiService {
     return this.http.get(`/search?q=${query}&limit=4&offset=${offset}`).toPromise();
   }
 
+  getClaim(currentadd: string, claimid: string) {
+    return this.http.get(`/wallet/${currentadd}/claim/${claimid}`).toPromise();
+  }
+
   getClaims(currentadd: string): Promise<any> {
     return this.http.get(`/wallet/${currentadd}/claim`).toPromise();
   }
@@ -76,6 +80,10 @@ export class ApiService {
         description: description,
         to: to
       }, httpOptions).toPromise();
+  }
+
+  getAsset(assetid: string, assetowner: string): Promise<any> {
+    return this.http.get(`/wallet/${assetowner}/registry/${assetid}`).toPromise();
   }
 
 }
