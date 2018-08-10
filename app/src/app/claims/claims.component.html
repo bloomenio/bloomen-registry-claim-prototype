@@ -12,7 +12,7 @@
             <div *ngFor="let c of claims">
                   <mat-card class="item-card">
                     <mat-card-header class="header">
-                        <img class="avatar" mat-card-avatar src="../../assets/file-png-image-59234.png">
+                        <img class="avatar" mat-card-avatar src="assets/file-png-image-59234.png">
                         <mat-card-title class="title"><b>Song Title:</b> {{c.song.name}}</mat-card-title>
                         <button mat-icon-button >
 
@@ -31,7 +31,7 @@
             <div *ngFor="let t of tasks">
                 <mat-card class="item-card">
                     <mat-card-header class="header">
-                        <img class="avatar" mat-card-avatar src="../../assets/task.png">
+                        <img class="avatar" mat-card-avatar src="assets/task.png">
                         <mat-card-title class="title"><b>Claim identificator:</b> {{t.issueId}}</mat-card-title>
                         <button mat-icon-button (click)="putTask(t.issueId, t.from, t.to)">
                             <mat-icon>reply</mat-icon>

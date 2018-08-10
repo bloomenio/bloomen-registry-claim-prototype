@@ -19,7 +19,7 @@
     <div *ngFor="let song of songs">
       <mat-card class="item-card">
         <mat-card-header class="header">
-            <img class="avatar" mat-card-avatar src="../../assets/600px-Simple_Music.svg_.png">
+            <img class="avatar" mat-card-avatar src="assets/600px-Simple_Music.svg_.png">
             <mat-card-title class="title"><b>Title:</b> {{song.name}}</mat-card-title>
             <button mat-icon-button [disabled]="!isnotmine(song.assetOwner)" (click)="postClaim(song.assetId, song.assetOwner)">
               <mat-icon class="icon" *ngIf="isnotmine(song.assetOwner)">change_history</mat-icon>
