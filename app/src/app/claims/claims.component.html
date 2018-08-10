@@ -21,7 +21,7 @@
                     <mat-card-content class="content">
                       <b>Song Author:</b> {{c.song.description}} <br/>
                       <b>Song Description:</b> {{c.song.description}} <br/>
-                      <b>Claim identificator:</b> {{c.data.claimId}} <br/>
+                      <b>Claim identificator:</b> {{c.data.issueId}} <br/>
                       <b>Claim Description:</b> {{c.data.description}} <br/>
                     </mat-card-content>
                   </mat-card>
@@ -32,7 +32,7 @@
                 <mat-card class="item-card">
                     <mat-card-header class="header">
                         <img class="avatar" mat-card-avatar src="../../assets/task.png">
-                        <mat-card-title class="title"><b>Claim identificator:</b> {{t.claimId}}</mat-card-title>
+                        <mat-card-title class="title"><b>Claim identificator:</b> {{t.issueId}}</mat-card-title>
                         <button mat-icon-button (click)="putTask(t.issueId, t.from, t.to)">
                             <mat-icon>reply</mat-icon>
                         </button>
