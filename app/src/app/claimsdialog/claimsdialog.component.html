@@ -1,10 +1,10 @@
 <div class="dialog">
-    <h1 mat-dialog-title> Descriptions </h1>
+    <h1 mat-dialog-title> Claim Description </h1>
     <mat-dialog-content class="example-container">
         <form (ngSubmit)="onSubmit()" #claimsForm="ngForm">
             <div>
                 <mat-form-field>
-                    <textarea matInput rows="4" cols="50" id="reasons" required [(ngModel)]="reasons" name="name" #name="ngModel" 
+                    <textarea matInput rows="4" cols="50" id="reasons" required [(ngModel)]="reasons" name="name" #name="ngModel"
                     placeholder="Insert the description"> </textarea>
                 </mat-form-field>
             </div>

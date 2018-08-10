@@ -10,31 +10,37 @@
     <mat-tab-group>
         <mat-tab label="Claims">
             <div *ngFor="let c of claims">
-                <mat-card class="item-card">
+                  <mat-card class="item-card">
                     <mat-card-header class="header">
-                        <img class="avatar" mat-card-avatar src="../../assets/musica.jpg">
+                        <img class="avatar" mat-card-avatar src="../../assets/file-png-image-59234.png">
+                        <mat-card-title class="title"><b>Song Title:</b> {{c.song.name}}</mat-card-title>
+                        <button mat-icon-button >
+
+                        </button>
                     </mat-card-header>
-                    <mat-card-title class="title"> {{c.song.name}} - {{c.song.author}} </mat-card-title>
-                    <mat-card-subtitle class=""> {{c.song.description}} </mat-card-subtitle>
                     <mat-card-content class="content">
-                        Claim Description: {{c.data.description}}
+                      <b>Song Author:</b> {{c.song.description}} <br/>
+                      <b>Song Description:</b> {{c.song.description}} <br/>
+                      <b>Claim identificator:</b> {{c.data.claimId}} <br/>
+                      <b>Claim Description:</b> {{c.data.description}} <br/>
                     </mat-card-content>
-                </mat-card>
+                  </mat-card>
             </div>
         </mat-tab>
         <mat-tab label="Tasks">
             <div *ngFor="let t of tasks">
                 <mat-card class="item-card">
                     <mat-card-header class="header">
-                        <img class="avatar" mat-card-avatar src="../../assets/musicatask.png">
-                        <mat-card-title class="content" id="description-task">Description: {{t.description}}</mat-card-title>
-                        <div class="button">
-                            <button mat-icon-button (click)="putTask(t.issueId, t.from, t.to)">
-                                <mat-icon>add</mat-icon>
-                            </button>
-                        </div>
+                        <img class="avatar" mat-card-avatar src="../../assets/task.png">
+                        <mat-card-title class="title"><b>Claim identificator:</b> {{t.claimId}}</mat-card-title>
+                        <button mat-icon-button (click)="putTask(t.issueId, t.from, t.to)">
+                            <mat-icon>reply</mat-icon>
+                        </button>
                     </mat-card-header>
-                </mat-card>
+                    <mat-card-content class="content">
+                      <b>Task Description:</b> {{t.description}} <br/>
+                    </mat-card-content>
+                  </mat-card>
             </div>
         </mat-tab>
     </mat-tab-group>
