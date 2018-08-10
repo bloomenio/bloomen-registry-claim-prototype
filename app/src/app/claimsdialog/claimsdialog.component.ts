@@ -47,9 +47,11 @@ export class ClaimsDialogComponent {
   }
 
   putTask() {
-    this.apiService.putTask(this.to, this.issueId, this.reasons, this.from);
-    this.claimsStore.setListTasks({id: this.to});
-    this.dialogRef.close();
+    this.apiService.putTask(this.to, this.issueId, this.reasons, this.from).then(
+      () => this.claimsStore.setListTasks({id: this.to})
+    ).then(
+      () => { this.dialogRef.close(); }
+    );
   }
 
 }
