@@ -22,19 +22,19 @@ export class ApiService {
   postAddress(): Promise<any> {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post(`wallet`, headers).toPromise();
+    return this.http.post(`/wallet`, headers).toPromise();
   }
 
   searchMusic(query: string, offset: number): Promise<any> {
-    return this.http.get(`search?q=${query}&limit=4&offset=${offset}`).toPromise();
+    return this.http.get(`/search?q=${query}&limit=4&offset=${offset}`).toPromise();
   }
 
   getClaim(currentadd: string, claimid: string) {
-    return this.http.get(`wallet/${currentadd}/claim/${claimid}`).toPromise();
+    return this.http.get(`/wallet/${currentadd}/claim/${claimid}`).toPromise();
   }
 
   getClaims(currentadd: string): Promise<any> {
-    return this.http.get(`wallet/${currentadd}/claim`).toPromise();
+    return this.http.get(`/wallet/${currentadd}/claim`).toPromise();
   }
 
   postClaim(assetId: string, assetOwner: string, description: string, currentadd: String): Promise<any> {
@@ -43,7 +43,7 @@ export class ApiService {
         'Content-Type': 'application/json'
       })
     }
-    return this.http.post(`wallet/${currentadd}/claim`,
+    return this.http.post(`/wallet/${currentadd}/claim`,
       {
         assetId: assetId,
         assetOwner: assetOwner,
@@ -57,7 +57,7 @@ export class ApiService {
         'Content-Type': 'application/json'
       })
     }
-    return this.http.post(`wallet/${currentadd}/registry`,
+    return this.http.post(`/wallet/${currentadd}/registry`,
       {
         name: name,
         author: author,
@@ -66,7 +66,7 @@ export class ApiService {
   }
 
   getTask(currentadd: string): Promise<any> {
-    return this.http.get(`wallet/${currentadd}/tasks`).toPromise();
+    return this.http.get(`/wallet/${currentadd}/tasks`).toPromise();
   }
 
   putTask(currentadd: string, issueid: string, description: string, to: string): Promise<any> {
@@ -75,7 +75,7 @@ export class ApiService {
         'Content-Type': 'application/json'
       })
     }
-    return this.http.put(`wallet/${currentadd}/tasks/${issueid}`,
+    return this.http.put(`/wallet/${currentadd}/tasks/${issueid}`,
       {
         description: description,
         to: to
@@ -83,7 +83,7 @@ export class ApiService {
   }
 
   getAsset(assetid: string, assetowner: string): Promise<any> {
-    return this.http.get(`wallet/${assetowner}/registry/${assetid}`).toPromise();
+    return this.http.get(`/wallet/${assetowner}/registry/${assetid}`).toPromise();
   }
 
 }
