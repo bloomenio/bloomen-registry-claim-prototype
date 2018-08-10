@@ -11,7 +11,7 @@
         "/index.html",
         "/manifest.json",
         "/inline.318b50c57b4eba3d437b.bundle.js",
-        "/main.6e414109fd86432689cb.bundle.js",
+        "/main.bc8366ba41cc0388d2ba.bundle.js",
         "/polyfills.d0b410a9a780558316d9.bundle.js",
         "/styles.8214eb1655da67c76bfc.bundle.css"
       ],
@@ -37,7 +37,7 @@
   "hashTable": {
     "/inline.318b50c57b4eba3d437b.bundle.js": "998c6060446975e566fd17509558ddc68d72eec3",
     "/assets/600px-Simple_Music.svg_.png": "793333c2e7e46a4a1a1d5548185c89b6846eb28a",
-    "/main.6e414109fd86432689cb.bundle.js": "55b9dff48aa089e0775326308b4cb843a705c92a",
+    "/main.bc8366ba41cc0388d2ba.bundle.js": "ab562d519db7811d0ecf14ae0b1134f2e8c8bf8f",
     "/assets/Bloomen-Logo-on-website-300x115.png": "72049af0aa46c4b666391e13f5f5a654f209631e",
     "/polyfills.d0b410a9a780558316d9.bundle.js": "622293ff26855641d71922eb09ef51bc470914d9",
     "/assets/file-png-image-59234.png": "5ff667f96cb1aa222ed5124bc896153685170550",
@@ -45,7 +45,7 @@
     "/assets/musica.jpg": "06aa21123dbaaeebaa9e4a795d31a6622e02c746",
     "/favicon.ico": "b65083d46bbf63692d5d2cdd69622e6d7ecae317",
     "/assets/musicatask.png": "f141f4ebdabcbb361ed828e7f96a904bfbe95473",
-    "/index.html": "61ffcd95dfd24cf27a165cd9394014e6bf5260d6",
+    "/index.html": "1563b4ff4cbc5af48dfd7dd41e0e47d574478498",
     "/assets/ngx-rocket-logo.png": "0ac53fd27406fe5a36e68285315fb0012e54058e",
     "/manifest.json": "b9d2318dc10cc9d3d903be63339c02ada38024e0",
     "/assets/task.png": "75933fd6fc8727d3a9e4b84cb7e468aa7e1bf2b0"
