@@ -11,6 +11,7 @@ ADD etc/solr-service.srv /etc/nginx/conf.d/solr-service.srv
 ADD etc/api-service.srv /etc/nginx/conf.d/api-service.srv
 ADD etc/admin-service.srv /etc/nginx/conf.d/admin-service.srv
 ADD etc/app-service.srv /etc/nginx/conf.d/app-service.srv
+ADD etc/alastria-service.srv /etc/nginx/conf.d/alastria-service.srv
 
 ADD home/awesome-landing-page /usr/share/nginx/html
 
@@ -23,7 +24,5 @@ RUN \
  chmod +x /le.sh && \
  apk add  --update certbot tzdata openssl && \
  rm -rf /var/cache/apk/*
-
-RUN ip -4 route list match 0/0 | awk '{print $3 "host.docker.internal"}' >> /etc/hosts
 
 CMD ["/entrypoint.sh"]

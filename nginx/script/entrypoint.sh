@@ -1,6 +1,10 @@
 #!/bin/sh
-echo "start nginx"
 
+echo "add host.docker.internal to hosts"
+
+ip -4 route list match 0/0 | awk '{print $3 " host.docker.internal"}' >> /etc/hosts  
+
+echo "start nginx"
 
 if [ ! -f /etc/nginx/.htpasswd ]; then
     echo "create htpasswd"
