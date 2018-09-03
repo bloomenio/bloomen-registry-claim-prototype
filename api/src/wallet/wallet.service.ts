@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpCode, HttpException } from '@nestjs/common';
 import { Wallet } from './interfaces/wallet.interface';
 import { RegistryDto } from './dto/registry.dto';
 import { Registry } from './interfaces/registry.interface';
@@ -6,7 +6,6 @@ import { Claim } from './interfaces/claim.interface';
 import { Task } from './interfaces/task.interface';
 import { ClaimDto } from './dto/claim.dto';
 import { TaskDto } from './dto/task.dto';
-
 @Injectable()
 export class WalletService {
 
@@ -43,6 +42,30 @@ export class WalletService {
         }
     }
 
+    search(q: string, limit: number, offset: number): Registry[] {
+        let x: Registry[] = [];
+        let off: number = 0;
+        for (let i = 0; i < this.registries.length; ++i) {
+            if (x.length == limit)
+                return x;
+            else {
+                if (this.registries[i].name.search(q)) {
+                    ++off;
+                    if (off >= offset) x.push(this.registries[i]);
+                }
+                else if (this.registries[i].author.search(q)){
+                    ++off;
+                    if (off >= offset) x.push(this.registries[i]);
+                }
+                else if (this.registries[i].description.search(q)){
+                    ++off;
+                    if (off >= offset) x.push(this.registries[i]);
+                }
+            }
+        }
+        return x;
+    }
+
     getRegistry(address: string, id: string) {
         for (let i = 0; i < this.registries.length; ++i) {
             if (this.registries[i].assetOwner == address && this.registries[i].assetId == id)
@@ -77,22 +100,27 @@ export class WalletService {
 
     postClaim(add: string, claimDto: ClaimDto) {
         var randomString = require('random-string');
-        let x: Claim = {
-            assetId: claimDto.assetId,
-            assetOwner: claimDto.assetOwner,
-            description: claimDto.description,
-            claimId: randomString({ length: 20 }),
-            issueId: randomString({ length: 20 }),
-            claimOwner: add
+        if (add != claimDto.assetOwner) {
+            let x: Claim = {
+                assetId: claimDto.assetId,
+                assetOwner: claimDto.assetOwner,
+                description: claimDto.description,
+                claimId: randomString({ length: 20 }),
+                issueId: randomString({ length: 20 }),
+                claimOwner: add
+            }
+            this.claims.push(x);
+            this.tasks.push({
+                description: "Initial claim msg",
+                to: x.assetOwner,
+                from: x.claimOwner,
+                issueId: x.issueId
+            });
+            return x;
         }
-        this.claims.push(x);
-        this.tasks.push({
-            description: "Initial claim msg",
-            to: x.assetOwner,
-            from: x.claimOwner,
-            issueId: x.claimId
-        });
-        return x;
+        else {
+            throw HttpException;
+        }
     }
 
     getClaimById(add: string, id: string) {
