@@ -22,13 +22,13 @@ contract Demo2Registry is Ownable {
     uint256 private numAssets;
 
     function createAsset(string _name, string _author, string _description) public onlyOwner {
-        uint256 assetId = numAssets.add(1);
-        assets[assetId] = Asset(_name, _author, _description, assetId, msg.sender);
-        emit AssetCreated(_name, _author, _description, assetId, msg.sender);
+        numAssets = numAssets.add(1);
+        assets[numAssets] = Asset(_name, _author, _description, numAssets, msg.sender);
+        emit AssetCreated(_name, _author, _description, numAssets, msg.sender);
     }
 
     function updateAsset(uint256 _assetId, string _name, string _author, string _description) public onlyOwner {
-        require(_assetId > 0);
+        require(_assetId > 0 && _assetId <= numAssets);
         Asset storage asset = assets[_assetId];
         asset.name = _name;
         asset.author = _author;
