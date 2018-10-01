@@ -6,7 +6,7 @@ import "./Demo2Task.sol";
 
 contract Demo2Wallet {
 
-    event AddressAdded(address[] userAddresses);
+    event AddressAdded(address[] userAddresses_);
 
     struct User {
         address addr;
@@ -15,11 +15,11 @@ contract Demo2Wallet {
         address taskContract;
     }
 
-    mapping (address => User) private usersMap;
-    address[] private userAddresses;
+    mapping (address => User) private usersMap_;
+    address[] private userAddresses_;
 
     function getAddress() public view returns(address[]) {
-        return userAddresses;
+        return userAddresses_;
     }
 
     function createAddress(address _newAddress) public {
@@ -31,23 +31,23 @@ contract Demo2Wallet {
         Demo2Task demo2Task = new Demo2Task();
         demo2Task.transferOwnership(_newAddress);
         User memory user = User(_newAddress, address(demo2Claim), address(demo2Registry), address(demo2Task));
-        usersMap[_newAddress] = user;
-        userAddresses.push(_newAddress);
-        emit AddressAdded(userAddresses);
+        usersMap_[_newAddress] = user;
+        userAddresses_.push(_newAddress);
+        emit AddressAdded(userAddresses_);
     }
 
     function getClaimAddress(address _userAddress) public view returns(address) {
-        User memory user = usersMap[_userAddress];
+        User memory user = usersMap_[_userAddress];
         return user.claimContract;
     }
 
     function getRegistryAddress(address _userAddress) public view returns(address) {
-        User memory user = usersMap[_userAddress];
+        User memory user = usersMap_[_userAddress];
         return user.registryContract;
     }
 
     function getTaskAddress(address _userAddress) public view returns(address) {
-        User memory user = usersMap[_userAddress];
+        User memory user = usersMap_[_userAddress];
         return user.taskContract;
     }
 
