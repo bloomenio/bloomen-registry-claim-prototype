@@ -137,9 +137,17 @@ walletContract.methods.createAddress(accountAddress).send({from: '0x235e90B0bB3F
       console.log(error);
       console.log(result);
     });
+    walletContract.methods.getClaimAddress(accountAddress).call({from: '0x235e90B0bB3F4c0875a96456d451a5733fb3C025'}, function(error, result) {
+        console.log(error);
+        console.log(result);
+    });
+    walletContract.methods.getTaskAddress(accountAddress).call({from: '0x235e90B0bB3F4c0875a96456d451a5733fb3C025'}, function(error, result) {
+        console.log(error);
+        console.log(result);
+    });
 });
 
 // inspect all events
 walletContract.getPastEvents('AddressAdded', {fromBlock: 0, toBlock: 'latest'}, (err, events) => {
-    console.log(events)
+    console.log(events);
 });
