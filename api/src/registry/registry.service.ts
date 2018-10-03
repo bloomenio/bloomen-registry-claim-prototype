@@ -388,19 +388,28 @@ export class RegistryService {
         });
     }
 
-    updateRegistry(address: string, id: string, registryDto: RegistryDto) {
-        for (let i = 0; i < this.registries.length; ++i) {
-            if (this.registries[i].assetOwner == address && this.registries[i].assetId == id) {
-                this.registries[i] = {
-                    assetId: this.registries[i].assetId,
-                    assetOwner: this.registries[i].assetOwner,
-                    name: registryDto.name,
-                    author: registryDto.author,
-                    description: registryDto.description
-                }
-                return this.registries[i];
-            }
-        }
+    updateRegistry(address: string, id: string, registryDto: RegistryDto): Promise<Registry> {
+        return new Promise<Registry>((resolve, reject) => {
+            walletContract.methods.getRegistryAddress(address).call({ from: initialAddress })
+                .then(registryAddress => {
+                    var registryContract = new web3.eth.Contract(abiRegistry, registryAddress);
+                    registryContract.methods.updateAsset(id, registryDto.name, registryDto.author, registryDto.description).send({ from: address, gas: 1000000 })
+                        .then(() => {
+                            registryContract.getPastEvents('AssetUpdated', { fromBlock: 0, toBlock: 'latest' })
+                                .then(events => {
+                                    let asset = events[events.length - 1].returnValues;
+                                    let registry: Registry = {
+                                        assetId: asset.assetId,
+                                        assetOwner: asset.assetOwner,
+                                        name: asset.name,
+                                        author: asset.author,
+                                        description: asset.description
+                                    };
+                                    resolve(registry);
+                                }, reject);
+                        }, reject);
+                }, reject);
+        });
     }
 
 }   
