@@ -7,8 +7,8 @@ contract Demo2Registry is Ownable {
 
     using SafeMath for uint256;
 
-    event AssetCreated(string name, string author, string description, uint256 assetId, address sender);
-    event AssetUpdated(string name, string author, string description, uint256 assetId, address sender);
+    event AssetCreated(string name, string author, string description, uint256 assetId, address assetOwner);
+    event AssetUpdated(string name, string author, string description, uint256 assetId, address assetOwner);
 
     struct Asset {
         string name;

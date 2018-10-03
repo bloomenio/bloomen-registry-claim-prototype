@@ -193,7 +193,7 @@ var abiRegistry = [
             },
             {
                 "indexed": false,
-                "name": "sender",
+                "name": "assetOwner",
                 "type": "address"
             }
         ],
@@ -225,7 +225,7 @@ var abiRegistry = [
             },
             {
                 "indexed": false,
-                "name": "sender",
+                "name": "assetOwner",
                 "type": "address"
             }
         ],
