@@ -342,8 +342,6 @@ var initialAddress = '0x235e90B0bB3F4c0875a96456d451a5733fb3C025';
 @Injectable()
 export class RegistryService {
 
-    private readonly registries: Registry[] = [];
-
     postRegistry(address: string, registryDto: RegistryDto): Promise<Registry> {
         return new Promise<Registry>((resolve, reject) => {
             walletContract.methods.getRegistryAddress(address).call({ from: initialAddress })
