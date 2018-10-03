@@ -1,0 +1,44 @@
+{
+    // Use IntelliSense to learn about possible attributes. 
+    // Hover to view descriptions of existing attributes. 
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387 <https://go.microsoft.com/fwlink/?linkid=830387> 
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "test",
+            "runtimeArgs": [
+                "-r",
+                "ts-node/register"
+            ],
+            "args": [
+                "${workspaceFolder}/test/maintest.js"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "wallettest",
+            "runtimeArgs": [
+                "-r",
+                "ts-node/register"
+            ],
+            "args": [
+                "${workspaceFolder}/test/wallettest.js"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "registrytest",
+            "runtimeArgs": [
+                "-r",
+                "ts-node/register"
+            ],
+            "args": [
+                "${workspaceFolder}/test/registrytest.js"
+            ]
+        }
+    ]
+}

@@ -23,7 +23,7 @@ export class WalletController {
 
     @ApiUseTags('Wallet')
     @Post()
-    async postWallet(): Promise<Wallet> {
+    async postWallet(): Promise<Wallet[]> {
         return this.walletService.postWallet();
     }
 
