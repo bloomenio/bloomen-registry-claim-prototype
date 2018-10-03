@@ -354,15 +354,12 @@ walletContract.methods.createAddress(accountAddress).send({ from: '0x235e90B0bB3
     var registryContract = new web3.eth.Contract(abiRegistry, result);
 
     // subscription to AssetCreated event
-    let kaka = registryContract.events.AssetCreated({}, (error, data) => {
+    registryContract.events.AssetCreated({}, (error, data) => {
       if (error)
         console.log(error);
       else
         console.log(data.returnValues);
     });
-
-    // kaka.on('data', data => {});
-    // kaka.on('error', error => {});
 
     // subscription to AssetUpdated event
     registryContract.events.AssetUpdated({}, (error, data) => {

@@ -1,8 +1,6 @@
 import { Get, Post, Controller, Param, Body, Put } from '@nestjs/common';
 import { WalletService } from './wallet.service';
 import { Wallet } from './interfaces/wallet.interface';
-import { RegistryDto } from './dto/registry.dto';
-import { Registry } from './interfaces/registry.interface';
 import { Claim } from './interfaces/claim.interface';
 import { ClaimDto } from './dto/claim.dto';
 import { Task } from './interfaces/task.interface';
@@ -25,24 +23,6 @@ export class WalletController {
     @Post()
     async postWallet(): Promise<Wallet[]> {
         return this.walletService.postWallet();
-    }
-
-    @ApiUseTags('Registry')
-    @Post(':address/registry')
-    async postRegistry(@Body() registryDto: RegistryDto, @Param('address') add: string): Promise<Registry> {
-        return this.walletService.postRegistry(add, registryDto);
-    }
-
-    @ApiUseTags('Registry')
-    @Get(':address/registry/:id')
-    async getRegistry(@Param('address') add: string, @Param('id') id: string): Promise<Registry> {
-        return this.walletService.getRegistry(add, id);
-    }
-
-    @ApiUseTags('Registry')
-    @Put(':address/registry/:id')
-    async updateRegistry(@Body() registryDto: RegistryDto, @Param('address') add: string, @Param('id') id: string): Promise<Registry> {
-        return this.walletService.updateRegistry(add, id, registryDto);
     }
 
     @ApiUseTags('Claim')
@@ -71,8 +51,8 @@ export class WalletController {
 
     @ApiUseTags('Tasks')
     @Get(':address/tasks')
-    async getTask(@Param('address') add: string) :Promise<Task[]> {
-        return this.walletService.getTask(add); 
+    async getTask(@Param('address') add: string): Promise<Task[]> {
+        return this.walletService.getTask(add);
     }
 
     @ApiUseTags('Tasks')

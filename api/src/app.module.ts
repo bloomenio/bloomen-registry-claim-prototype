@@ -1,10 +1,13 @@
 import { Module } from '@nestjs/common';
-import { WalletController } from 'wallet/wallet.controller';
-import { WalletService } from 'wallet/wallet.service';
 import { WalletModule } from 'wallet/wallet.module';
 import { SearchModule } from 'search/search.module';
+import { RegistryModule } from 'registry/registry.module';
 
 @Module({
-  imports: [WalletModule, SearchModule]
+  imports: [
+    WalletModule,
+    SearchModule,
+    RegistryModule
+  ]
 })
-export class AppModule {}
+export class AppModule { }

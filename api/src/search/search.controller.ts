@@ -1,17 +1,17 @@
 import { Get, Post, Controller, Param, Body, Put, Query } from '@nestjs/common';
-import { WalletService } from '../wallet/wallet.service';
+import { SearchService } from './search.service';
 
 //Swagger
 import { ApiUseTags } from '@nestjs/swagger';
-import { Registry } from 'wallet/interfaces/registry.interface';
+import { Registry } from '../registry/interfaces/registry.interface';
 
 @Controller('/search')
 export class SearchController {
-    constructor(private readonly walletService: WalletService) { }
+    constructor(private readonly searchService: SearchService) { }
 
     @ApiUseTags('Search')
     @Get()
     async getWallet(@Query('offset') offset: number, @Query('limit') limit: number, @Query('q') q: string): Promise<Registry[]> {
-        return this.walletService.search(q, limit, offset);
+        return this.searchService.search(q, limit, offset);
     }
 }
