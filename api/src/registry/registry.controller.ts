@@ -6,7 +6,7 @@ import { Registry } from './interfaces/registry.interface';
 //Swagger
 import { ApiUseTags } from '@nestjs/swagger';
 
-@Controller('/registry')
+@Controller('/wallet')
 export class RegistryController {
     constructor(private readonly registrytService: RegistryService) { }
 

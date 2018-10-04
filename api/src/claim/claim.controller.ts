@@ -6,7 +6,7 @@ import { Claim } from './interfaces/claim.interface';
 //Swagger
 import { ApiUseTags } from '@nestjs/swagger';
 
-@Controller('/claim')
+@Controller('/wallet')
 export class ClaimController {
     constructor(private readonly claimtService: ClaimService) { }
 
