@@ -1,8 +1,6 @@
-import { Injectable, HttpCode, HttpException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Wallet } from './interfaces/wallet.interface';
-import { Claim } from './interfaces/claim.interface';
 import { Task } from './interfaces/task.interface';
-import { ClaimDto } from './dto/claim.dto';
 import { TaskDto } from './dto/task.dto';
 
 import * as Web3 from 'web3';
@@ -116,13 +114,12 @@ var accountAddress = "0xE0FeE2336a7c23f75acea2be3917ebc9AC7a1156";
 @Injectable()
 export class WalletService {
 
-    private readonly claims: Claim[] = [];
     private readonly tasks: Task[] = [];
 
     getWallet(): Promise<Wallet[]> {
         return new Promise<Wallet[]>((resolve, reject) => {
 
-            walletContract.methods.getAddress().call({ from: '0x235e90B0bB3F4c0875a96456d451a5733fb3C025' })
+            walletContract.methods.getAddress().call({ from: initialAddress })
                 .then(userAddresses => {
                     let wallets: Wallet[] = [];
                     for (let address of userAddresses) {
@@ -152,65 +149,6 @@ export class WalletService {
                 }, reject)
                 .then(resolve, reject);
         });
-    }
-
-    getClaim(add: string) {
-        let x: Claim[] = [];
-        for (let i = 0; i < this.claims.length; ++i) {
-            if (this.claims[i].claimOwner == add) {
-                x.push(this.claims[i]);
-            }
-        }
-        return x;
-    }
-
-    postClaim(add: string, claimDto: ClaimDto) {
-        var randomString = require('random-string');
-        if (add != claimDto.assetOwner) {
-            let x: Claim = {
-                assetId: claimDto.assetId,
-                assetOwner: claimDto.assetOwner,
-                description: claimDto.description,
-                claimId: randomString({ length: 20 }),
-                issueId: randomString({ length: 20 }),
-                claimOwner: add
-            }
-            this.claims.push(x);
-            this.tasks.push({
-                description: "Initial claim msg",
-                to: x.assetOwner,
-                from: x.claimOwner,
-                issueId: x.issueId
-            });
-            return x;
-        }
-        else {
-            throw HttpException;
-        }
-    }
-
-    getClaimById(add: string, id: string) {
-        for (let i = 0; i < this.claims.length; ++i) {
-            if (this.claims[i].claimOwner == add && this.claims[i].claimId == id) {
-                return this.claims[i];
-            }
-        }
-    }
-
-    putClaimById(add: string, id: string, claimDto: ClaimDto) {
-        for (let i = 0; i < this.claims.length; ++i) {
-            if (this.claims[i].claimOwner == add && this.claims[i].claimId == id) {
-                this.claims[i] = {
-                    assetId: claimDto.assetId,
-                    assetOwner: claimDto.assetOwner,
-                    description: claimDto.description,
-                    claimId: this.claims[i].claimId,
-                    issueId: this.claims[i].issueId,
-                    claimOwner: this.claims[i].claimOwner
-                }
-                return this.claims[i];
-            }
-        }
     }
 
     getTask(add: string): Task[] {

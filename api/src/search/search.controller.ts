@@ -1,4 +1,4 @@
-import { Get, Post, Controller, Param, Body, Put, Query } from '@nestjs/common';
+import { Get, Controller, Query } from '@nestjs/common';
 import { SearchService } from './search.service';
 
 //Swagger

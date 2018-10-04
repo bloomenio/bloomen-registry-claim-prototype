@@ -1,4 +1,4 @@
-import { Injectable, HttpCode, HttpException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Registry } from '../registry/interfaces/registry.interface';
 
 @Injectable()
