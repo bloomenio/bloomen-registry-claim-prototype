@@ -30,7 +30,7 @@ export class ClaimController {
 
     @ApiUseTags('Claim')
     @Put(':address/claim/:id')
-    async updateClaimById(@Body() claimDto: ClaimDto, @Param('address') add: string, @Param('id') id: string) {
+    async updateClaimById(@Body() claimDto: ClaimDto, @Param('address') add: string, @Param('id') id: string): Promise<Claim> {
         return this.claimtService.putClaimById(add, id, claimDto);
     }
     

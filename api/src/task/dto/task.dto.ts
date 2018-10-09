@@ -1,4 +1,4 @@
-import { IsString, IsInt } from 'class-validator';
+import { IsString } from 'class-validator';
 import { ApiModelProperty } from '@nestjs/swagger';
 
 export class TaskDto {
