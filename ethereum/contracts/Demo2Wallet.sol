@@ -24,12 +24,18 @@ contract Demo2Wallet {
 
     function createAddress(address _newAddress) public {
         require(_newAddress != address(0));
-        Demo2Claim demo2Claim = new Demo2Claim();
-        demo2Claim.transferOwnership(_newAddress);
         Demo2Registry demo2Registry = new Demo2Registry();
-        demo2Registry.transferOwnership(_newAddress);
+
+        Demo2Claim demo2Claim = new Demo2Claim();
+
         Demo2Task demo2Task = new Demo2Task();
+        demo2Claim.setTaskContract(demo2Task);
+        demo2Task.setClaimAddress(address(demo2Claim));
+
+        demo2Registry.transferOwnership(_newAddress);
+        demo2Claim.transferOwnership(_newAddress);
         demo2Task.transferOwnership(_newAddress);
+
         User memory user = User(_newAddress, address(demo2Claim), address(demo2Registry), address(demo2Task));
         usersMap_[_newAddress] = user;
         userAddresses_.push(_newAddress);
