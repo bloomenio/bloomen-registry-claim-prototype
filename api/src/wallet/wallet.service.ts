@@ -1,7 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { Wallet } from './interfaces/wallet.interface';
-import { Task } from './interfaces/task.interface';
-import { TaskDto } from './dto/task.dto';
 
 import * as Web3 from 'web3';
 
@@ -114,8 +112,6 @@ var accountAddress = "0xE0FeE2336a7c23f75acea2be3917ebc9AC7a1156";
 @Injectable()
 export class WalletService {
 
-    private readonly tasks: Task[] = [];
-
     getWallet(): Promise<Wallet[]> {
         return new Promise<Wallet[]>((resolve, reject) => {
 
@@ -151,29 +147,4 @@ export class WalletService {
         });
     }
 
-    getTask(add: string): Task[] {
-        let x: Task[] = [];
-        for (let i = 0; i < this.tasks.length; ++i) {
-            if (this.tasks[i].to == add) {
-                x.push(this.tasks[i]);
-            }
-        }
-        return x;
-    }
-
-    updateTask(add: string, id: string, taskDto: TaskDto): Task {
-        let x: Task = undefined;
-        for (let i = 0; i < this.tasks.length; ++i) {
-            if (this.tasks[i].to == add && this.tasks[i].issueId == id) {
-                this.tasks[i] = {
-                    description: taskDto.description,
-                    to: taskDto.to,
-                    from: add,
-                    issueId: this.tasks[i].issueId
-                }
-                x = this.tasks[i];
-            }
-        }
-        return x;
-    }
 }   

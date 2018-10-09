@@ -8,8 +8,8 @@ contract Demo2Claim is Ownable {
 
     using SafeMath for uint256;
 
-    event ClaimCreated(uint256 _assetId, address _assetOwner, string _description, uint256 _claimId, address _claimOwner);
-    event ClaimUpdated(uint256 _assetId, address _assetOwner, string _description, uint256 _claimId, address _claimOwner);
+    event ClaimCreated(uint256 assetId, address assetOwner, string description, uint256 claimId, address claimOwner);
+    event ClaimUpdated(uint256 assetId, address assetOwner, string description, uint256 claimId, address claimOwner);
 
     struct Claim {
         uint256 assetId;
@@ -25,10 +25,10 @@ contract Demo2Claim is Ownable {
     Demo2Task public taskContract;
 
     function createClaim(uint256 _assetId, address _assetOwner, string _description) public onlyOwner {
-        uint256 claimId = numClaims_.add(1);
-        claims[claimId] = Claim(_assetId, _assetOwner, _description, claimId, msg.sender);
-        emit ClaimCreated(_assetId, _assetOwner, _description, claimId, msg.sender);
-        taskContract.createTask(_description, _assetOwner, claimId, msg.sender);
+        numClaims_ = numClaims_.add(1);
+        claims[numClaims_] = Claim(_assetId, _assetOwner, _description, numClaims_, msg.sender);
+        emit ClaimCreated(_assetId, _assetOwner, _description, numClaims_, msg.sender);
+        taskContract.createTask(_description, _assetOwner, numClaims_, msg.sender);
     }
 
     function updateClaim(uint256 _claimId, uint256 _assetId, address _assetOwner, string _description) public onlyOwner {

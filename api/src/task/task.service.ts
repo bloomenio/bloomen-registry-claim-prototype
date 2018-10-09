@@ -1,6 +1,6 @@
 import { Injectable, HttpException } from '@nestjs/common';
-import { Claim } from './interfaces/claim.interface';
-import { ClaimDto } from './dto/claim.dto';
+import { Task } from './interfaces/task.interface';
+import { TaskDto } from './dto/task.dto';
 
 import * as Web3 from 'web3';
 
@@ -104,25 +104,11 @@ var abiWallet = [
     "type": "function"
   }
 ];
-var abiClaim = [
+var abiTask = [
   {
     "constant": true,
     "inputs": [],
-    "name": "taskContract",
-    "outputs": [
-      {
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "owner",
+    "name": "claimAddress",
     "outputs": [
       {
         "name": "",
@@ -141,19 +127,19 @@ var abiClaim = [
         "type": "uint256"
       }
     ],
-    "name": "claims",
+    "name": "tasks",
     "outputs": [
-      {
-        "name": "assetId",
-        "type": "uint256"
-      },
-      {
-        "name": "assetOwner",
-        "type": "address"
-      },
       {
         "name": "description",
         "type": "string"
+      },
+      {
+        "name": "to",
+        "type": "address"
+      },
+      {
+        "name": "taskId",
+        "type": "uint256"
       },
       {
         "name": "claimId",
@@ -161,6 +147,24 @@ var abiClaim = [
       },
       {
         "name": "claimOwner",
+        "type": "address"
+      },
+      {
+        "name": "from",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "owner",
+    "outputs": [
+      {
+        "name": "",
         "type": "address"
       }
     ],
@@ -187,18 +191,18 @@ var abiClaim = [
     "inputs": [
       {
         "indexed": false,
-        "name": "assetId",
-        "type": "uint256"
+        "name": "description",
+        "type": "string"
       },
       {
         "indexed": false,
-        "name": "assetOwner",
+        "name": "to",
         "type": "address"
       },
       {
         "indexed": false,
-        "name": "description",
-        "type": "string"
+        "name": "taskId",
+        "type": "uint256"
       },
       {
         "indexed": false,
@@ -209,9 +213,14 @@ var abiClaim = [
         "indexed": false,
         "name": "claimOwner",
         "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "from",
+        "type": "address"
       }
     ],
-    "name": "ClaimCreated",
+    "name": "TaskCreated",
     "type": "event"
   },
   {
@@ -219,18 +228,18 @@ var abiClaim = [
     "inputs": [
       {
         "indexed": false,
-        "name": "assetId",
-        "type": "uint256"
+        "name": "description",
+        "type": "string"
       },
       {
         "indexed": false,
-        "name": "assetOwner",
+        "name": "to",
         "type": "address"
       },
       {
         "indexed": false,
-        "name": "description",
-        "type": "string"
+        "name": "taskId",
+        "type": "uint256"
       },
       {
         "indexed": false,
@@ -241,9 +250,14 @@ var abiClaim = [
         "indexed": false,
         "name": "claimOwner",
         "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "from",
+        "type": "address"
       }
     ],
-    "name": "ClaimUpdated",
+    "name": "TaskUpdated",
     "type": "event"
   },
   {
@@ -267,45 +281,23 @@ var abiClaim = [
     "constant": false,
     "inputs": [
       {
-        "name": "_assetId",
-        "type": "uint256"
-      },
-      {
-        "name": "_assetOwner",
-        "type": "address"
-      },
-      {
         "name": "_description",
         "type": "string"
-      }
-    ],
-    "name": "createClaim",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
+      },
+      {
+        "name": "_to",
+        "type": "address"
+      },
       {
         "name": "_claimId",
         "type": "uint256"
       },
       {
-        "name": "_assetId",
-        "type": "uint256"
-      },
-      {
-        "name": "_assetOwner",
+        "name": "_claimOwner",
         "type": "address"
-      },
-      {
-        "name": "_description",
-        "type": "string"
       }
     ],
-    "name": "updateClaim",
+    "name": "createTask",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
@@ -315,11 +307,33 @@ var abiClaim = [
     "constant": false,
     "inputs": [
       {
-        "name": "_taskContract",
+        "name": "_taskId",
+        "type": "uint256"
+      },
+      {
+        "name": "_description",
+        "type": "string"
+      },
+      {
+        "name": "_to",
         "type": "address"
       }
     ],
-    "name": "setTaskContract",
+    "name": "updateTask",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_claimAddress",
+        "type": "address"
+      }
+    ],
+    "name": "setClaimAddress",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
@@ -333,83 +347,38 @@ var initialAddress = '0x235e90B0bB3F4c0875a96456d451a5733fb3C025';
 // var accountAddress = "0xE0FeE2336a7c23f75acea2be3917ebc9AC7a1156";
 
 @Injectable()
-export class ClaimService {
+export class TaskService {
 
-  private readonly claims: Claim[] = [];
+  private readonly tasks: Task[] = [];
 
-  getClaim(add: string) {
-    let x: Claim[] = [];
-    for (let i = 0; i < this.claims.length; ++i) {
-      if (this.claims[i].claimOwner == add) {
-        x.push(this.claims[i]);
+  getTask(add: string): Task[] {
+    let x: Task[] = [];
+    for (let i = 0; i < this.tasks.length; ++i) {
+      if (this.tasks[i].to == add) {
+        x.push(this.tasks[i]);
       }
     }
     return x;
   }
 
-  postClaim(address: string, claimDto: ClaimDto): Promise<Claim> {
-    return new Promise<Claim>((resolve, reject) => {
-      walletContract.methods.getClaimAddress(address).call({ from: initialAddress })
-        .then(claimAddress => {
-          var claimContract = new web3.eth.Contract(abiClaim, claimAddress);
-          claimContract.methods.createClaim(claimDto.assetId, claimDto.assetOwner, claimDto.description).send({ from: address, gas: 1000000 })
+  updateTask(add: string, id: string, taskDto: TaskDto): Promise<Task> {
+    return new Promise<Task>((resolve, reject) => {
+      walletContract.methods.getTaskAddress(add).call({ from: initialAddress })
+        .then(taskAddress => {
+          var taskContract = new web3.eth.Contract(abiTask, taskAddress);
+          taskContract.methods.updateTask(id, taskDto.description, taskDto.to).send({ from: add, gas: 1000000 })
             .then(() => {
-              claimContract.getPastEvents('ClaimCreated', { fromBlock: 0, toBlock: 'latest' })
+              taskContract.getPastEvents('TaskUpdated', { fromBlock: 0, toBlock: 'latest' })
                 .then(events => {
                   let asset = events[events.length - 1].returnValues;
-                  console.log(asset);
-                  let claim: Claim = {
-                    assetId: asset.assetId,
-                    assetOwner: asset.assetOwner,
+                  let task: Task = {
                     claimId: asset.claimId,
-                    claimOwner: asset.claimOwner,
-                    description: asset.description
+                    description: asset.description,
+                    to: asset.to,
+                    taskId: asset.taskId,
+                    from: asset.from
                   };
-                  resolve(claim);
-                }, reject);
-            }, reject);
-        }, reject);
-    });
-  }
-
-  getClaimById(address: string, id: string): Promise<Claim> {
-    return new Promise<Claim>((resolve, reject) => {
-      walletContract.methods.getClaimAddress(address).call({ from: initialAddress })
-        .then(claimAddress => {
-          var claimContract = new web3.eth.Contract(abiClaim, claimAddress);
-          claimContract.methods.claims(id).call({ from: address })
-            .then(asset => {
-              let claim: Claim = {
-                assetId: asset.assetId,
-                assetOwner: asset.assetOwner,
-                claimId: asset.claimId,
-                claimOwner: asset.claimOwner,
-                description: asset.description
-              };
-              resolve(claim);
-            }, reject);
-        }, reject);
-    });
-  }
-
-  putClaimById(address: string, id: string, claimDto: ClaimDto): Promise<Claim> {
-    return new Promise<Claim>((resolve, reject) => {
-      walletContract.methods.getClaimAddress(address).call({ from: initialAddress })
-        .then(claimAddress => {
-          var claimContract = new web3.eth.Contract(abiClaim, claimAddress);
-          claimContract.methods.updateClaim(id, claimDto.assetId, claimDto.assetOwner, claimDto.description).send({ from: address, gas: 1000000 })
-            .then(() => {
-              claimContract.getPastEvents('ClaimUpdated', { fromBlock: 0, toBlock: 'latest' })
-                .then(events => {
-                  let asset = events[events.length - 1].returnValues;
-                  let claim: Claim = {
-                    assetId: asset.assetId,
-                    assetOwner: asset.assetOwner,
-                    claimId: asset.claimId,
-                    claimOwner: asset.claimOwner,
-                    description: asset.description
-                  };
-                  resolve(claim);
+                  resolve(task);
                 }, reject);
             }, reject);
         }, reject);
