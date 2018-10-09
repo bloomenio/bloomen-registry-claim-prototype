@@ -1,114 +1,18 @@
 var Web3 = require('web3');
 var Q = require('q');
+var fs = require('fs');
+
+var jsonFile = "../ethereum/build/contracts/Demo2Wallet.json";
+var parsed= JSON.parse(fs.readFileSync(jsonFile));
+var abi = parsed.abi;
 
 // connection with ganache
 var web3 = new Web3('ws://localhost:7545');
 
-// the ABI of the Demo2Wallet contract
-var abiWallet = [
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "name": "userAddresses",
-        "type": "address[]"
-      }
-    ],
-    "name": "AddressAdded",
-    "type": "event"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "getAddress",
-    "outputs": [
-      {
-        "name": "",
-        "type": "address[]"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_newAddress",
-        "type": "address"
-      }
-    ],
-    "name": "createAddress",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_userAddress",
-        "type": "address"
-      }
-    ],
-    "name": "getClaimAddress",
-    "outputs": [
-      {
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_userAddress",
-        "type": "address"
-      }
-    ],
-    "name": "getRegistryAddress",
-    "outputs": [
-      {
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_userAddress",
-        "type": "address"
-      }
-    ],
-    "name": "getTaskAddress",
-    "outputs": [
-      {
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  }
-];
-
 var addrWallet = '0xc5494d3540ff7d4107b03b4c2f490d267964df1a';
 
 // initialization of the Demo2Wallet contract
-var walletContract = new web3.eth.Contract(abiWallet, addrWallet);
+var walletContract = new web3.eth.Contract(abi, addrWallet);
 
 // subscription to the AddressAdded event
 walletContract.events.AddressAdded({}, (error, data) => {

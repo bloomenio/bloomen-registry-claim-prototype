@@ -357,7 +357,6 @@ export class ClaimService {
               claimContract.getPastEvents('ClaimCreated', { fromBlock: 0, toBlock: 'latest' })
                 .then(events => {
                   let asset = events[events.length - 1].returnValues;
-                  console.log(asset);
                   let claim: Claim = {
                     assetId: asset.assetId,
                     assetOwner: asset.assetOwner,
