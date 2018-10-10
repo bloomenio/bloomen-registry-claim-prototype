@@ -3,329 +3,18 @@ import { Claim } from './interfaces/claim.interface';
 import { ClaimDto } from './dto/claim.dto';
 
 import * as Web3 from 'web3';
+var fs = require('fs');
+var Q = require('q');
 
 var web3 = new Web3('ws://localhost:7545');
-var abiWallet = [
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "name": "userAddresses",
-        "type": "address[]"
-      }
-    ],
-    "name": "AddressAdded",
-    "type": "event"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "getAddress",
-    "outputs": [
-      {
-        "name": "",
-        "type": "address[]"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_newAddress",
-        "type": "address"
-      }
-    ],
-    "name": "createAddress",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_userAddress",
-        "type": "address"
-      }
-    ],
-    "name": "getClaimAddress",
-    "outputs": [
-      {
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_userAddress",
-        "type": "address"
-      }
-    ],
-    "name": "getRegistryAddress",
-    "outputs": [
-      {
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_userAddress",
-        "type": "address"
-      }
-    ],
-    "name": "getTaskAddress",
-    "outputs": [
-      {
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  }
-];
-var abiClaim = [
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "taskContract",
-    "outputs": [
-      {
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "owner",
-    "outputs": [
-      {
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "claims",
-    "outputs": [
-      {
-        "name": "assetId",
-        "type": "uint256"
-      },
-      {
-        "name": "assetOwner",
-        "type": "address"
-      },
-      {
-        "name": "description",
-        "type": "string"
-      },
-      {
-        "name": "claimId",
-        "type": "uint256"
-      },
-      {
-        "name": "claimOwner",
-        "type": "address"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "newOwner",
-        "type": "address"
-      }
-    ],
-    "name": "transferOwnership",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "name": "assetId",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "assetOwner",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "name": "description",
-        "type": "string"
-      },
-      {
-        "indexed": false,
-        "name": "claimId",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "claimOwner",
-        "type": "address"
-      }
-    ],
-    "name": "ClaimCreated",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "name": "assetId",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "assetOwner",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "name": "description",
-        "type": "string"
-      },
-      {
-        "indexed": false,
-        "name": "claimId",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "claimOwner",
-        "type": "address"
-      }
-    ],
-    "name": "ClaimUpdated",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "name": "previousOwner",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "name": "newOwner",
-        "type": "address"
-      }
-    ],
-    "name": "OwnershipTransferred",
-    "type": "event"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_assetId",
-        "type": "uint256"
-      },
-      {
-        "name": "_assetOwner",
-        "type": "address"
-      },
-      {
-        "name": "_description",
-        "type": "string"
-      }
-    ],
-    "name": "createClaim",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_claimId",
-        "type": "uint256"
-      },
-      {
-        "name": "_assetId",
-        "type": "uint256"
-      },
-      {
-        "name": "_assetOwner",
-        "type": "address"
-      },
-      {
-        "name": "_description",
-        "type": "string"
-      }
-    ],
-    "name": "updateClaim",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_taskContract",
-        "type": "address"
-      }
-    ],
-    "name": "setTaskContract",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  }
-]
+
+var walletFile = "../ethereum/build/contracts/Demo2Wallet.json";
+var compiledWallet = JSON.parse(fs.readFileSync(walletFile, 'utf8'));
+var abiWallet = compiledWallet.abi;
+
+var claimFile = "../ethereum/build/contracts/Demo2Claim.json";
+var compiledClaim = JSON.parse(fs.readFileSync(claimFile, 'utf8'));
+var abiClaim = compiledClaim.abi;
 
 var addrWallet = '0xc5494d3540ff7d4107b03b4c2f490d267964df1a';
 var walletContract = new web3.eth.Contract(abiWallet, addrWallet);
@@ -335,16 +24,36 @@ var initialAddress = '0x235e90B0bB3F4c0875a96456d451a5733fb3C025';
 @Injectable()
 export class ClaimService {
 
-  private readonly claims: Claim[] = [];
+  getClaim(add: string): Promise<Claim[]> {
+    return new Promise<Claim[]>((resolve, reject) => {
 
-  getClaim(add: string) {
-    let x: Claim[] = [];
-    for (let i = 0; i < this.claims.length; ++i) {
-      if (this.claims[i].claimOwner == add) {
-        x.push(this.claims[i]);
-      }
-    }
-    return x;
+      walletContract.methods.getClaimAddress(add).call({ from: initialAddress })
+        .then(claimAddress => {
+          var claimContract = new web3.eth.Contract(abiClaim, claimAddress);
+          claimContract.methods.claimsNumber().call({ from: initialAddress })
+            .then(claimsNumber => {
+              let claimsArray: Claim[] = [];
+              let claimPromises: Promise<any>[] = [];
+              var i;
+              for (i = 1; i <= claimsNumber; i++) {
+                claimPromises.push(claimContract.methods.claims(i).call({ from: initialAddress }));
+              }
+              Q.all(claimPromises).then(claims => {
+                for (let asset of claims) {
+                  let claim: Claim = {
+                    assetId: asset.assetId,
+                    assetOwner: asset.assetOwner,
+                    claimId: asset.claimId,
+                    claimOwner: asset.claimOwner,
+                    description: asset.description
+                  };
+                  claimsArray.push(claim);
+                }
+                resolve(claimsArray);
+              }, reject);
+            }, reject);
+        }, reject);
+    });
   }
 
   postClaim(address: string, claimDto: ClaimDto): Promise<Claim> {

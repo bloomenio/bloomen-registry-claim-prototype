@@ -20,15 +20,15 @@ contract Demo2Claim is Ownable {
     }
 
     mapping (uint256 => Claim) public claims;
-    uint256 private numClaims_;
+    uint256 public claimsNumber;
 
     Demo2Task public taskContract;
 
     function createClaim(uint256 _assetId, address _assetOwner, string _description) public onlyOwner {
-        numClaims_ = numClaims_.add(1);
-        claims[numClaims_] = Claim(_assetId, _assetOwner, _description, numClaims_, msg.sender);
-        emit ClaimCreated(_assetId, _assetOwner, _description, numClaims_, msg.sender);
-        taskContract.createTask(_description, _assetOwner, numClaims_, msg.sender);
+        claimsNumber = claimsNumber.add(1);
+        claims[claimsNumber] = Claim(_assetId, _assetOwner, _description, claimsNumber, msg.sender);
+        emit ClaimCreated(_assetId, _assetOwner, _description, claimsNumber, msg.sender);
+        taskContract.createTask(_description, _assetOwner, claimsNumber, msg.sender);
     }
 
     function updateClaim(uint256 _claimId, uint256 _assetId, address _assetOwner, string _description) public onlyOwner {

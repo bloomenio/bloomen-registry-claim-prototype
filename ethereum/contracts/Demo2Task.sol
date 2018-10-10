@@ -28,12 +28,12 @@ contract Demo2Task is Ownable {
     address public claimAddress;
 
     mapping (uint256 => Task) public tasks;
-    uint256 private numTasks_;
+    uint256 public tasksNumber;
 
     function createTask(string _description, address _to, uint256 _claimId, address _claimOwner) public onlyClaim {
-        numTasks_ = numTasks_.add(1);
-        tasks[numTasks_] = Task(_description, _to, numTasks_, _claimId, _claimOwner, _claimOwner);
-        emit TaskCreated(_description, _to, numTasks_, _claimId, _claimOwner, _claimOwner);
+        tasksNumber = tasksNumber.add(1);
+        tasks[tasksNumber] = Task(_description, _to, tasksNumber, _claimId, _claimOwner, _claimOwner);
+        emit TaskCreated(_description, _to, tasksNumber, _claimId, _claimOwner, _claimOwner);
     }
 
     function updateTask(uint256 _taskId, string _description, address _to) public onlyOwner {

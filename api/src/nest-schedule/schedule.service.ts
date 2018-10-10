@@ -103,7 +103,7 @@ var abiWallet = [
         "type": "function"
     }
 ]; 
-/* var abiTask = [ */
+/* var abiTask = [ 
     {
       "constant": true,
       "inputs": [
@@ -294,7 +294,7 @@ var abiWallet = [
       "stateMutability": "nonpayable",
       "type": "function"
     }
-  ];
+  ];*/
 
 var addrWallet = '0x844dccbe93f6b47e5c0e1b7fb9e1bfd9e14b78d3'; //Demo2Wallet
 /* var addrTask = '0x822be334c5c5efac67441948f8afc907887603ea'; */
