@@ -2,21 +2,15 @@ pragma solidity ^0.4.22;
 
 import "./Ownable.sol";
 import "./SafeMath.sol";
+import "./Demo2Wallet.sol";
+import "./Structs.sol";
 
-contract Demo2Registry is Ownable {
+contract Demo2Registry is Ownable, Structs {
 
     using SafeMath for uint256;
 
     event AssetCreated(string name, string author, string description, uint256 assetId, address assetOwner);
     event AssetUpdated(string name, string author, string description, uint256 assetId, address assetOwner);
-
-    struct Asset {
-        string name;
-        string author;
-        string description;
-        uint256 assetId;
-        address assetOwner;
-    }
 
     mapping (uint256 => Asset) public assets;
     uint256 public assetsNumber;

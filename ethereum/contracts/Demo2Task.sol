@@ -3,22 +3,14 @@ pragma solidity ^0.4.22;
 import "./Ownable.sol";
 import "./SafeMath.sol";
 import "./Demo2Claim.sol";
+import "./Structs.sol";
 
-contract Demo2Task is Ownable {
+contract Demo2Task is Ownable, Structs {
     
     using SafeMath for uint256;
 
     event TaskCreated(string description, address to, uint256 taskId, uint256 claimId, address claimOwner, address from);
     event TaskUpdated(string description, address to, uint256 taskId, uint256 claimId, address claimOwner, address from);
-
-    struct Task {
-        string description;
-        address to;
-        uint256 taskId;
-        uint256 claimId;
-        address claimOwner;
-        address from;
-    }
 
     modifier onlyClaim() {
         require(msg.sender == claimAddress);

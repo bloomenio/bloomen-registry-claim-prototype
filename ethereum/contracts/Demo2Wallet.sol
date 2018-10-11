@@ -3,17 +3,11 @@ pragma solidity ^0.4.22;
 import "./Demo2Claim.sol";
 import "./Demo2Registry.sol";
 import "./Demo2Task.sol";
+import "./Structs.sol";
 
-contract Demo2Wallet {
+contract Demo2Wallet is Structs {
 
     event AddressAdded(address[] userAddresses_);
-
-    struct User {
-        address addr;
-        address claimContract;
-        address registryContract;
-        address taskContract;
-    }
 
     mapping (address => User) private usersMap_;
     address[] private userAddresses_;

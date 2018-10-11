@@ -3,21 +3,14 @@ pragma solidity ^0.4.22;
 import "./Ownable.sol";
 import "./SafeMath.sol";
 import "./Demo2Task.sol";
+import "./Structs.sol";
 
-contract Demo2Claim is Ownable {
+contract Demo2Claim is Ownable, Structs {
 
     using SafeMath for uint256;
 
     event ClaimCreated(uint256 assetId, address assetOwner, string description, uint256 claimId, address claimOwner);
     event ClaimUpdated(uint256 assetId, address assetOwner, string description, uint256 claimId, address claimOwner);
-
-    struct Claim {
-        uint256 assetId;
-        address assetOwner;
-        string description;
-        uint256 claimId;
-        address claimOwner;
-    }
 
     mapping (uint256 => Claim) public claims;
     uint256 public claimsNumber;
