@@ -5,6 +5,7 @@ import { RegistryModule } from 'registry/registry.module';
 import { ClaimModule } from 'claim/claim.module';
 import { ScheduleModule } from 'nest-schedule/schedule.module';
 import { TaskModule } from 'task/task.module';
+import { SolrModule } from 'solr/solr.module';
 
 @Module({
   imports: [
@@ -12,8 +13,9 @@ import { TaskModule } from 'task/task.module';
     SearchModule,
     RegistryModule,
     ClaimModule, 
-    // ScheduleModule,
-    TaskModule
+    ScheduleModule,
+    TaskModule,
+    SolrModule
   ]
 })
 export class AppModule { }

@@ -63,7 +63,7 @@ export class ClaimService {
           var claimContract = new web3.eth.Contract(abiClaim, claimAddress);
           claimContract.methods.createClaim(claimDto.assetId, claimDto.assetOwner, claimDto.description).send({ from: address, gas: 1000000 })
             .then(() => {
-              claimContract.getPastEvents('ClaimCreated', { fromBlock: 0, toBlock: 'latest' })
+              walletContract.getPastEvents('ClaimCreated', { fromBlock: 0, toBlock: 'latest' })
                 .then(events => {
                   let asset = events[events.length - 1].returnValues;
                   let claim: Claim = {
@@ -107,7 +107,7 @@ export class ClaimService {
           var claimContract = new web3.eth.Contract(abiClaim, claimAddress);
           claimContract.methods.updateClaim(id, claimDto.assetId, claimDto.assetOwner, claimDto.description).send({ from: address, gas: 1000000 })
             .then(() => {
-              claimContract.getPastEvents('ClaimUpdated', { fromBlock: 0, toBlock: 'latest' })
+              walletContract.getPastEvents('ClaimUpdated', { fromBlock: 0, toBlock: 'latest' })
                 .then(events => {
                   let asset = events[events.length - 1].returnValues;
                   let claim: Claim = {

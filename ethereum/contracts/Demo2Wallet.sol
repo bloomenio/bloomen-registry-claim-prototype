@@ -4,10 +4,9 @@ import "./Demo2Claim.sol";
 import "./Demo2Registry.sol";
 import "./Demo2Task.sol";
 import "./Structs.sol";
+import "./EventManager.sol";
 
-contract Demo2Wallet is Structs {
-
-    event AddressAdded(address[] userAddresses_);
+contract Demo2Wallet is Structs, EventManager {
 
     mapping (address => User) private usersMap_;
     address[] private userAddresses_;
@@ -18,11 +17,12 @@ contract Demo2Wallet is Structs {
 
     function createAddress(address _newAddress) public {
         require(_newAddress != address(0));
-        Demo2Registry demo2Registry = new Demo2Registry();
 
-        Demo2Claim demo2Claim = new Demo2Claim();
+        Demo2Registry demo2Registry = new Demo2Registry(this);
 
-        Demo2Task demo2Task = new Demo2Task();
+        Demo2Claim demo2Claim = new Demo2Claim(this);
+
+        Demo2Task demo2Task = new Demo2Task(this);
         demo2Claim.setTaskContract(demo2Task);
         demo2Task.setClaimAddress(address(demo2Claim));
 
@@ -33,7 +33,7 @@ contract Demo2Wallet is Structs {
         User memory user = User(_newAddress, address(demo2Claim), address(demo2Registry), address(demo2Task));
         usersMap_[_newAddress] = user;
         userAddresses_.push(_newAddress);
-        emit AddressAdded(userAddresses_);
+        emitAddressAdded(userAddresses_);
     }
 
     function getClaimAddress(address _userAddress) public view returns(address) {

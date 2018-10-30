@@ -64,7 +64,7 @@ export class TaskService {
           var taskContract = new web3.eth.Contract(abiTask, taskAddress);
           taskContract.methods.updateTask(id, taskDto.description, taskDto.to).send({ from: add, gas: 1000000 })
             .then(() => {
-              taskContract.getPastEvents('TaskUpdated', { fromBlock: 0, toBlock: 'latest' })
+              walletContract.getPastEvents('TaskUpdated', { fromBlock: 0, toBlock: 'latest' })
                 .then(events => {
                   let asset = events[events.length - 1].returnValues;
                   let task: Task = {

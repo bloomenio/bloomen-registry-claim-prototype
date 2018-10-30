@@ -1,307 +1,26 @@
 import { Injectable, LoggerService } from '@nestjs/common';
-import { Cron, Interval, Timeout, NestSchedule, defaults } from 'nest-schedule';
-
+import { Cron, Interval, NestSchedule, defaults } from 'nest-schedule';
+import * as solr from 'solr-client';
 import * as Web3 from 'web3';
+import { Container } from 'typedi';
+import { SolrService } from '../solr/solr.service';
+
+var fs = require('fs');
+var Q = require('q');
 
 var web3 = new Web3('ws://localhost:7545');
-var abiWallet = [
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": false,
-                "name": "userAddresses",
-                "type": "address[]"
-            }
-        ],
-        "name": "AddressAdded",
-        "type": "event"
-    },
-    {
-        "constant": true,
-        "inputs": [],
-        "name": "getAddress",
-        "outputs": [
-            {
-                "name": "",
-                "type": "address[]"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "constant": false,
-        "inputs": [
-            {
-                "name": "_newAddress",
-                "type": "address"
-            }
-        ],
-        "name": "createAddress",
-        "outputs": [],
-        "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "constant": true,
-        "inputs": [
-            {
-                "name": "_userAddress",
-                "type": "address"
-            }
-        ],
-        "name": "getClaimAddress",
-        "outputs": [
-            {
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "constant": true,
-        "inputs": [
-            {
-                "name": "_userAddress",
-                "type": "address"
-            }
-        ],
-        "name": "getRegistryAddress",
-        "outputs": [
-            {
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "constant": true,
-        "inputs": [
-            {
-                "name": "_userAddress",
-                "type": "address"
-            }
-        ],
-        "name": "getTaskAddress",
-        "outputs": [
-            {
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    }
-]; 
-/* var abiTask = [ 
-    {
-      "constant": true,
-      "inputs": [
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "name": "tasks",
-      "outputs": [
-        {
-          "name": "description",
-          "type": "string"
-        },
-        {
-          "name": "to",
-          "type": "address"
-        },
-        {
-          "name": "issueId",
-          "type": "uint256"
-        },
-        {
-          "name": "claimId",
-          "type": "uint256"
-        },
-        {
-          "name": "claimOwner",
-          "type": "address"
-        },
-        {
-          "name": "from",
-          "type": "address"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "owner",
-      "outputs": [
-        {
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "constant": false,
-      "inputs": [
-        {
-          "name": "newOwner",
-          "type": "address"
-        }
-      ],
-      "name": "transferOwnership",
-      "outputs": [],
-      "payable": false,
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "name": "description",
-          "type": "string"
-        },
-        {
-          "indexed": false,
-          "name": "to",
-          "type": "address"
-        },
-        {
-          "indexed": false,
-          "name": "issueId",
-          "type": "uint256"
-        },
-        {
-          "indexed": false,
-          "name": "claimId",
-          "type": "uint256"
-        },
-        {
-          "indexed": false,
-          "name": "claimOwner",
-          "type": "address"
-        },
-        {
-          "indexed": false,
-          "name": "from",
-          "type": "address"
-        }
-      ],
-      "name": "TaskCreated",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "name": "description",
-          "type": "string"
-        },
-        {
-          "indexed": false,
-          "name": "to",
-          "type": "address"
-        }
-      ],
-      "name": "TaskUpdated",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": true,
-          "name": "previousOwner",
-          "type": "address"
-        },
-        {
-          "indexed": true,
-          "name": "newOwner",
-          "type": "address"
-        }
-      ],
-      "name": "OwnershipTransferred",
-      "type": "event"
-    },
-    {
-      "constant": false,
-      "inputs": [
-        {
-          "name": "_description",
-          "type": "string"
-        },
-        {
-          "name": "_to",
-          "type": "address"
-        },
-        {
-          "name": "_issueId",
-          "type": "uint256"
-        },
-        {
-          "name": "_claimId",
-          "type": "uint256"
-        },
-        {
-          "name": "_claimOwner",
-          "type": "address"
-        }
-      ],
-      "name": "createTask",
-      "outputs": [],
-      "payable": false,
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "constant": false,
-      "inputs": [
-        {
-          "name": "_taskId",
-          "type": "uint256"
-        },
-        {
-          "name": "_description",
-          "type": "string"
-        },
-        {
-          "name": "_to",
-          "type": "address"
-        }
-      ],
-      "name": "updateTask",
-      "outputs": [],
-      "payable": false,
-      "stateMutability": "nonpayable",
-      "type": "function"
-    }
-  ];*/
 
-var addrWallet = '0x844dccbe93f6b47e5c0e1b7fb9e1bfd9e14b78d3'; //Demo2Wallet
-/* var addrTask = '0x822be334c5c5efac67441948f8afc907887603ea'; */
+var walletFile = "../ethereum/build/contracts/Demo2Wallet.json";
+var compiledWallet = JSON.parse(fs.readFileSync(walletFile, 'utf8'));
+var abiWallet = compiledWallet.abi;
 
+var registryFile = "../ethereum/build/contracts/Demo2Registry.json";
+var compiledRegistry = JSON.parse(fs.readFileSync(registryFile, 'utf8'));
+var abiRegistry = compiledRegistry.abi;
+
+var addrWallet = '0xc5494d3540ff7d4107b03b4c2f490d267964df1a';
 var walletContract = new web3.eth.Contract(abiWallet, addrWallet);
-// var taskContract = new web3.eth.Contract(abiTask, addrTask);
-var initialAddress = '0x89eb0d7A5f7692a5D2b24276F9C1B10cA7Df601A';
+var initialAddress = '0x235e90B0bB3F4c0875a96456d451a5733fb3C025';
 var accountAddress = "0xE0FeE2336a7c23f75acea2be3917ebc9AC7a1156";
 
 export class NestLogger implements LoggerService {
@@ -327,42 +46,57 @@ defaults.retryInterval = 10;
 @Injectable()
 export class ScheduleService extends NestSchedule {
 
-    private last_block = 0;
+    private last_block_number: any = 0;
+    public client: any = solr.createClient('localhost', '8983', 'demo-bloomen-registry-claim-m12', '/opt/solr/server');
+    public solrService: SolrService = Container.get(SolrService);
 
     constructor() {
         super();
+        this.solrService.setInstance(this.client);
     }
 
-    @Cron('* * * * *', {
-        startTime: new Date(),
-        endTime: new Date(new Date().getTime() + 1),
-        tz: 'Asia/Shanghai',
-    })
+    @Interval(10000)
     async syncData() {
-        console.log('syncing data ...');
-        try {
-            walletContract.methods.createAddress(accountAddress).send({ from: initialAddress, gas: 100000 })
-                .then(() => walletContract.getPastEvents('AllEvents', { fromBlock: this.last_block, toBlock: 'latest' }, (err, events) => {
-                    if (err)
-                        console.log(err);
-                    else {
-                        this.last_block = web3.eth.getBlock('latest').number;
-                        console.log(events);
-                    }
-                }));
-                /* taskContract.methods.createTask('first task', accountAddress, 1, 1, accountAddress).send({ from: initialAddress, gas: 6721975 })
-                .then(() => taskContract.getPastEvents('AllEvents', { fromBlock: this.last_block, toBlock: 'latest' }, (err, events) => {
-                    if (err)
-                        console.log(err);
-                    else {
-                        this.last_block = web3.eth.getBlock('latest').number;
-                        console.log(events);
-                    }
-                })); */
+        console.log('Syncing data ...');
+
+        let latest_block: any = await web3.eth.getBlock('latest');
+
+        if (latest_block.number > this.last_block_number) {
+            walletContract.getPastEvents('AllEvents', { fromBlock: this.last_block_number + 1, toBlock: latest_block.number })
+                .then(async events => {
+                    this.last_block_number = latest_block.number;
+                    console.log(events.length);
+                    // this.solrService.addDocuments(events);
+                }, error => {
+                    console.log(error);
+                });
+        } else {
+            console.log('Already up to date.');
         }
-        catch(err){
-            console.error(err.message);
-        }
+
+        // try {
+        //     walletContract.methods.createAddress(accountAddress).send({ from: initialAddress, gas: 100000 })
+        //         .then(() => walletContract.getPastEvents('AllEvents', { fromBlock: this.last_block, toBlock: 'latest' }, (err, events) => {
+        //             if (err)
+        //                 console.log(err);
+        //             else {
+        //                 this.last_block = web3.eth.getBlock('latest').number;
+        //                 console.log(events);
+        //             }
+        //         }));
+        //         /* taskContract.methods.createTask('first task', accountAddress, 1, 1, accountAddress).send({ from: initialAddress, gas: 6721975 })
+        //         .then(() => taskContract.getPastEvents('AllEvents', { fromBlock: this.last_block, toBlock: 'latest' }, (err, events) => {
+        //             if (err)
+        //                 console.log(err);
+        //             else {
+        //                 this.last_block = web3.eth.getBlock('latest').number;
+        //                 console.log(events);
+        //             }
+        //         })); */
+        // }
+        // catch(err){
+        //     console.error(err.message);
+        // }
     }
 
 }

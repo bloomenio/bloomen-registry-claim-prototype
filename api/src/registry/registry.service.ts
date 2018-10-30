@@ -18,6 +18,7 @@ var abiRegistry = compiledRegistry.abi;
 
 var addrWallet = '0xc5494d3540ff7d4107b03b4c2f490d267964df1a';
 var walletContract = new web3.eth.Contract(abiWallet, addrWallet);
+
 var initialAddress = '0x235e90B0bB3F4c0875a96456d451a5733fb3C025';
 // var accountAddress = "0xE0FeE2336a7c23f75acea2be3917ebc9AC7a1156";
 
@@ -31,7 +32,7 @@ export class RegistryService {
                     var registryContract = new web3.eth.Contract(abiRegistry, registryAddress);
                     registryContract.methods.createAsset(registryDto.name, registryDto.author, registryDto.description).send({ from: address, gas: 1000000 })
                         .then(() => {
-                            registryContract.getPastEvents('AssetCreated', { fromBlock: 0, toBlock: 'latest' })
+                            walletContract.getPastEvents('AssetCreated', { fromBlock: 0, toBlock: 'latest' })
                                 .then(events => {
                                     let asset = events[events.length - 1].returnValues;
                                     let registry: Registry = {
@@ -75,7 +76,7 @@ export class RegistryService {
                     var registryContract = new web3.eth.Contract(abiRegistry, registryAddress);
                     registryContract.methods.updateAsset(id, registryDto.name, registryDto.author, registryDto.description).send({ from: address, gas: 1000000 })
                         .then(() => {
-                            registryContract.getPastEvents('AssetUpdated', { fromBlock: 0, toBlock: 'latest' })
+                            walletContract.getPastEvents('AssetUpdated', { fromBlock: 0, toBlock: 'latest' })
                                 .then(events => {
                                     let asset = events[events.length - 1].returnValues;
                                     let registry: Registry = {
