@@ -13,14 +13,13 @@ var abiWallet = compiledWallet.abi;
 var addrWallet = "0xc5494d3540ff7d4107b03b4c2f490d267964df1a";
 var walletContract = new web3.eth.Contract(abiWallet, addrWallet);
 var initialAddress = "0x235e90B0bB3F4c0875a96456d451a5733fb3C025";
-var accountAddress = "0xE0FeE2336a7c23f75acea2be3917ebc9AC7a1156";
+// var accountAddress = "0xE0FeE2336a7c23f75acea2be3917ebc9AC7a1156";
 
 @Injectable()
 export class WalletService {
 
     getWallet(): Promise<Wallet[]> {
         return new Promise<Wallet[]>((resolve, reject) => {
-
             walletContract.methods.getAddress().call({ from: initialAddress })
                 .then(userAddresses => {
                     let wallets: Wallet[] = [];
@@ -34,7 +33,9 @@ export class WalletService {
     }
 
     postWallet(): Promise<Wallet[]> {
-        return new Promise<Wallet[]>((resolve, reject) => {
+        return new Promise<Wallet[]>( async (resolve, reject) => {
+            let accountAddress = await web3.eth.personal.newAccount("password");
+            web3.eth.personal.unlockAccount(accountAddress, "password", 600);
 
             walletContract.methods.createAddress(accountAddress).send({ from: initialAddress, gas: 100000000 })
                 .then(() => {

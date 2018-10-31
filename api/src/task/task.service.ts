@@ -18,7 +18,6 @@ var abiTask = compiledTask.abi;
 
 var addrWallet = '0xc5494d3540ff7d4107b03b4c2f490d267964df1a';
 var walletContract = new web3.eth.Contract(abiWallet, addrWallet);
-var initialAddress = '0x235e90B0bB3F4c0875a96456d451a5733fb3C025';
 // var accountAddress = "0xE0FeE2336a7c23f75acea2be3917ebc9AC7a1156";
 
 @Injectable()
@@ -27,16 +26,16 @@ export class TaskService {
   getTask(add: string): Promise<Task[]> {
     return new Promise<Task[]>((resolve, reject) => {
 
-      walletContract.methods.getTaskAddress(add).call({ from: initialAddress })
+      walletContract.methods.getTaskAddress(add).call({ from: add })
         .then(taskAddress => {
           var taskContract = new web3.eth.Contract(abiTask, taskAddress);
-          taskContract.methods.tasksNumber().call({ from: initialAddress })
+          taskContract.methods.tasksNumber().call({ from: add })
             .then(tasksNumber => {
               let tasksArray: Task[] = [];
               let taskPromises: Promise<any>[] = [];
               var i;
               for (i = 1; i <= tasksNumber; i++) {
-                taskPromises.push(taskContract.methods.tasks(i).call({ from: initialAddress }));
+                taskPromises.push(taskContract.methods.tasks(i).call({ from: add }));
               }
               Q.all(taskPromises).then(tasks => {
                 for (let asset of tasks) {
@@ -59,7 +58,7 @@ export class TaskService {
 
   updateTask(add: string, id: string, taskDto: TaskDto): Promise<Task> {
     return new Promise<Task>((resolve, reject) => {
-      walletContract.methods.getTaskAddress(add).call({ from: initialAddress })
+      walletContract.methods.getTaskAddress(add).call({ from: add })
         .then(taskAddress => {
           var taskContract = new web3.eth.Contract(abiTask, taskAddress);
           taskContract.methods.updateTask(id, taskDto.description, taskDto.to).send({ from: add, gas: 1000000 })

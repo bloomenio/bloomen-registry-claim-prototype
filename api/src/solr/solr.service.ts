@@ -25,16 +25,14 @@ export class SolrService {
 
                     for (const doc of obj.response.docs) {
                         const asset: Registry = {
-                            assetId: doc.id,
+                            assetId: doc.assetId_i,
                             assetOwner: doc.assetOwner_s,
-                            name: doc.name_t,
-                            author: doc.author_t,
-                            description: doc.description_t
+                            name: doc.name_s,
+                            author: doc.author_s,
+                            description: doc.description_s
                         };
                         resultData.push(asset);
                     }
-
-                    console.log(resultData);
                     resolve(resultData);
                 }
 

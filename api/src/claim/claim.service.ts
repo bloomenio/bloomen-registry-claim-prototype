@@ -18,7 +18,7 @@ var abiClaim = compiledClaim.abi;
 
 var addrWallet = '0xc5494d3540ff7d4107b03b4c2f490d267964df1a';
 var walletContract = new web3.eth.Contract(abiWallet, addrWallet);
-var initialAddress = '0x235e90B0bB3F4c0875a96456d451a5733fb3C025';
+// var initialAddress = '0x235e90B0bB3F4c0875a96456d451a5733fb3C025';
 // var accountAddress = "0xE0FeE2336a7c23f75acea2be3917ebc9AC7a1156";
 
 @Injectable()
@@ -27,16 +27,16 @@ export class ClaimService {
   getClaim(add: string): Promise<Claim[]> {
     return new Promise<Claim[]>((resolve, reject) => {
 
-      walletContract.methods.getClaimAddress(add).call({ from: initialAddress })
+      walletContract.methods.getClaimAddress(add).call({ from: add })
         .then(claimAddress => {
           var claimContract = new web3.eth.Contract(abiClaim, claimAddress);
-          claimContract.methods.claimsNumber().call({ from: initialAddress })
+          claimContract.methods.claimsNumber().call({ from: add })
             .then(claimsNumber => {
               let claimsArray: Claim[] = [];
               let claimPromises: Promise<any>[] = [];
               var i;
               for (i = 1; i <= claimsNumber; i++) {
-                claimPromises.push(claimContract.methods.claims(i).call({ from: initialAddress }));
+                claimPromises.push(claimContract.methods.claims(i).call({ from: add }));
               }
               Q.all(claimPromises).then(claims => {
                 for (let asset of claims) {
@@ -58,7 +58,7 @@ export class ClaimService {
 
   postClaim(address: string, claimDto: ClaimDto): Promise<Claim> {
     return new Promise<Claim>((resolve, reject) => {
-      walletContract.methods.getClaimAddress(address).call({ from: initialAddress })
+      walletContract.methods.getClaimAddress(address).call({ from: address })
         .then(claimAddress => {
           var claimContract = new web3.eth.Contract(abiClaim, claimAddress);
           claimContract.methods.createClaim(claimDto.assetId, claimDto.assetOwner, claimDto.description).send({ from: address, gas: 1000000 })
@@ -82,7 +82,7 @@ export class ClaimService {
 
   getClaimById(address: string, id: string): Promise<Claim> {
     return new Promise<Claim>((resolve, reject) => {
-      walletContract.methods.getClaimAddress(address).call({ from: initialAddress })
+      walletContract.methods.getClaimAddress(address).call({ from: address })
         .then(claimAddress => {
           var claimContract = new web3.eth.Contract(abiClaim, claimAddress);
           claimContract.methods.claims(id).call({ from: address })
@@ -102,7 +102,7 @@ export class ClaimService {
 
   putClaimById(address: string, id: string, claimDto: ClaimDto): Promise<Claim> {
     return new Promise<Claim>((resolve, reject) => {
-      walletContract.methods.getClaimAddress(address).call({ from: initialAddress })
+      walletContract.methods.getClaimAddress(address).call({ from: address })
         .then(claimAddress => {
           var claimContract = new web3.eth.Contract(abiClaim, claimAddress);
           claimContract.methods.updateClaim(id, claimDto.assetId, claimDto.assetOwner, claimDto.description).send({ from: address, gas: 1000000 })
