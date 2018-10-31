@@ -4,6 +4,7 @@ import * as solr from 'solr-client';
 import * as Web3 from 'web3';
 import { Container } from 'typedi';
 import { SolrService } from '../solr/solr.service';
+import { RegistrySolr } from './models/registrySolr.interface';
 
 var fs = require('fs');
 var Q = require('q');
@@ -47,7 +48,7 @@ defaults.retryInterval = 10;
 export class ScheduleService extends NestSchedule {
 
     private last_block_number: any = 0;
-    public client: any = solr.createClient('localhost', '8983', 'demo-bloomen-registry-claim-m12', '/opt/solr/server');
+    public client: any = solr.createClient('localhost', '8983', 'demo-bloomen-registry-claim-m12', '/solr');
     public solrService: SolrService = Container.get(SolrService);
 
     constructor() {
@@ -57,16 +58,35 @@ export class ScheduleService extends NestSchedule {
 
     @Interval(10000)
     async syncData() {
-        console.log('Syncing data ...');
+        console.log('Syncing blocks ...');
 
         let latest_block: any = await web3.eth.getBlock('latest');
 
         if (latest_block.number > this.last_block_number) {
-            walletContract.getPastEvents('AllEvents', { fromBlock: this.last_block_number + 1, toBlock: latest_block.number })
+            walletContract.getPastEvents('AssetCreated', { fromBlock: this.last_block_number + 1, toBlock: latest_block.number })
                 .then(async events => {
                     this.last_block_number = latest_block.number;
-                    console.log(events.length);
-                    // this.solrService.addDocuments(events);
+                    if (events.length > 0) {
+                        console.log(events.length + " new events.");
+                        console.log('Saving to Solr ...');
+                        let solrEvents: RegistrySolr[] = [];
+                        for (let event of events) {
+                            let asset = event.returnValues;
+                            let registry: RegistrySolr = {
+                                assetId_i: asset.assetId,
+                                assetOwner_s: asset.assetOwner,
+                                name_s: asset.name,
+                                author_s: asset.author,
+                                description_s: asset.description
+                            };
+                            console.log(registry);
+                            solrEvents.push(registry);
+                        }
+                        await this.solrService.addDocuments(solrEvents);
+                        console.log('Done.');
+                    } else {
+                        console.log('No new events.');
+                    }
                 }, error => {
                     console.log(error);
                 });
