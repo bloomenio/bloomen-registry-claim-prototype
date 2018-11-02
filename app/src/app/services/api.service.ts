@@ -69,13 +69,13 @@ export class ApiService {
     return this.http.get(`wallet/${currentadd}/tasks`).toPromise();
   }
 
-  putTask(currentadd: string, issueid: string, description: string, to: string): Promise<any> {
+  putTask(currentadd: string, taskId: string, description: string, to: string): Promise<any> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     }
-    return this.http.put(`wallet/${currentadd}/tasks/${issueid}`,
+    return this.http.put(`wallet/${currentadd}/tasks/${taskId}`,
       {
         description: description,
         to: to

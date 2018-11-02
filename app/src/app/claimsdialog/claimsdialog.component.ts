@@ -23,13 +23,13 @@ export class ClaimsDialogComponent {
   public reasons: string;
   private to: string;
   private from: string;
-  private issueId: string;
+  private taskId: string;
 
   constructor(private dialogRef: MatDialogRef<ClaimsDialogComponent>, private claimsStore: ClaimsStore, private apiService: ApiService, @Inject(MAT_DIALOG_DATA) public data: any) {
     this.reasons = "";
     this.to = data.to;
     this.from = data.from;
-    this.issueId = data.issueid;
+    this.taskId = data.taskId;
   }
 
   /**
@@ -47,7 +47,7 @@ export class ClaimsDialogComponent {
   }
 
   putTask() {
-    this.apiService.putTask(this.to, this.issueId, this.reasons, this.from).then(
+    this.apiService.putTask(this.to, this.taskId, this.reasons, this.from).then(
       () => this.claimsStore.setListTasks({id: this.to})
     ).then(
       () => { this.dialogRef.close(); }

@@ -73,10 +73,10 @@ export class ClaimsComponent implements OnInit {
   /**
    * S'encarrega d'obrir el dialeg claimsdialog quan es clicka +/-
    */
-  putTask(issueid: string, from: string, to: string) {
+  putTask(taskId: string, from: string, to: string) {
     this.dialog.open(ClaimsDialogComponent, {
       data: {
-        issueid: issueid,
+        taskId: taskId,
         to: to,
         from: from
       }
