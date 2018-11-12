@@ -23,8 +23,6 @@ contract Demo2Wallet is Structs, EventManager {
         Demo2Claim demo2Claim = new Demo2Claim(this);
 
         Demo2Task demo2Task = new Demo2Task(this);
-        demo2Claim.setTaskContract(demo2Task);
-        demo2Task.setClaimAddress(address(demo2Claim));
 
         demo2Registry.transferOwnership(_newAddress);
         demo2Claim.transferOwnership(_newAddress);

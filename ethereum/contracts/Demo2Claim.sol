@@ -4,7 +4,7 @@ import "./Ownable.sol";
 import "./SafeMath.sol";
 import "./Demo2Task.sol";
 import "./Structs.sol";
-import "./EventManager.sol";
+import "./Demo2Wallet.sol";
 
 contract Demo2Claim is Ownable, Structs {
 
@@ -13,11 +13,9 @@ contract Demo2Claim is Ownable, Structs {
     mapping (uint256 => Claim) public claims;
     uint256 public claimsNumber;
 
-    Demo2Task public taskContract;
+    Demo2Wallet private eventManager_;
 
-    EventManager private eventManager_;
-
-    constructor(EventManager _eventManager) public {
+    constructor(Demo2Wallet _eventManager) public {
         eventManager_ = _eventManager;
     }
 
@@ -25,6 +23,8 @@ contract Demo2Claim is Ownable, Structs {
         claimsNumber = claimsNumber.add(1);
         claims[claimsNumber] = Claim(_assetId, _assetOwner, _description, claimsNumber, msg.sender);
         eventManager_.emitClaimCreated(_assetId, _assetOwner, _description, claimsNumber, msg.sender);
+        address taskAddress = eventManager_.getTaskAddress(_assetOwner);
+        Demo2Task taskContract = Demo2Task(taskAddress);
         taskContract.createTask(_description, _assetOwner, claimsNumber, msg.sender);
     }
 
@@ -35,10 +35,6 @@ contract Demo2Claim is Ownable, Structs {
         claim.assetOwner = _assetOwner;
         claim.description = _description;
         eventManager_.emitClaimUpdated(claim.assetId, claim.assetOwner, claim.description, claim.claimId, claim.claimOwner);
-    }
-
-    function setTaskContract(Demo2Task _taskContract) public {
-        taskContract = _taskContract;
     }
 
 }
