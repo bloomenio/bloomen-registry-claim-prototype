@@ -11,20 +11,15 @@ export class RegistryService {
 
     public walletContract;
 
-    public compiledRegistry;
-    public abiRegistry;
-
     constructor(private web3Service: Web3Service) {
         this.walletContract = this.web3Service.getWalletContract();
-        this.compiledRegistry = JSON.parse(fs.readFileSync(this.web3Service.getRegistryFile(), 'utf8'));
-        this.abiRegistry = this.compiledRegistry.abi;
     }
 
     postRegistry(address: string, registryDto: RegistryDto): Promise<Registry> {
         return new Promise<Registry>((resolve, reject) => {
             this.walletContract.methods.getRegistryAddress(address).call({ from: address })
                 .then(registryAddress => {
-                    var registryContract = this.web3Service.createContract(this.abiRegistry, registryAddress);
+                    var registryContract = this.web3Service.createContract(this.web3Service.getAbiRegistry(), registryAddress);
                     registryContract.methods.createAsset(registryDto.name, registryDto.author, registryDto.description).send({ from: address, gas: 1000000 })
                         .then(() => {
                             this.walletContract.getPastEvents('AssetCreated', { fromBlock: 0, toBlock: 'latest' })
@@ -48,7 +43,7 @@ export class RegistryService {
         return new Promise<Registry>((resolve, reject) => {
             this.walletContract.methods.getRegistryAddress(address).call({ from: address })
                 .then(registryAddress => {
-                    var registryContract = this.web3Service.createContract(this.abiRegistry, registryAddress);
+                    var registryContract = this.web3Service.createContract(this.web3Service.getAbiRegistry(), registryAddress);
                     registryContract.methods.assets(id).call({ from: address })
                         .then(asset => {
                             let registry: Registry = {
@@ -68,7 +63,7 @@ export class RegistryService {
         return new Promise<Registry>((resolve, reject) => {
             this.walletContract.methods.getRegistryAddress(address).call({ from: address })
                 .then(registryAddress => {
-                    var registryContract = this.web3Service.createContract(this.abiRegistry, registryAddress);
+                    var registryContract = this.web3Service.createContract(this.web3Service.getAbiRegistry(), registryAddress);
                     registryContract.methods.updateAsset(id, registryDto.name, registryDto.author, registryDto.description).send({ from: address, gas: 1000000 })
                         .then(() => {
                             this.walletContract.getPastEvents('AssetUpdated', { fromBlock: 0, toBlock: 'latest' })

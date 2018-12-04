@@ -11,13 +11,8 @@ export class ClaimService {
 
   public walletContract;
 
-  public compiledClaim;
-  public abiClaim;
-
   constructor(private web3Service: Web3Service) {
     this.walletContract = this.web3Service.getWalletContract();//createContract(abiWallet, compiledWallet.networks[process.env.NETWORK_ID].address);
-    this.compiledClaim = JSON.parse(fs.readFileSync(this.web3Service.getClaimFile(), 'utf8'));
-    this.abiClaim = this.compiledClaim.abi;
   }
 
   getClaim(add: string): Promise<Claim[]> {
@@ -25,7 +20,7 @@ export class ClaimService {
 
       this.walletContract.methods.getClaimAddress(add).call({ from: add })
         .then(claimAddress => {
-          var claimContract = this.web3Service.createContract(this.abiClaim, claimAddress);
+          var claimContract = this.web3Service.createContract(this.web3Service.getAbiClaim(), claimAddress);
           claimContract.methods.claimsNumber().call({ from: add })
             .then(claimsNumber => {
               let claimsArray: Claim[] = [];
@@ -56,7 +51,7 @@ export class ClaimService {
     return new Promise<Claim>((resolve, reject) => {
       this.walletContract.methods.getClaimAddress(address).call({ from: address })
         .then(claimAddress => {
-          var claimContract = this.web3Service.createContract(this.abiClaim, claimAddress);
+          var claimContract = this.web3Service.createContract(this.web3Service.getAbiClaim(), claimAddress);
           claimContract.methods.createClaim(claimDto.assetId, claimDto.assetOwner, claimDto.description).send({ from: address, gas: 672197500 })
             .then(() => {
               this.walletContract.getPastEvents('ClaimCreated', { fromBlock: 0, toBlock: 'latest' })
@@ -80,7 +75,7 @@ export class ClaimService {
     return new Promise<Claim>((resolve, reject) => {
       this.walletContract.methods.getClaimAddress(address).call({ from: address })
         .then(claimAddress => {
-          var claimContract = this.web3Service.createContract(this.abiClaim, claimAddress);
+          var claimContract = this.web3Service.createContract(this.web3Service.getAbiClaim(), claimAddress);
           claimContract.methods.claims(id).call({ from: address })
             .then(asset => {
               let claim: Claim = {
@@ -100,7 +95,7 @@ export class ClaimService {
     return new Promise<Claim>((resolve, reject) => {
      this.walletContract.methods.getClaimAddress(address).call({ from: address })
         .then(claimAddress => {
-          var claimContract = this.web3Service.createContract(this.abiClaim, claimAddress);
+          var claimContract = this.web3Service.createContract(this.web3Service.getAbiClaim(), claimAddress);
           claimContract.methods.updateClaim(id, claimDto.assetId, claimDto.assetOwner, claimDto.description).send({ from: address, gas: 1000000 })
             .then(() => {
               this.walletContract.getPastEvents('ClaimUpdated', { fromBlock: 0, toBlock: 'latest' })

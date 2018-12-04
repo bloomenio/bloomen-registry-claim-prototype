@@ -10,17 +10,9 @@ var Q = require('q');
 export class TaskService {
 
   public walletContract;
-  public compiledWallet;
-  public abiWallet;
-
-  public compiledTask;
-  public abiTask;
 
   constructor(private web3Service: Web3Service) {
     this.walletContract = this.web3Service.getWalletContract();
-
-    this.compiledTask = JSON.parse(fs.readFileSync(this.web3Service.getTaskFile(), 'utf8'));
-    this.abiTask = this.compiledTask.abi;
   }
 
   getTask(add: string): Promise<Task[]> {
@@ -28,7 +20,7 @@ export class TaskService {
 
       this.walletContract.methods.getTaskAddress(add).call({ from: add })
         .then(taskAddress => {
-          var taskContract = this.web3Service.createContract(this.abiTask, taskAddress);
+          var taskContract = this.web3Service.createContract(this.web3Service.getAbiTask(), taskAddress);
           taskContract.methods.tasksNumber().call({ from: add })
             .then(tasksNumber => {
               let tasksArray: Task[] = [];
@@ -62,7 +54,7 @@ export class TaskService {
     return new Promise<Task>((resolve, reject) => {
       this.walletContract.methods.getTaskAddress(add).call({ from: add })
         .then(taskAddress => {
-          var taskContract = this.web3Service.createContract(this.abiTask, taskAddress);
+          var taskContract = this.web3Service.createContract(this.web3Service.getAbiTask(), taskAddress);
           taskContract.methods.updateTask(id, taskDto.description, taskDto.to).send({ from: add, gas: 1000000 })
             .then(async algo => {
               let taskPromises: any[] = [];

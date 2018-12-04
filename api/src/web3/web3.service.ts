@@ -7,36 +7,39 @@ var fs = require('fs');
 @Injectable()
 export class Web3Service {
   private web3: any = new Web3("ws://localhost:7545");
-  private walletFile;
-  private compiledWallet;
-  private claimFile;
-  private taskFile;
-  private registryFile;
+  private abiClaim;
+  private abiTask;
+  private abiRegistry;
   private walletContract;
 
   constructor() {
-    this.walletFile = "../ethereum/build/contracts/Demo2Wallet.json";
-    this.compiledWallet = JSON.parse(fs.readFileSync(this.walletFile, 'utf8'));
-    this.claimFile = "../ethereum/build/contracts/Demo2Claim.json";
-    this.taskFile = "../ethereum/build/contracts/Demo2Task.json";
-    this.registryFile = "../ethereum/build/contracts/Demo2Registry.json";
-    this.walletContract = new this.web3.eth.Contract(this.compiledWallet.abi, this.compiledWallet.networks[process.env.NETWORK_ID].address);
+    let walletFile = "../ethereum/build/contracts/Demo2Wallet.json";
+    let compiledWallet = JSON.parse(fs.readFileSync(walletFile, 'utf8'));
+    this.walletContract = new this.web3.eth.Contract(compiledWallet.abi, compiledWallet.networks[process.env.NETWORK_ID].address);
+
+    let claimFile = "../ethereum/build/contracts/Demo2Claim.json";
+    let compiledClaim = JSON.parse(fs.readFileSync(claimFile, 'utf8'));
+    this.abiClaim = compiledClaim.abi;
+
+    let taskFile = "../ethereum/build/contracts/Demo2Task.json";
+    let compiledTask = JSON.parse(fs.readFileSync(claimFile, 'utf8'));
+    this.abiTask = compiledTask.abi;
+
+    let registryFile = "../ethereum/build/contracts/Demo2Registry.json";
+    let compiledRegistry = JSON.parse(fs.readFileSync(registryFile, 'utf8'));
+    this.abiRegistry = compiledRegistry.abi;
   }
 
-  public getWalletFile() {
-    return this.walletFile;
+  public getAbiClaim() {
+    return this.abiClaim;
   }
 
-  public getClaimFile() {
-    return this.claimFile;
+  public getAbiTask() {
+    return this.abiTask;
   }
 
-  public getTaskFile() {
-    return this.taskFile;
-  }
-
-  public getRegistryFile() {
-    return this.registryFile;
+  public getAbiRegistry() {
+    return this.abiRegistry;
   }
 
   public getWalletContract() {
