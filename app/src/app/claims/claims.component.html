@@ -43,6 +43,11 @@
                         <b>Task Description:</b> {{t.description}} <br />
                         <b>From:</b> {{t.from}} <br />
                         <b>To:</b> {{t.to}} <br />
+                        <b>History:  </b> <br/>
+                        <!-- {{t.history}} -->
+                        <p *ngFor="let h of t.history">
+                            {{h}}
+                        </p>
                     </mat-card-content>
                 </mat-card>
             </div>

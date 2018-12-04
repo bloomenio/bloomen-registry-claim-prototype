@@ -4,4 +4,5 @@ export interface Task {
     readonly from: string;
     readonly taskId: string;
     readonly claimId: string;
+    readonly history: string[];
 }

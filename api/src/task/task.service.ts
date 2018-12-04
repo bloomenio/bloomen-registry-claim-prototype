@@ -1,6 +1,7 @@
 import { Injectable, HttpException } from '@nestjs/common';
 import { Task } from './interfaces/task.interface';
 import { TaskDto } from './dto/task.dto';
+//import { Web3Service } from '../web3/web3.service';
 
 import * as Web3 from 'web3';
 var fs = require('fs');
@@ -23,28 +24,51 @@ var walletContract = new web3.eth.Contract(abiWallet, addrWallet);
 @Injectable()
 export class TaskService {
 
+  /* public walletContract;
+  public compiledWallet;
+  public abiWallet;
+
+  public compiledTask;
+  public abiTask;
+
+  constructor(private web3Service: Web3Service) {
+    //this.compiledWallet = JSON.parse(fs.readFileSync(this.web3Service.getWalletFile(), 'utf8'));
+    //this.abiWallet = this.compiledWallet.abi; 
+    this.walletContract = this.web3Service.getWalletContract();//this.web3Service.getWalletContract();// this.web3Service.createContract(this.abiWallet, this.compiledWallet.networks[process.env.NETWORK_ID].address);
+
+    this.compiledTask = JSON.parse(fs.readFileSync(this.web3Service.getTaskFile(), 'utf8'));
+    this.abiTask = this.compiledTask.abi;
+  } */
+
   getTask(add: string): Promise<Task[]> {
     return new Promise<Task[]>((resolve, reject) => {
 
-      walletContract.methods.getTaskAddress(add).call({ from: add })
+      /* this. */walletContract.methods.getTaskAddress(add).call({ from: add })
         .then(taskAddress => {
           var taskContract = new web3.eth.Contract(abiTask, taskAddress);
+          //this.web3Service.createContract(this.abiTask, taskAddress);
           taskContract.methods.tasksNumber().call({ from: add })
             .then(tasksNumber => {
               let tasksArray: Task[] = [];
-              let taskPromises: Promise<any>[] = [];
+              let taskPromises: any[] = [];
               var i;
               for (i = 1; i <= tasksNumber; i++) {
+                // let taskData: Promise<any>[] = [
+                //   taskContract.methods.tasks(i).call({ from: add }),
+                //   taskContract.methods.getHistories(i).call({ from: add })
+                // ];  
                 taskPromises.push(taskContract.methods.tasks(i).call({ from: add }));
+                taskPromises.push(taskContract.methods.getHistories(i).call({ from: add }));
               }
               Q.all(taskPromises).then(tasks => {
-                for (let asset of tasks) {
+                for (let i = 0; i < tasks.length; i += 2) {
                   let task: Task = {
-                    claimId: asset.claimId,
-                    description: asset.description,
-                    to: asset.to,
-                    taskId: asset.taskId,
-                    from: asset.from
+                    claimId: tasks[i].claimId,
+                    description: tasks[i].description,
+                    to: tasks[i].to,
+                    taskId: tasks[i].taskId,
+                    from: tasks[i].from,
+                    history: tasks[i + 1]
                   };
                   tasksArray.push(task);
                 }
@@ -58,23 +82,33 @@ export class TaskService {
 
   updateTask(add: string, id: string, taskDto: TaskDto): Promise<Task> {
     return new Promise<Task>((resolve, reject) => {
-      walletContract.methods.getTaskAddress(add).call({ from: add })
+      /* this. */walletContract.methods.getTaskAddress(add).call({ from: add })
         .then(taskAddress => {
           var taskContract = new web3.eth.Contract(abiTask, taskAddress);
+          //var taskContract = this.web3Service.createContract(this.abiTask, taskAddress);
           taskContract.methods.updateTask(id, taskDto.description, taskDto.to).send({ from: add, gas: 1000000 })
-            .then(() => {
-              walletContract.getPastEvents('TaskUpdated', { fromBlock: 0, toBlock: 'latest' })
-                .then(events => {
-                  let asset = events[events.length - 1].returnValues;
-                  let task: Task = {
-                    claimId: asset.claimId,
-                    description: asset.description,
-                    to: asset.to,
-                    taskId: asset.taskId,
-                    from: asset.from
-                  };
-                  resolve(task);
-                }, reject);
+            .then(async algo => {
+              let taskPromises: any[] = [];
+              console.log(id);
+              let task = await taskContract.methods.tasks(id).call({ from: add });
+              // taskPromises.push(tasks);
+              console.log(task);
+              let history = await taskContract.methods.getHistories(id).call({ from: add });
+              // taskPromises.push(history);
+              console.log(history);
+              // Q.all(taskPromises).then(tasks => {
+              console.log("update");
+              console.log(task);
+              let taskModel: Task = {
+                claimId: task.claimId,
+                description: task.description,
+                to: task.to,
+                taskId: task.taskId,
+                from: task.from,
+                history: history
+              };
+              resolve(taskModel);
+              // }, reject);
             }, reject);
         }, reject);
     });

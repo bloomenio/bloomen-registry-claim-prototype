@@ -46,3 +46,51 @@ http://demo2.bloomen.io
     http://localhost:8000
 
 		
+
+---
+
+### ETHEREUM
+
+cd ethereum/
+
+npm run wclean
+
+npm run development
+
+<!-- ### SOLR
+
+virtualbox
+
+. docker_service.sh
+
+cd bloomen-registry-prototype/
+
+docker-compose rm
+
+docker-compose up nginx solr
+
+putty
+
+localhost 2204
+
+tunnels:
+
+L8000 localhost:8000
+
+L8983 localhost:8983   -->              
+
+### GANACHE
+
+ganache-cli -g 0 -p 7545 -l 672197500 -m "YOUR_MNEMONIC"
+
+### API
+
+cd api/
+
+npm run start
+
+### APP
+
+cd app/
+
+npm run start
