@@ -48,14 +48,25 @@ http://demo2.bloomen.io
 		
 
 ---
+### GANACHE
+
+First of all, It is necessary to launch a Ethereum blockchain, which will allow us to deploy the Smart Contracts.
+
+```console
+> ganache-cli -g 0 -p 7545 -l 672197500 -m "YOUR_MNEMONIC" -i 1543827346053
+```
+
 
 ### ETHEREUM
+Then, we must deploy the Smart Contracts.
 
-cd ethereum/
+```console
+> cd ethereum/
 
-npm run wclean
+> npm run wclean
 
-npm run development
+> npm run development
+```
 
 <!-- ### SOLR
 
@@ -79,18 +90,20 @@ L8000 localhost:8000
 
 L8983 localhost:8983   -->              
 
-### GANACHE
-
-ganache-cli -g 0 -p 7545 -l 672197500 -m "YOUR_MNEMONIC"
-
 ### API
+We must run the api.
 
-cd api/
+```console
+> cd api/
 
-npm run start
+> npm run start
+```
 
 ### APP
+We must run the app.
 
-cd app/
+```console
+> cd app/
 
-npm run start
+> npm run start
+```

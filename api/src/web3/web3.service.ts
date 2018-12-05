@@ -6,7 +6,7 @@ var fs = require('fs');
 
 @Injectable()
 export class Web3Service {
-  private web3: any = new Web3("ws://localhost:7545");
+  private web3: any = new Web3("ws://" + process.env.DEVELOPMENT_HOST + ":" + process.env.DEVELOPMENT_PORT);
   private abiClaim;
   private abiTask;
   private abiRegistry;
