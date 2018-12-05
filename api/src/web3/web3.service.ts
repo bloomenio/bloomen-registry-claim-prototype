@@ -22,7 +22,7 @@ export class Web3Service {
     this.abiClaim = compiledClaim.abi;
 
     let taskFile = "../ethereum/build/contracts/Demo2Task.json";
-    let compiledTask = JSON.parse(fs.readFileSync(claimFile, 'utf8'));
+    let compiledTask = JSON.parse(fs.readFileSync(taskFile, 'utf8'));
     this.abiTask = compiledTask.abi;
 
     let registryFile = "../ethereum/build/contracts/Demo2Registry.json";
