@@ -1,10 +1,10 @@
-import { Get, Post, Controller, Param, Body, Put } from '@nestjs/common';
+import { Get, Post, Controller, Param, Body, Put, UploadedFile, UseInterceptors, Req, Para } from '@nestjs/common';
 import { RegistryService } from './registry.service';
 import { RegistryDto } from './dto/registry.dto';
 import { Registry } from './interfaces/registry.interface';
 
 //Swagger
-import { ApiUseTags } from '@nestjs/swagger';
+import { ApiUseTags, ApiConsumes, ApiImplicitFile } from '@nestjs/swagger';
 
 @Controller('/wallet')
 export class RegistryController {
@@ -12,8 +12,8 @@ export class RegistryController {
 
     @ApiUseTags('Registry')
     @Post(':address/registry')
-    async postRegistry(@Body() registryDto: RegistryDto, @Param('address') add: string): Promise<Registry> {
-        return this.registrytService.postRegistry(add, registryDto);
+    async postRegistry(/* @Body() registryDto: RegistryDto, */ @Body() file, @Param('address') add: string): Promise<Registry> {
+        return this.registrytService.postRegistry(add, file/*, registryDto */);
     }
 
     @ApiUseTags('Registry')

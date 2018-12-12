@@ -9,6 +9,8 @@ import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import { AddressModel } from '@app/Models/Address.model';
 
+import { UploadEvent, UploadFile } from 'ngx-file-drop';
+
 @Injectable()
 export class ApiService {
 
@@ -51,18 +53,28 @@ export class ApiService {
       }, httpOptions).toPromise();
   }
 
-  addRegistry(name: String, author: string, description: string, currentadd: string): Promise<any> {
+  addRegistry(/* name: String, author: string, description: string, */file: UploadFile, currentadd: string): Promise<any> {
+    const reader = new FileReader();
+    const fileEntry = file.fileEntry;
+    var json, json_par;
+    fileEntry.file(file => {
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        json = atob(reader.result.split(',')[1]);
+        json_par = JSON.stringify((JSON.parse(json)));
+      };
+    })
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     }
     return this.http.post(`wallet/${currentadd}/registry`,
-      {
+      /* {
         name: name,
         author: author,
         description: description
-      }, httpOptions).toPromise();
+      }, */json_par/* file */, httpOptions).toPromise();
   }
 
   getTask(currentadd: string): Promise<any> {

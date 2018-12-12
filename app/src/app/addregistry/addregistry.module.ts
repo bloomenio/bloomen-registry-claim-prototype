@@ -9,6 +9,7 @@ import { MaterialModule } from '@app/material.module';
 import { AddRegistryComponent } from './addregistry.component';
 import { ApiService } from '../services/api.service';
 import { FormsModule } from '@angular/forms';
+import { FileDropModule } from 'ngx-file-drop';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { FormsModule } from '@angular/forms';
     SharedModule,
     FlexLayoutModule,
     MaterialModule,
-    FormsModule
+    FormsModule,
+    FileDropModule
   ],
   declarations: [
     AddRegistryComponent

@@ -1,28 +1,39 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
 <div class="dialog">
     <div>
+
         <h1 mat-dialog-title> Add Registry </h1>
+
+        <div class="center">
+            <file-drop headertext="Drop files here" (onFileDrop)="dropped($event)" (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+            </file-drop>
+            <div class="upload-table">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                        </tr>
+                    </thead>
+                    <tbody class="upload-name-style">
+                        <tr *ngIf="file">
+                            <td>
+                                <strong>{{ file.relativePath }}</strong>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
         <mat-dialog-content class="example-container">
             <form (ngSubmit)="onSubmit()" #claimsForm="ngForm">
-                <div>
-                    <mat-form-field>
-                        <input matInput type="text" id="name" required [(ngModel)]="name" name="name" #namet="ngModel" placeholder="Name">
-                    </mat-form-field>
-                </div>
-
-                <div>
-                    <mat-form-field>
-                        <input matInput type="text" id="author" [(ngModel)]="author" name="author" #authort="ngModel"placeholder="Author">
-                    </mat-form-field>
-                </div>
-
-                <div>
-                    <mat-form-field>
-                        <input matInput type="text" id="description" [(ngModel)]="description" name="description" #descriptiont="ngModel" placeholder="Description">
-                    </mat-form-field>
-                </div>
                 <mat-dialog-actions>
                     <button mat-raised-button type="button" (click)="close()">Close</button>
-                    <button mat-raised-button type="submit" [disabled]="!claimsForm.form.valid" (click)="addRegistry()">Submit</button>
+                    <button mat-raised-button type="submit" (click)="addRegistry()">Submit</button>
+                    <!-- <button mat-raised-button type="submit" [disabled]="!claimsForm.form.valid" (click)="addRegistry()">Submit</button> -->
                 </mat-dialog-actions>
 
             </form>
