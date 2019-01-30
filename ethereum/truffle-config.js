@@ -1,4 +1,5 @@
-require('dotenv').config()
+require('dotenv').config();
+var HDWalletProvider = require("truffle-hdwallet-provider");
 
 var Web3 = require('web3');
 
@@ -21,13 +22,22 @@ module.exports = {
       from: process.env.DEVELOPMENT_ACCOUNT,
     },
     alastria: {
-      provider: () => {
-        return new Web3.providers.HttpProvider(process.env.ALASTRIA_URL, 0, process.env.ALASTRIA_USER, process.env.ALASTRIA_PASSWORD);
+      provider: () =>{
+        var hdprovider =new HDWalletProvider(process.env.ALASTRIA_MNEMONIC, process.env.ALASTRIA_URL); 
+        Web3.providers.HttpProvider.prototype.sendAsync = Web3.providers.HttpProvider.prototype.send;
+        const _user = process.env.ALASTRIA_USER;
+        const _password = process.env.ALASTRIA_PASSWORD;
+        const _auth = 'Basic ' + Buffer.from(_user + ':' + _password).toString('base64');
+        const _headers = [{name: 'Authorization', value: _auth}];
+        const _provider = new Web3.providers.HttpProvider(process.env.ALASTRIA_URL, {timeout: 0, headers: _headers });
+
+        hdprovider.engine.stop()
+        hdprovider.engine._providers[2].provider=_provider
+        hdprovider.engine.start()
+        return    hdprovider; 
       },
-      network_id: "*", 
       gasPrice: 0,
-      gas: 4500000,
-      from: process.env.ALASTRIA_ACCOUNT,
+      network_id: '*',
     }
   }
 };

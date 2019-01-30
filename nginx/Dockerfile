@@ -9,7 +9,6 @@ ADD etc/local-8000-service.conf /etc/nginx/conf.d/local-8000-service.conf
 ADD etc/public-443-service.conf /etc/nginx/conf.d/public-443-service.conf
 ADD etc/solr-service.srv /etc/nginx/conf.d/solr-service.srv
 ADD etc/api-service.srv /etc/nginx/conf.d/api-service.srv
-ADD etc/admin-service.srv /etc/nginx/conf.d/admin-service.srv
 ADD etc/app-service.srv /etc/nginx/conf.d/app-service.srv
 ADD etc/alastria-service.srv /etc/nginx/conf.d/alastria-service.srv
 

@@ -6,7 +6,7 @@ var fs = require('fs');
 
 @Injectable()
 export class Web3Service {
-  private web3: any = new Web3("ws://" + process.env.DEVELOPMENT_HOST + ":" + process.env.DEVELOPMENT_PORT);
+  private web3: any = new Web3("http://" + process.env.GETH_HOST + ":" + process.env.GETH_PORT);
   private abiClaim;
   private abiTask;
   private abiRegistry;
@@ -15,7 +15,7 @@ export class Web3Service {
   constructor() {
     let walletFile = "../ethereum/build/contracts/Demo2Wallet.json";
     let compiledWallet = JSON.parse(fs.readFileSync(walletFile, 'utf8'));
-    this.walletContract = new this.web3.eth.Contract(compiledWallet.abi, compiledWallet.networks[process.env.NETWORK_ID].address);
+    this.walletContract = new this.web3.eth.Contract(compiledWallet.abi, compiledWallet.networks[process.env.GETH_NETWORK_ID].address);
 
     let claimFile = "../ethereum/build/contracts/Demo2Claim.json";
     let compiledClaim = JSON.parse(fs.readFileSync(claimFile, 'utf8'));

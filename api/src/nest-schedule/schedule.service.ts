@@ -5,24 +5,25 @@ import * as Web3 from 'web3';
 import { Container } from 'typedi';
 import { SolrService } from '../solr/solr.service';
 import { RegistrySolr } from './models/registrySolr.interface';
+require('dotenv').config();
 
 var fs = require('fs');
 var Q = require('q');
 
-var web3 = new Web3('ws://localhost:7545');
+var web3: any = new Web3("http://" + process.env.GETH_HOST + ":" + process.env.GETH_PORT);
 
 var walletFile = "../ethereum/build/contracts/Demo2Wallet.json";
 var compiledWallet = JSON.parse(fs.readFileSync(walletFile, 'utf8'));
 var abiWallet = compiledWallet.abi;
+var walletAddress = compiledWallet.networks[process.env.GETH_NETWORK_ID].address
+
 
 var registryFile = "../ethereum/build/contracts/Demo2Registry.json";
 var compiledRegistry = JSON.parse(fs.readFileSync(registryFile, 'utf8'));
 var abiRegistry = compiledRegistry.abi;
 
-var addrWallet = '0xc5494d3540ff7d4107b03b4c2f490d267964df1a';
-var walletContract = new web3.eth.Contract(abiWallet, addrWallet);
-// var initialAddress = '0x235e90B0bB3F4c0875a96456d451a5733fb3C025';
-// var accountAddress = "0xE0FeE2336a7c23f75acea2be3917ebc9AC7a1156";
+
+var walletContract = new web3.eth.Contract(abiWallet, walletAddress);
 
 export class NestLogger implements LoggerService {
     log(message: string): any {
@@ -48,7 +49,7 @@ defaults.retryInterval = 10;
 export class ScheduleService extends NestSchedule {
 
     private last_block_number: any = 0;
-    public client: any = solr.createClient('localhost', '8983', 'demo-bloomen-registry-claim-m12', '/solr');
+    public client: any = solr.createClient(process.env.SOLR_HOST, process.env.SOLR_PORT, process.env.SOLR_CORE, process.env.SOLR_PATH );
     public solrService: SolrService = Container.get(SolrService);
 
     constructor() {
