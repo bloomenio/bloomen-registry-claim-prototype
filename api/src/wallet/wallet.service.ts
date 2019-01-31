@@ -30,9 +30,9 @@ export class WalletService {
     postWallet(): Promise<Wallet[]> {
         return new Promise<Wallet[]>( async (resolve, reject) => {
             let accountAddress = await this.web3Service.getWeb3().eth.personal.newAccount(process.env.PASSWORD);
-            this.web3Service.getWeb3().eth.personal.unlockAccount(accountAddress, process.env.PASSWORD, 600);
+            await this.web3Service.getWeb3().eth.personal.unlockAccount(accountAddress, process.env.PASSWORD, 600);
 
-            this.walletContract.methods.createAddress(accountAddress).send({ from: process.env.INITIAL_ADDRESS, gas: 100000000 })
+            this.walletContract.methods.createAddress(accountAddress).send({ from: accountAddress, gas: 100000000 })
                 .then(() => {
                     this.walletContract.methods.getAddress().call({ from: process.env.INITIAL_ADDRESS })
                         .then(userAddresses => {
