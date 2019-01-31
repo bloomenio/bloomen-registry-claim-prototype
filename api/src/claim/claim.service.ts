@@ -51,13 +51,15 @@ export class ClaimService {
     return new Promise<Claim>((resolve, reject) => {
       this.walletContract.methods.getClaimAddress(address).call({ from: address })
         .then(claimAddress => {
-          var claimContract = this.web3Service.createContract(this.web3Service.getAbiClaim(), claimAddress);
-          claimContract.methods.createClaim(claimDto.assetId, claimDto.assetOwner, claimDto.description).send({ from: address, gas: 672197500 })
+
+          const claimContract = this.web3Service.createContract(this.web3Service.getAbiClaim(), claimAddress);
+          this.web3Service.getWeb3().eth.personal.unlockAccount(address, process.env.PASSWORD, 600).then(() => {
+            claimContract.methods.createClaim(claimDto.assetId, claimDto.assetOwner, claimDto.description).send({ from: address, gas: 672197500 })
             .then(() => {
               this.walletContract.getPastEvents('ClaimCreated', { fromBlock: 0, toBlock: 'latest' })
                 .then(events => {
-                  let asset = events[events.length - 1].returnValues;
-                  let claim: Claim = {
+                  const asset = events[events.length - 1].returnValues;
+                  const claim: Claim = {
                     assetId: asset.assetId,
                     assetOwner: asset.assetOwner,
                     claimId: asset.claimId,
@@ -67,6 +69,7 @@ export class ClaimService {
                   resolve(claim);
                 }, reject);
             }, reject);
+          }, reject);
         }, reject);
     });
   }
