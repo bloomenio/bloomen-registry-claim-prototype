@@ -20,8 +20,12 @@ export class RegistryService {
             this.walletContract.methods.getRegistryAddress(address).call({ from: address })
                 .then(registryAddress => {
                     var registryContract = this.web3Service.createContract(this.web3Service.getAbiRegistry(), registryAddress);
+
+                    this.web3Service.getWeb3().eth.personal.unlockAccount(address, process.env.PASSWORD, 600).then(() => {
                     registryContract.methods.createAsset(registryDto.name, registryDto.author, registryDto.description).send({ from: address, gas: 1000000 })
                         .then(() => {
+
+                            console.log('AssetCreated');
                             this.walletContract.getPastEvents('AssetCreated', { fromBlock: 0, toBlock: 'latest' })
                                 .then(events => {
                                     let asset = events[events.length - 1].returnValues;
@@ -35,6 +39,9 @@ export class RegistryService {
                                     resolve(registry);
                                 }, reject);
                         }, reject);
+                    }, reject);
+
+
                 }, reject);
         });
     }

@@ -1,0 +1,1227 @@
+{
+  "contractName": "Structs",
+  "abi": [],
+  "bytecode": "0x6080604052348015600f57600080fd5b50603580601d6000396000f3006080604052600080fd00a165627a7a72305820642e9712b2ede97351e6846f91b152860542d326f6f337a3ebae3a206485cabd0029",
+  "deployedBytecode": "0x6080604052600080fd00a165627a7a72305820642e9712b2ede97351e6846f91b152860542d326f6f337a3ebae3a206485cabd0029",
+  "sourceMap": "26:650:10:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;26:650:10;;;;;;;",
+  "deployedSourceMap": "26:650:10:-;;;;;",
+  "source": "pragma solidity ^0.4.22;\n\ncontract Structs {\n\n    struct User {\n        address addr;\n        address claimContract;\n        address registryContract;\n        address taskContract;\n    }\n\n    struct Asset {\n        string name;\n        string author;\n        string description;\n        uint256 assetId;\n        address assetOwner;\n    }\n\n        struct Claim {\n        uint256 assetId;\n        address assetOwner;\n        string description;\n        uint256 claimId;\n        address claimOwner;\n    }\n\n    struct Task {\n        string description;\n        address to;\n        uint256 taskId;\n        uint256 claimId;\n        address claimOwner;\n        address from;\n    }\n\n}",
+  "sourcePath": "/home/jordi/ws/bloomen-registry-claim-prototype/ethereum/contracts/Structs.sol",
+  "ast": {
+    "absolutePath": "/home/jordi/ws/bloomen-registry-claim-prototype/ethereum/contracts/Structs.sol",
+    "exportedSymbols": {
+      "Structs": [
+        2854
+      ]
+    },
+    "id": 2855,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2809,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".22"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:10"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 2854,
+        "linearizedBaseContracts": [
+          2854
+        ],
+        "name": "Structs",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "Structs.User",
+            "id": 2818,
+            "members": [
+              {
+                "constant": false,
+                "id": 2811,
+                "name": "addr",
+                "nodeType": "VariableDeclaration",
+                "scope": 2818,
+                "src": "72:12:10",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 2810,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "72:7:10",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2813,
+                "name": "claimContract",
+                "nodeType": "VariableDeclaration",
+                "scope": 2818,
+                "src": "94:21:10",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 2812,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "94:7:10",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2815,
+                "name": "registryContract",
+                "nodeType": "VariableDeclaration",
+                "scope": 2818,
+                "src": "125:24:10",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 2814,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "125:7:10",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2817,
+                "name": "taskContract",
+                "nodeType": "VariableDeclaration",
+                "scope": 2818,
+                "src": "159:20:10",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 2816,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "159:7:10",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "User",
+            "nodeType": "StructDefinition",
+            "scope": 2854,
+            "src": "50:136:10",
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "Structs.Asset",
+            "id": 2829,
+            "members": [
+              {
+                "constant": false,
+                "id": 2820,
+                "name": "name",
+                "nodeType": "VariableDeclaration",
+                "scope": 2829,
+                "src": "215:11:10",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 2819,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "215:6:10",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2822,
+                "name": "author",
+                "nodeType": "VariableDeclaration",
+                "scope": 2829,
+                "src": "236:13:10",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 2821,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "236:6:10",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2824,
+                "name": "description",
+                "nodeType": "VariableDeclaration",
+                "scope": 2829,
+                "src": "259:18:10",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 2823,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "259:6:10",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2826,
+                "name": "assetId",
+                "nodeType": "VariableDeclaration",
+                "scope": 2829,
+                "src": "287:15:10",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 2825,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "287:7:10",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2828,
+                "name": "assetOwner",
+                "nodeType": "VariableDeclaration",
+                "scope": 2829,
+                "src": "312:18:10",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 2827,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "312:7:10",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "Asset",
+            "nodeType": "StructDefinition",
+            "scope": 2854,
+            "src": "192:145:10",
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "Structs.Claim",
+            "id": 2840,
+            "members": [
+              {
+                "constant": false,
+                "id": 2831,
+                "name": "assetId",
+                "nodeType": "VariableDeclaration",
+                "scope": 2840,
+                "src": "370:15:10",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 2830,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "370:7:10",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2833,
+                "name": "assetOwner",
+                "nodeType": "VariableDeclaration",
+                "scope": 2840,
+                "src": "395:18:10",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 2832,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "395:7:10",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2835,
+                "name": "description",
+                "nodeType": "VariableDeclaration",
+                "scope": 2840,
+                "src": "423:18:10",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 2834,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "423:6:10",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2837,
+                "name": "claimId",
+                "nodeType": "VariableDeclaration",
+                "scope": 2840,
+                "src": "451:15:10",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 2836,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "451:7:10",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2839,
+                "name": "claimOwner",
+                "nodeType": "VariableDeclaration",
+                "scope": 2840,
+                "src": "476:18:10",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 2838,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "476:7:10",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "Claim",
+            "nodeType": "StructDefinition",
+            "scope": 2854,
+            "src": "347:154:10",
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "Structs.Task",
+            "id": 2853,
+            "members": [
+              {
+                "constant": false,
+                "id": 2842,
+                "name": "description",
+                "nodeType": "VariableDeclaration",
+                "scope": 2853,
+                "src": "529:18:10",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 2841,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "529:6:10",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2844,
+                "name": "to",
+                "nodeType": "VariableDeclaration",
+                "scope": 2853,
+                "src": "557:10:10",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 2843,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "557:7:10",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2846,
+                "name": "taskId",
+                "nodeType": "VariableDeclaration",
+                "scope": 2853,
+                "src": "577:14:10",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 2845,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "577:7:10",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2848,
+                "name": "claimId",
+                "nodeType": "VariableDeclaration",
+                "scope": 2853,
+                "src": "601:15:10",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 2847,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "601:7:10",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2850,
+                "name": "claimOwner",
+                "nodeType": "VariableDeclaration",
+                "scope": 2853,
+                "src": "626:18:10",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 2849,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "626:7:10",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2852,
+                "name": "from",
+                "nodeType": "VariableDeclaration",
+                "scope": 2853,
+                "src": "654:12:10",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 2851,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "654:7:10",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "Task",
+            "nodeType": "StructDefinition",
+            "scope": 2854,
+            "src": "507:166:10",
+            "visibility": "public"
+          }
+        ],
+        "scope": 2855,
+        "src": "26:650:10"
+      }
+    ],
+    "src": "0:676:10"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/jordi/ws/bloomen-registry-claim-prototype/ethereum/contracts/Structs.sol",
+    "exportedSymbols": {
+      "Structs": [
+        2854
+      ]
+    },
+    "id": 2855,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 2809,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".22"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:10"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 2854,
+        "linearizedBaseContracts": [
+          2854
+        ],
+        "name": "Structs",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "Structs.User",
+            "id": 2818,
+            "members": [
+              {
+                "constant": false,
+                "id": 2811,
+                "name": "addr",
+                "nodeType": "VariableDeclaration",
+                "scope": 2818,
+                "src": "72:12:10",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 2810,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "72:7:10",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2813,
+                "name": "claimContract",
+                "nodeType": "VariableDeclaration",
+                "scope": 2818,
+                "src": "94:21:10",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 2812,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "94:7:10",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2815,
+                "name": "registryContract",
+                "nodeType": "VariableDeclaration",
+                "scope": 2818,
+                "src": "125:24:10",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 2814,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "125:7:10",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2817,
+                "name": "taskContract",
+                "nodeType": "VariableDeclaration",
+                "scope": 2818,
+                "src": "159:20:10",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 2816,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "159:7:10",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "User",
+            "nodeType": "StructDefinition",
+            "scope": 2854,
+            "src": "50:136:10",
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "Structs.Asset",
+            "id": 2829,
+            "members": [
+              {
+                "constant": false,
+                "id": 2820,
+                "name": "name",
+                "nodeType": "VariableDeclaration",
+                "scope": 2829,
+                "src": "215:11:10",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 2819,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "215:6:10",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2822,
+                "name": "author",
+                "nodeType": "VariableDeclaration",
+                "scope": 2829,
+                "src": "236:13:10",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 2821,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "236:6:10",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2824,
+                "name": "description",
+                "nodeType": "VariableDeclaration",
+                "scope": 2829,
+                "src": "259:18:10",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 2823,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "259:6:10",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2826,
+                "name": "assetId",
+                "nodeType": "VariableDeclaration",
+                "scope": 2829,
+                "src": "287:15:10",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 2825,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "287:7:10",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2828,
+                "name": "assetOwner",
+                "nodeType": "VariableDeclaration",
+                "scope": 2829,
+                "src": "312:18:10",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 2827,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "312:7:10",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "Asset",
+            "nodeType": "StructDefinition",
+            "scope": 2854,
+            "src": "192:145:10",
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "Structs.Claim",
+            "id": 2840,
+            "members": [
+              {
+                "constant": false,
+                "id": 2831,
+                "name": "assetId",
+                "nodeType": "VariableDeclaration",
+                "scope": 2840,
+                "src": "370:15:10",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 2830,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "370:7:10",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2833,
+                "name": "assetOwner",
+                "nodeType": "VariableDeclaration",
+                "scope": 2840,
+                "src": "395:18:10",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 2832,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "395:7:10",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2835,
+                "name": "description",
+                "nodeType": "VariableDeclaration",
+                "scope": 2840,
+                "src": "423:18:10",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 2834,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "423:6:10",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2837,
+                "name": "claimId",
+                "nodeType": "VariableDeclaration",
+                "scope": 2840,
+                "src": "451:15:10",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 2836,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "451:7:10",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2839,
+                "name": "claimOwner",
+                "nodeType": "VariableDeclaration",
+                "scope": 2840,
+                "src": "476:18:10",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 2838,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "476:7:10",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "Claim",
+            "nodeType": "StructDefinition",
+            "scope": 2854,
+            "src": "347:154:10",
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "Structs.Task",
+            "id": 2853,
+            "members": [
+              {
+                "constant": false,
+                "id": 2842,
+                "name": "description",
+                "nodeType": "VariableDeclaration",
+                "scope": 2853,
+                "src": "529:18:10",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 2841,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "529:6:10",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2844,
+                "name": "to",
+                "nodeType": "VariableDeclaration",
+                "scope": 2853,
+                "src": "557:10:10",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 2843,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "557:7:10",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2846,
+                "name": "taskId",
+                "nodeType": "VariableDeclaration",
+                "scope": 2853,
+                "src": "577:14:10",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 2845,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "577:7:10",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2848,
+                "name": "claimId",
+                "nodeType": "VariableDeclaration",
+                "scope": 2853,
+                "src": "601:15:10",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 2847,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "601:7:10",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2850,
+                "name": "claimOwner",
+                "nodeType": "VariableDeclaration",
+                "scope": 2853,
+                "src": "626:18:10",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 2849,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "626:7:10",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2852,
+                "name": "from",
+                "nodeType": "VariableDeclaration",
+                "scope": 2853,
+                "src": "654:12:10",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 2851,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "654:7:10",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "Task",
+            "nodeType": "StructDefinition",
+            "scope": 2854,
+            "src": "507:166:10",
+            "visibility": "public"
+          }
+        ],
+        "scope": 2855,
+        "src": "26:650:10"
+      }
+    ],
+    "src": "0:676:10"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.1",
+  "updatedAt": "2019-01-09T13:49:51.680Z"
+}

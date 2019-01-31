@@ -1,0 +1,4213 @@
+{
+  "contractName": "Demo2Claim",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "claimsNumber",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "claims",
+      "outputs": [
+        {
+          "name": "assetId",
+          "type": "uint256"
+        },
+        {
+          "name": "assetOwner",
+          "type": "address"
+        },
+        {
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "name": "claimId",
+          "type": "uint256"
+        },
+        {
+          "name": "claimOwner",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "_eventManager",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_assetId",
+          "type": "uint256"
+        },
+        {
+          "name": "_assetOwner",
+          "type": "address"
+        },
+        {
+          "name": "_description",
+          "type": "string"
+        }
+      ],
+      "name": "createClaim",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_claimId",
+          "type": "uint256"
+        },
+        {
+          "name": "_assetId",
+          "type": "uint256"
+        },
+        {
+          "name": "_assetOwner",
+          "type": "address"
+        },
+        {
+          "name": "_description",
+          "type": "string"
+        }
+      ],
+      "name": "updateClaim",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x608060405234801561001057600080fd5b50604051602080610a73833981016040525160008054600160a060020a0319908116331790915560038054600160a060020a0390931692909116919091179055610a148061005f6000396000f3006080604052600436106100775763ffffffff7c01000000000000000000000000000000000000000000000000000000006000350416635457efe2811461007c57806374c8cb65146100ea5780638da5cb5b14610111578063a888c2cd14610142578063f2fde38b14610212578063f6f6ce2d14610233575b600080fd5b34801561008857600080fd5b50604080516020601f6064356004818101359283018490048402850184019095528184526100e8948035946024803595600160a060020a0360443516953695608494930191819084018382808284375094975061029c9650505050505050565b005b3480156100f657600080fd5b506100ff61044c565b60408051918252519081900360200190f35b34801561011d57600080fd5b50610126610452565b60408051600160a060020a039092168252519081900360200190f35b34801561014e57600080fd5b5061015a600435610461565b6040518086815260200185600160a060020a0316600160a060020a031681526020018060200184815260200183600160a060020a0316600160a060020a03168152602001828103825285818151815260200191508051906020019080838360005b838110156101d35781810151838201526020016101bb565b50505050905090810190601f1680156102005780820380516001836020036101000a031916815260200191505b50965050505050505060405180910390f35b34801561021e57600080fd5b506100e8600160a060020a036004351661052a565b34801561023f57600080fd5b50604080516020600460443581810135601f81018490048402850184019095528484526100e89482359460248035600160a060020a0316953695946064949201919081908401838280828437509497506105be9650505050505050565b60008054600160a060020a031633146102b457600080fd5b600085116102c157600080fd5b506000848152600160208181526040909220858155908101805473ffffffffffffffffffffffffffffffffffffffff1916600160a060020a0386161790558251909161031491600284019185019061094d565b50600380548254600184810154938501546004808701546040517f8f483bd9000000000000000000000000000000000000000000000000000000008152918201858152600160a060020a0397881660248401819052606484018590529188166084840181905260a0604485019081526002808c0180546000199981161561010002999099019098160460a486018190529990981698638f483bd9989396959491939160c40190869080156104095780601f106103de57610100808354040283529160200191610409565b820191906000526020600020905b8154815290600101906020018083116103ec57829003601f168201915b50509650505050505050600060405180830381600087803b15801561042d57600080fd5b505af1158015610441573d6000803e3d6000fd5b505050505050505050565b60025481565b600054600160a060020a031681565b6001602081815260009283526040928390208054818401546002808401805488516101009882161598909802600019011691909104601f81018690048602870186019097528686529195600160a060020a0390911694929383018282801561050a5780601f106104df5761010080835404028352916020019161050a565b820191906000526020600020905b8154815290600101906020018083116104ed57829003601f168201915b505050506003830154600490930154919291600160a060020a0316905085565b600054600160a060020a0316331461054157600080fd5b600160a060020a038116151561055657600080fd5b60008054604051600160a060020a03808516939216917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e091a36000805473ffffffffffffffffffffffffffffffffffffffff1916600160a060020a0392909216919091179055565b600080548190600160a060020a031633146105d857600080fd5b6002546105ec90600163ffffffff61093716565b60028181556040805160a081018252888152600160a060020a0388811660208084019182528385018a8152606085018890523360808601526000978852600180835295909720845181559151948201805473ffffffffffffffffffffffffffffffffffffffff1916959093169490941790915593518051919493610676939085019291019061094d565b5060608201516003828101919091556080909201516004918201805473ffffffffffffffffffffffffffffffffffffffff1916600160a060020a0392831617905591546002546040517fe5491589000000000000000000000000000000000000000000000000000000008152928301898152888516602485015260648401829052336084850181905260a060448601908152895160a48701528951949096169563e5491589958c958c958c959094939092909160c490910190602087019080838360005b8381101561075257818101518382015260200161073a565b50505050905090810190601f16801561077f5780820380516001836020036101000a031916815260200191505b509650505050505050600060405180830381600087803b1580156107a257600080fd5b505af11580156107b6573d6000803e3d6000fd5b5050600354604080517ffad1e01d000000000000000000000000000000000000000000000000000000008152600160a060020a038981166004830152915191909216935063fad1e01d925060248083019260209291908290030181600087803b15801561082257600080fd5b505af1158015610836573d6000803e3d6000fd5b505050506040513d602081101561084c57600080fd5b50516002546040517f912b33f1000000000000000000000000000000000000000000000000000000008152600160a060020a0387811660248301526044820183905233606483018190526080600484019081528851608485015288519597508796509186169463912b33f19489948b94919392829160a40190602088019080838360005b838110156108e85781810151838201526020016108d0565b50505050905090810190601f1680156109155780820380516001836020036101000a031916815260200191505b5095505050505050600060405180830381600087803b15801561042d57600080fd5b60008282018381101561094657fe5b9392505050565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061098e57805160ff19168380011785556109bb565b828001600101855582156109bb579182015b828111156109bb5782518255916020019190600101906109a0565b506109c79291506109cb565b5090565b6109e591905b808211156109c757600081556001016109d1565b905600a165627a7a7230582089ae0d2f60d3c8256bb36206938d4d531bbebf3bd1e5f8c5908b1d403959f3980029",
+  "deployedBytecode": "0x6080604052600436106100775763ffffffff7c01000000000000000000000000000000000000000000000000000000006000350416635457efe2811461007c57806374c8cb65146100ea5780638da5cb5b14610111578063a888c2cd14610142578063f2fde38b14610212578063f6f6ce2d14610233575b600080fd5b34801561008857600080fd5b50604080516020601f6064356004818101359283018490048402850184019095528184526100e8948035946024803595600160a060020a0360443516953695608494930191819084018382808284375094975061029c9650505050505050565b005b3480156100f657600080fd5b506100ff61044c565b60408051918252519081900360200190f35b34801561011d57600080fd5b50610126610452565b60408051600160a060020a039092168252519081900360200190f35b34801561014e57600080fd5b5061015a600435610461565b6040518086815260200185600160a060020a0316600160a060020a031681526020018060200184815260200183600160a060020a0316600160a060020a03168152602001828103825285818151815260200191508051906020019080838360005b838110156101d35781810151838201526020016101bb565b50505050905090810190601f1680156102005780820380516001836020036101000a031916815260200191505b50965050505050505060405180910390f35b34801561021e57600080fd5b506100e8600160a060020a036004351661052a565b34801561023f57600080fd5b50604080516020600460443581810135601f81018490048402850184019095528484526100e89482359460248035600160a060020a0316953695946064949201919081908401838280828437509497506105be9650505050505050565b60008054600160a060020a031633146102b457600080fd5b600085116102c157600080fd5b506000848152600160208181526040909220858155908101805473ffffffffffffffffffffffffffffffffffffffff1916600160a060020a0386161790558251909161031491600284019185019061094d565b50600380548254600184810154938501546004808701546040517f8f483bd9000000000000000000000000000000000000000000000000000000008152918201858152600160a060020a0397881660248401819052606484018590529188166084840181905260a0604485019081526002808c0180546000199981161561010002999099019098160460a486018190529990981698638f483bd9989396959491939160c40190869080156104095780601f106103de57610100808354040283529160200191610409565b820191906000526020600020905b8154815290600101906020018083116103ec57829003601f168201915b50509650505050505050600060405180830381600087803b15801561042d57600080fd5b505af1158015610441573d6000803e3d6000fd5b505050505050505050565b60025481565b600054600160a060020a031681565b6001602081815260009283526040928390208054818401546002808401805488516101009882161598909802600019011691909104601f81018690048602870186019097528686529195600160a060020a0390911694929383018282801561050a5780601f106104df5761010080835404028352916020019161050a565b820191906000526020600020905b8154815290600101906020018083116104ed57829003601f168201915b505050506003830154600490930154919291600160a060020a0316905085565b600054600160a060020a0316331461054157600080fd5b600160a060020a038116151561055657600080fd5b60008054604051600160a060020a03808516939216917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e091a36000805473ffffffffffffffffffffffffffffffffffffffff1916600160a060020a0392909216919091179055565b600080548190600160a060020a031633146105d857600080fd5b6002546105ec90600163ffffffff61093716565b60028181556040805160a081018252888152600160a060020a0388811660208084019182528385018a8152606085018890523360808601526000978852600180835295909720845181559151948201805473ffffffffffffffffffffffffffffffffffffffff1916959093169490941790915593518051919493610676939085019291019061094d565b5060608201516003828101919091556080909201516004918201805473ffffffffffffffffffffffffffffffffffffffff1916600160a060020a0392831617905591546002546040517fe5491589000000000000000000000000000000000000000000000000000000008152928301898152888516602485015260648401829052336084850181905260a060448601908152895160a48701528951949096169563e5491589958c958c958c959094939092909160c490910190602087019080838360005b8381101561075257818101518382015260200161073a565b50505050905090810190601f16801561077f5780820380516001836020036101000a031916815260200191505b509650505050505050600060405180830381600087803b1580156107a257600080fd5b505af11580156107b6573d6000803e3d6000fd5b5050600354604080517ffad1e01d000000000000000000000000000000000000000000000000000000008152600160a060020a038981166004830152915191909216935063fad1e01d925060248083019260209291908290030181600087803b15801561082257600080fd5b505af1158015610836573d6000803e3d6000fd5b505050506040513d602081101561084c57600080fd5b50516002546040517f912b33f1000000000000000000000000000000000000000000000000000000008152600160a060020a0387811660248301526044820183905233606483018190526080600484019081528851608485015288519597508796509186169463912b33f19489948b94919392829160a40190602088019080838360005b838110156108e85781810151838201526020016108d0565b50505050905090810190601f1680156109155780820380516001836020036101000a031916815260200191505b5095505050505050600060405180830381600087803b15801561042d57600080fd5b60008282018381101561094657fe5b9392505050565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061098e57805160ff19168380011785556109bb565b828001600101855582156109bb579182015b828111156109bb5782518255916020019190600101906109a0565b506109c79291506109cb565b5090565b6109e591905b808211156109c757600081556001016109d1565b905600a165627a7a7230582089ae0d2f60d3c8256bb36206938d4d531bbebf3bd1e5f8c5908b1d403959f3980029",
+  "sourceMap": "154:1319:0:-;;;354:92;8:9:-1;5:2;;;30:1;27;20:12;5:2;354:92:0;;;;;;;;;;;;;493:5:7;:18;;-1:-1:-1;;;;;;493:18:7;;;501:10;493:18;;;;410:13:0;:29;;-1:-1:-1;;;;;410:29:0;;;;;;;;;;;;;154:1319;;;;;;",
+  "deployedSourceMap": "154:1319:0:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1027:443;;8:9:-1;5:2;;;30:1;27;20:12;5:2;-1:-1;1027:443:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;;;1027:443:0;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;1027:443:0;;-1:-1:-1;1027:443:0;;-1:-1:-1;;;;;;;1027:443:0;;;280:27;;8:9:-1;5:2;;;30:1;27;20:12;5:2;280:27:0;;;;;;;;;;;;;;;;;;;;237:20:7;;8:9:-1;5:2;;;30:1;27;20:12;5:2;237:20:7;;;;;;;;-1:-1:-1;;;;;237:20:7;;;;;;;;;;;;;;234:40:0;;8:9:-1;5:2;;;30:1;27;20:12;5:2;-1:-1;234:40:0;;;;;;;;;;;;-1:-1:-1;;;;;234:40:0;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;234:40:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;8:100;33:3;30:1;27:10;8:100;;;90:11;;;84:18;71:11;;;64:39;52:2;45:10;8:100;;;12:14;234:40:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;824:174:7;;8:9:-1;5:2;;;30:1;27;20:12;5:2;-1:-1;824:174:7;;;-1:-1:-1;;;;;824:174:7;;;452:569:0;;8:9:-1;5:2;;;30:1;27;20:12;5:2;-1:-1;452:569:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;;;452:569:0;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;452:569:0;;-1:-1:-1;452:569:0;;-1:-1:-1;;;;;;;452:569:0;1027:443;1184:19;645:5:7;;-1:-1:-1;;;;;645:5:7;631:10;:19;623:28;;;;;;1172:1:0;1161:12;;1153:21;;;;;;-1:-1:-1;1206:16:0;;;;:6;:16;;;;;;;;1232:24;;;1266:16;;;:30;;-1:-1:-1;;1266:30:0;-1:-1:-1;;;;;1266:30:0;;;;;1306:32;;1206:16;;1306:32;;-1:-1:-1;1306:17:0;;;:32;;;;:::i;:::-;-1:-1:-1;1348:13:0;;;1379;;1348;1394:16;;;;1431:13;;;;1446:16;;;;;1348:115;;;;;;;;;;;-1:-1:-1;;;;;1394:16:0;;;1348:115;;;;;;;;;;;;1446:16;;;1348:115;;;;;;-1:-1:-1;1348:115:0;;;;;;-1:-1:-1;1412:17:0;;;1348:115;;:13;:115;;;;;;;;-1:-1:-1;;1348:115:0;;;;;;;;;;;:13;;;;;:30;;1394:16;;1412:17;1431:13;1446:16;;1348:115;;;;1412:17;;1348:115;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;1348:115:0;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;1348:115:0;;;;1027:443;;;;;:::o;280:27::-;;;;:::o;237:20:7:-;;;-1:-1:-1;;;;;237:20:7;;:::o;234:40:0:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;234:40:0;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;;;234:40:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;;234:40:0;;;;;;;;;;;;-1:-1:-1;;;;;234:40:0;;-1:-1:-1;234:40:0;:::o;824:174:7:-;645:5;;-1:-1:-1;;;;;645:5:7;631:10;:19;623:28;;;;;;-1:-1:-1;;;;;900:22:7;;;;892:31;;;;;;955:5;;;934:37;;-1:-1:-1;;;;;934:37:7;;;;955:5;;;934:37;;;977:5;:16;;-1:-1:-1;;977:16:7;-1:-1:-1;;;;;977:16:7;;;;;;;;;;824:174::o;452:569:0:-;808:19;645:5:7;;808:19:0;;-1:-1:-1;;;;;645:5:7;631:10;:19;623:28;;;;;;575:12:0;;:19;;592:1;575:19;:16;:19;:::i;:::-;560:12;:34;;;627:68;;;;;;;;;;;-1:-1:-1;;;;;627:68:0;;;;;;;;;;;;;;;;;;;;;;684:10;627:68;;;;-1:-1:-1;604:20:0;;;-1:-1:-1;604:20:0;;;;;;;:91;;;;;;;;;;;-1:-1:-1;;604:91:0;;;;;;;;;;;;;;;;627:68;;604:20;:91;;;;;;;;;;:::i;:::-;-1:-1:-1;604:91:0;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;604:91:0;-1:-1:-1;;;;;604:91:0;;;;;;705:13;;-1:-1:-1;773:12:0;705:93;;;;;;;;;;;;;;;;;;;;;;;;787:10;705:93;;;;;;-1:-1:-1;705:93:0;;;;;;;;;;;;;;:13;;;;;:30;;:93;;;;;;773:12;;787:10;705:93;;;;;;;;;-1:-1:-1;705:93:0;;;;;;-1:-1:-1;8:100;33:3;30:1;27:10;8:100;;;90:11;;;84:18;71:11;;;64:39;52:2;45:10;8:100;;;12:14;705:93:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;705:93:0;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;-1:-1;;830:13:0;;:41;;;;;;-1:-1:-1;;;;;830:41:0;;;;;;;;;:13;;;;;-1:-1:-1;830:28:0;;-1:-1:-1;830:41:0;;;;;;;;;;;;;;-1:-1:-1;830:13:0;:41;;;5:2:-1;;;;30:1;27;20:12;5:2;830:41:0;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;830:41:0;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;830:41:0;989:12;;938:76;;;;;-1:-1:-1;;;;;938:76:0;;;;;;;;;;;;;1003:10;938:76;;;;;;;;;;;;;;;;;;;;;830:41;;-1:-1:-1;830:41:0;;-1:-1:-1;938:23:0;;;;;;:76;;;;989:12;;1003:10;938:76;;;;;-1:-1:-1;938:76:0;;;;;;-1:-1:-1;8:100;33:3;30:1;27:10;8:100;;;90:11;;;84:18;71:11;;;64:39;52:2;45:10;8:100;;;12:14;938:76:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;8:9:-1;5:2;;;30:1;27;20:12;1006:129:8;1064:7;1091:5;;;1109:6;;;;1102:14;;;;1129:1;1006:129;-1:-1:-1;;;1006:129:8:o;154:1319:0:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;154:1319:0;;;-1:-1:-1;154:1319:0;:::i;:::-;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;:::o",
+  "source": "pragma solidity ^0.4.22;\n\nimport \"./Ownable.sol\";\nimport \"./SafeMath.sol\";\nimport \"./Demo2Task.sol\";\nimport \"./Structs.sol\";\nimport \"./Demo2Wallet.sol\";\n\ncontract Demo2Claim is Ownable, Structs {\n\n    using SafeMath for uint256;\n\n    mapping (uint256 => Claim) public claims;\n    uint256 public claimsNumber;\n\n    Demo2Wallet private eventManager_;\n\n    constructor(Demo2Wallet _eventManager) public {\n        eventManager_ = _eventManager;\n    }\n\n    function createClaim(uint256 _assetId, address _assetOwner, string _description) public onlyOwner {\n        claimsNumber = claimsNumber.add(1);\n        claims[claimsNumber] = Claim(_assetId, _assetOwner, _description, claimsNumber, msg.sender);\n        eventManager_.emitClaimCreated(_assetId, _assetOwner, _description, claimsNumber, msg.sender);\n        address taskAddress = eventManager_.getTaskAddress(_assetOwner);\n        Demo2Task taskContract = Demo2Task(taskAddress);\n        taskContract.createTask(_description, _assetOwner, claimsNumber, msg.sender);\n    }\n\n    function updateClaim(uint256 _claimId, uint256 _assetId, address _assetOwner, string _description) public onlyOwner {\n        require(_claimId > 0);\n        Claim storage claim = claims[_claimId];\n        claim.assetId = _assetId;\n        claim.assetOwner = _assetOwner;\n        claim.description = _description;\n        eventManager_.emitClaimUpdated(claim.assetId, claim.assetOwner, claim.description, claim.claimId, claim.claimOwner);\n    }\n\n}\n",
+  "sourcePath": "/home/jordi/ws/bloomen-registry-claim-prototype/ethereum/contracts/Demo2Claim.sol",
+  "ast": {
+    "absolutePath": "/home/jordi/ws/bloomen-registry-claim-prototype/ethereum/contracts/Demo2Claim.sol",
+    "exportedSymbols": {
+      "Demo2Claim": [
+        157
+      ]
+    },
+    "id": 158,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".22"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:0"
+      },
+      {
+        "absolutePath": "/home/jordi/ws/bloomen-registry-claim-prototype/ethereum/contracts/Ownable.sol",
+        "file": "./Ownable.sol",
+        "id": 2,
+        "nodeType": "ImportDirective",
+        "scope": 158,
+        "sourceUnit": 1015,
+        "src": "26:23:0",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/jordi/ws/bloomen-registry-claim-prototype/ethereum/contracts/SafeMath.sol",
+        "file": "./SafeMath.sol",
+        "id": 3,
+        "nodeType": "ImportDirective",
+        "scope": 158,
+        "sourceUnit": 1113,
+        "src": "50:24:0",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/jordi/ws/bloomen-registry-claim-prototype/ethereum/contracts/Demo2Task.sol",
+        "file": "./Demo2Task.sol",
+        "id": 4,
+        "nodeType": "ImportDirective",
+        "scope": 158,
+        "sourceUnit": 476,
+        "src": "75:25:0",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/jordi/ws/bloomen-registry-claim-prototype/ethereum/contracts/Structs.sol",
+        "file": "./Structs.sol",
+        "id": 5,
+        "nodeType": "ImportDirective",
+        "scope": 158,
+        "sourceUnit": 2855,
+        "src": "101:23:0",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/jordi/ws/bloomen-registry-claim-prototype/ethereum/contracts/Demo2Wallet.sol",
+        "file": "./Demo2Wallet.sol",
+        "id": 6,
+        "nodeType": "ImportDirective",
+        "scope": 158,
+        "sourceUnit": 639,
+        "src": "125:27:0",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 7,
+              "name": "Ownable",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1014,
+              "src": "177:7:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Ownable_$1014",
+                "typeString": "contract Ownable"
+              }
+            },
+            "id": 8,
+            "nodeType": "InheritanceSpecifier",
+            "src": "177:7:0"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 9,
+              "name": "Structs",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 2854,
+              "src": "186:7:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Structs_$2854",
+                "typeString": "contract Structs"
+              }
+            },
+            "id": 10,
+            "nodeType": "InheritanceSpecifier",
+            "src": "186:7:0"
+          }
+        ],
+        "contractDependencies": [
+          1014,
+          2854
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 157,
+        "linearizedBaseContracts": [
+          157,
+          2854,
+          1014
+        ],
+        "name": "Demo2Claim",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "id": 13,
+            "libraryName": {
+              "contractScope": null,
+              "id": 11,
+              "name": "SafeMath",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1112,
+              "src": "207:8:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_SafeMath_$1112",
+                "typeString": "library SafeMath"
+              }
+            },
+            "nodeType": "UsingForDirective",
+            "src": "201:27:0",
+            "typeName": {
+              "id": 12,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "220:7:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            }
+          },
+          {
+            "constant": false,
+            "id": 17,
+            "name": "claims",
+            "nodeType": "VariableDeclaration",
+            "scope": 157,
+            "src": "234:40:0",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Claim_$2840_storage_$",
+              "typeString": "mapping(uint256 => struct Structs.Claim)"
+            },
+            "typeName": {
+              "id": 16,
+              "keyType": {
+                "id": 14,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "243:7:0",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "234:26:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Claim_$2840_storage_$",
+                "typeString": "mapping(uint256 => struct Structs.Claim)"
+              },
+              "valueType": {
+                "contractScope": null,
+                "id": 15,
+                "name": "Claim",
+                "nodeType": "UserDefinedTypeName",
+                "referencedDeclaration": 2840,
+                "src": "254:5:0",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Claim_$2840_storage_ptr",
+                  "typeString": "struct Structs.Claim"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 19,
+            "name": "claimsNumber",
+            "nodeType": "VariableDeclaration",
+            "scope": 157,
+            "src": "280:27:0",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 18,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "280:7:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 21,
+            "name": "eventManager_",
+            "nodeType": "VariableDeclaration",
+            "scope": 157,
+            "src": "314:33:0",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_Demo2Wallet_$638",
+              "typeString": "contract Demo2Wallet"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 20,
+              "name": "Demo2Wallet",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 638,
+              "src": "314:11:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Demo2Wallet_$638",
+                "typeString": "contract Demo2Wallet"
+              }
+            },
+            "value": null,
+            "visibility": "private"
+          },
+          {
+            "body": {
+              "id": 30,
+              "nodeType": "Block",
+              "src": "400:46:0",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 28,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 26,
+                      "name": "eventManager_",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 21,
+                      "src": "410:13:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_Demo2Wallet_$638",
+                        "typeString": "contract Demo2Wallet"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 27,
+                      "name": "_eventManager",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 23,
+                      "src": "426:13:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_Demo2Wallet_$638",
+                        "typeString": "contract Demo2Wallet"
+                      }
+                    },
+                    "src": "410:29:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_Demo2Wallet_$638",
+                      "typeString": "contract Demo2Wallet"
+                    }
+                  },
+                  "id": 29,
+                  "nodeType": "ExpressionStatement",
+                  "src": "410:29:0"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 31,
+            "implemented": true,
+            "isConstructor": true,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 24,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 23,
+                  "name": "_eventManager",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 31,
+                  "src": "366:25:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_Demo2Wallet_$638",
+                    "typeString": "contract Demo2Wallet"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 22,
+                    "name": "Demo2Wallet",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 638,
+                    "src": "366:11:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_Demo2Wallet_$638",
+                      "typeString": "contract Demo2Wallet"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "365:27:0"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 25,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "400:0:0"
+            },
+            "scope": 157,
+            "src": "354:92:0",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 96,
+              "nodeType": "Block",
+              "src": "550:471:0",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 47,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 42,
+                      "name": "claimsNumber",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 19,
+                      "src": "560:12:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "arguments": [
+                        {
+                          "argumentTypes": null,
+                          "hexValue": "31",
+                          "id": 45,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "kind": "number",
+                          "lValueRequested": false,
+                          "nodeType": "Literal",
+                          "src": "592:1:0",
+                          "subdenomination": null,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_rational_1_by_1",
+                            "typeString": "int_const 1"
+                          },
+                          "value": "1"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_rational_1_by_1",
+                            "typeString": "int_const 1"
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 43,
+                          "name": "claimsNumber",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 19,
+                          "src": "575:12:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "id": 44,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "add",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 1111,
+                        "src": "575:16:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
+                          "typeString": "function (uint256,uint256) pure returns (uint256)"
+                        }
+                      },
+                      "id": 46,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "functionCall",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "575:19:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "src": "560:34:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 48,
+                  "nodeType": "ExpressionStatement",
+                  "src": "560:34:0"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 60,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "baseExpression": {
+                        "argumentTypes": null,
+                        "id": 49,
+                        "name": "claims",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 17,
+                        "src": "604:6:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Claim_$2840_storage_$",
+                          "typeString": "mapping(uint256 => struct Structs.Claim storage ref)"
+                        }
+                      },
+                      "id": 51,
+                      "indexExpression": {
+                        "argumentTypes": null,
+                        "id": 50,
+                        "name": "claimsNumber",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 19,
+                        "src": "611:12:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "nodeType": "IndexAccess",
+                      "src": "604:20:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Claim_$2840_storage",
+                        "typeString": "struct Structs.Claim storage ref"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "arguments": [
+                        {
+                          "argumentTypes": null,
+                          "id": 53,
+                          "name": "_assetId",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 33,
+                          "src": "633:8:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        {
+                          "argumentTypes": null,
+                          "id": 54,
+                          "name": "_assetOwner",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 35,
+                          "src": "643:11:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        {
+                          "argumentTypes": null,
+                          "id": 55,
+                          "name": "_description",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 37,
+                          "src": "656:12:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_string_memory_ptr",
+                            "typeString": "string memory"
+                          }
+                        },
+                        {
+                          "argumentTypes": null,
+                          "id": 56,
+                          "name": "claimsNumber",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 19,
+                          "src": "670:12:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        {
+                          "argumentTypes": null,
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 57,
+                            "name": "msg",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 2869,
+                            "src": "684:3:0",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_magic_message",
+                              "typeString": "msg"
+                            }
+                          },
+                          "id": 58,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "sender",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": null,
+                          "src": "684:10:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          },
+                          {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          },
+                          {
+                            "typeIdentifier": "t_string_memory_ptr",
+                            "typeString": "string memory"
+                          },
+                          {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          },
+                          {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        ],
+                        "id": 52,
+                        "name": "Claim",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2840,
+                        "src": "627:5:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_struct$_Claim_$2840_storage_ptr_$",
+                          "typeString": "type(struct Structs.Claim storage pointer)"
+                        }
+                      },
+                      "id": 59,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "structConstructorCall",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "627:68:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Claim_$2840_memory",
+                        "typeString": "struct Structs.Claim memory"
+                      }
+                    },
+                    "src": "604:91:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Claim_$2840_storage",
+                      "typeString": "struct Structs.Claim storage ref"
+                    }
+                  },
+                  "id": 61,
+                  "nodeType": "ExpressionStatement",
+                  "src": "604:91:0"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 65,
+                        "name": "_assetId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 33,
+                        "src": "736:8:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 66,
+                        "name": "_assetOwner",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 35,
+                        "src": "746:11:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 67,
+                        "name": "_description",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 37,
+                        "src": "759:12:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 68,
+                        "name": "claimsNumber",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 19,
+                        "src": "773:12:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 69,
+                          "name": "msg",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 2869,
+                          "src": "787:3:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_magic_message",
+                            "typeString": "msg"
+                          }
+                        },
+                        "id": 70,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "sender",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": null,
+                        "src": "787:10:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 62,
+                        "name": "eventManager_",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 21,
+                        "src": "705:13:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_Demo2Wallet_$638",
+                          "typeString": "contract Demo2Wallet"
+                        }
+                      },
+                      "id": 64,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "emitClaimCreated",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 798,
+                      "src": "705:30:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_nonpayable$_t_uint256_$_t_address_$_t_string_memory_ptr_$_t_uint256_$_t_address_$returns$__$",
+                        "typeString": "function (uint256,address,string memory,uint256,address) external"
+                      }
+                    },
+                    "id": 71,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "705:93:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 72,
+                  "nodeType": "ExpressionStatement",
+                  "src": "705:93:0"
+                },
+                {
+                  "assignments": [
+                    74
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 74,
+                      "name": "taskAddress",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 97,
+                      "src": "808:19:0",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      },
+                      "typeName": {
+                        "id": 73,
+                        "name": "address",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "808:7:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 79,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 77,
+                        "name": "_assetOwner",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 35,
+                        "src": "859:11:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 75,
+                        "name": "eventManager_",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 21,
+                        "src": "830:13:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_Demo2Wallet_$638",
+                          "typeString": "contract Demo2Wallet"
+                        }
+                      },
+                      "id": 76,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "getTaskAddress",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 637,
+                      "src": "830:28:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_view$_t_address_$returns$_t_address_$",
+                        "typeString": "function (address) view external returns (address)"
+                      }
+                    },
+                    "id": 78,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "830:41:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "808:63:0"
+                },
+                {
+                  "assignments": [
+                    81
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 81,
+                      "name": "taskContract",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 97,
+                      "src": "881:22:0",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_Demo2Task_$475",
+                        "typeString": "contract Demo2Task"
+                      },
+                      "typeName": {
+                        "contractScope": null,
+                        "id": 80,
+                        "name": "Demo2Task",
+                        "nodeType": "UserDefinedTypeName",
+                        "referencedDeclaration": 475,
+                        "src": "881:9:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_Demo2Task_$475",
+                          "typeString": "contract Demo2Task"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 85,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 83,
+                        "name": "taskAddress",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 74,
+                        "src": "916:11:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "id": 82,
+                      "name": "Demo2Task",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 475,
+                      "src": "906:9:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_Demo2Task_$475_$",
+                        "typeString": "type(contract Demo2Task)"
+                      }
+                    },
+                    "id": 84,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "typeConversion",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "906:22:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_Demo2Task_$475",
+                      "typeString": "contract Demo2Task"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "881:47:0"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 89,
+                        "name": "_description",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 37,
+                        "src": "962:12:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 90,
+                        "name": "_assetOwner",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 35,
+                        "src": "976:11:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 91,
+                        "name": "claimsNumber",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 19,
+                        "src": "989:12:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 92,
+                          "name": "msg",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 2869,
+                          "src": "1003:3:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_magic_message",
+                            "typeString": "msg"
+                          }
+                        },
+                        "id": 93,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "sender",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": null,
+                        "src": "1003:10:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        },
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 86,
+                        "name": "taskContract",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 81,
+                        "src": "938:12:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_Demo2Task_$475",
+                          "typeString": "contract Demo2Task"
+                        }
+                      },
+                      "id": 88,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "createTask",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 414,
+                      "src": "938:23:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_nonpayable$_t_string_memory_ptr_$_t_address_$_t_uint256_$_t_address_$returns$__$",
+                        "typeString": "function (string memory,address,uint256,address) external"
+                      }
+                    },
+                    "id": 94,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "938:76:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 95,
+                  "nodeType": "ExpressionStatement",
+                  "src": "938:76:0"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 97,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [
+              {
+                "arguments": null,
+                "id": 40,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 39,
+                  "name": "onlyOwner",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 988,
+                  "src": "540:9:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$__$",
+                    "typeString": "modifier ()"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "540:9:0"
+              }
+            ],
+            "name": "createClaim",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 38,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 33,
+                  "name": "_assetId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 97,
+                  "src": "473:16:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 32,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "473:7:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 35,
+                  "name": "_assetOwner",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 97,
+                  "src": "491:19:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 34,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "491:7:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 37,
+                  "name": "_description",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 97,
+                  "src": "512:19:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 36,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "512:6:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "472:60:0"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 41,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "550:0:0"
+            },
+            "scope": 157,
+            "src": "452:569:0",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 155,
+              "nodeType": "Block",
+              "src": "1143:327:0",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "commonType": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        "id": 113,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "argumentTypes": null,
+                          "id": 111,
+                          "name": "_claimId",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 99,
+                          "src": "1161:8:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": ">",
+                        "rightExpression": {
+                          "argumentTypes": null,
+                          "hexValue": "30",
+                          "id": 112,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "kind": "number",
+                          "lValueRequested": false,
+                          "nodeType": "Literal",
+                          "src": "1172:1:0",
+                          "subdenomination": null,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_rational_0_by_1",
+                            "typeString": "int_const 0"
+                          },
+                          "value": "0"
+                        },
+                        "src": "1161:12:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      ],
+                      "id": 110,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        2872,
+                        2873
+                      ],
+                      "referencedDeclaration": 2872,
+                      "src": "1153:7:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
+                        "typeString": "function (bool) pure"
+                      }
+                    },
+                    "id": 114,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1153:21:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 115,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1153:21:0"
+                },
+                {
+                  "assignments": [
+                    117
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 117,
+                      "name": "claim",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 156,
+                      "src": "1184:19:0",
+                      "stateVariable": false,
+                      "storageLocation": "storage",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Claim_$2840_storage_ptr",
+                        "typeString": "struct Structs.Claim"
+                      },
+                      "typeName": {
+                        "contractScope": null,
+                        "id": 116,
+                        "name": "Claim",
+                        "nodeType": "UserDefinedTypeName",
+                        "referencedDeclaration": 2840,
+                        "src": "1184:5:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Claim_$2840_storage_ptr",
+                          "typeString": "struct Structs.Claim"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 121,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "baseExpression": {
+                      "argumentTypes": null,
+                      "id": 118,
+                      "name": "claims",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 17,
+                      "src": "1206:6:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Claim_$2840_storage_$",
+                        "typeString": "mapping(uint256 => struct Structs.Claim storage ref)"
+                      }
+                    },
+                    "id": 120,
+                    "indexExpression": {
+                      "argumentTypes": null,
+                      "id": 119,
+                      "name": "_claimId",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 99,
+                      "src": "1213:8:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "IndexAccess",
+                    "src": "1206:16:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Claim_$2840_storage",
+                      "typeString": "struct Structs.Claim storage ref"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "1184:38:0"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 126,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 122,
+                        "name": "claim",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 117,
+                        "src": "1232:5:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Claim_$2840_storage_ptr",
+                          "typeString": "struct Structs.Claim storage pointer"
+                        }
+                      },
+                      "id": 124,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "memberName": "assetId",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 2831,
+                      "src": "1232:13:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 125,
+                      "name": "_assetId",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 101,
+                      "src": "1248:8:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "src": "1232:24:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 127,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1232:24:0"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 132,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 128,
+                        "name": "claim",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 117,
+                        "src": "1266:5:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Claim_$2840_storage_ptr",
+                          "typeString": "struct Structs.Claim storage pointer"
+                        }
+                      },
+                      "id": 130,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "memberName": "assetOwner",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 2833,
+                      "src": "1266:16:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 131,
+                      "name": "_assetOwner",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 103,
+                      "src": "1285:11:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "src": "1266:30:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "id": 133,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1266:30:0"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 138,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 134,
+                        "name": "claim",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 117,
+                        "src": "1306:5:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Claim_$2840_storage_ptr",
+                          "typeString": "struct Structs.Claim storage pointer"
+                        }
+                      },
+                      "id": 136,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "memberName": "description",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 2835,
+                      "src": "1306:17:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_storage",
+                        "typeString": "string storage ref"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 137,
+                      "name": "_description",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 105,
+                      "src": "1326:12:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    },
+                    "src": "1306:32:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage",
+                      "typeString": "string storage ref"
+                    }
+                  },
+                  "id": 139,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1306:32:0"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 143,
+                          "name": "claim",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 117,
+                          "src": "1379:5:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_struct$_Claim_$2840_storage_ptr",
+                            "typeString": "struct Structs.Claim storage pointer"
+                          }
+                        },
+                        "id": 144,
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "assetId",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 2831,
+                        "src": "1379:13:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 145,
+                          "name": "claim",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 117,
+                          "src": "1394:5:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_struct$_Claim_$2840_storage_ptr",
+                            "typeString": "struct Structs.Claim storage pointer"
+                          }
+                        },
+                        "id": 146,
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "assetOwner",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 2833,
+                        "src": "1394:16:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 147,
+                          "name": "claim",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 117,
+                          "src": "1412:5:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_struct$_Claim_$2840_storage_ptr",
+                            "typeString": "struct Structs.Claim storage pointer"
+                          }
+                        },
+                        "id": 148,
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "description",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 2835,
+                        "src": "1412:17:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_storage",
+                          "typeString": "string storage ref"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 149,
+                          "name": "claim",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 117,
+                          "src": "1431:5:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_struct$_Claim_$2840_storage_ptr",
+                            "typeString": "struct Structs.Claim storage pointer"
+                          }
+                        },
+                        "id": 150,
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "claimId",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 2837,
+                        "src": "1431:13:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 151,
+                          "name": "claim",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 117,
+                          "src": "1446:5:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_struct$_Claim_$2840_storage_ptr",
+                            "typeString": "struct Structs.Claim storage pointer"
+                          }
+                        },
+                        "id": 152,
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "claimOwner",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 2839,
+                        "src": "1446:16:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        {
+                          "typeIdentifier": "t_string_storage",
+                          "typeString": "string storage ref"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 140,
+                        "name": "eventManager_",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 21,
+                        "src": "1348:13:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_Demo2Wallet_$638",
+                          "typeString": "contract Demo2Wallet"
+                        }
+                      },
+                      "id": 142,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "emitClaimUpdated",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 820,
+                      "src": "1348:30:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_nonpayable$_t_uint256_$_t_address_$_t_string_memory_ptr_$_t_uint256_$_t_address_$returns$__$",
+                        "typeString": "function (uint256,address,string memory,uint256,address) external"
+                      }
+                    },
+                    "id": 153,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1348:115:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 154,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1348:115:0"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 156,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [
+              {
+                "arguments": null,
+                "id": 108,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 107,
+                  "name": "onlyOwner",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 988,
+                  "src": "1133:9:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$__$",
+                    "typeString": "modifier ()"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "1133:9:0"
+              }
+            ],
+            "name": "updateClaim",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 106,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 99,
+                  "name": "_claimId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 156,
+                  "src": "1048:16:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 98,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1048:7:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 101,
+                  "name": "_assetId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 156,
+                  "src": "1066:16:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 100,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1066:7:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 103,
+                  "name": "_assetOwner",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 156,
+                  "src": "1084:19:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 102,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1084:7:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 105,
+                  "name": "_description",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 156,
+                  "src": "1105:19:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 104,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1105:6:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1047:78:0"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 109,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1143:0:0"
+            },
+            "scope": 157,
+            "src": "1027:443:0",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 158,
+        "src": "154:1319:0"
+      }
+    ],
+    "src": "0:1474:0"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/jordi/ws/bloomen-registry-claim-prototype/ethereum/contracts/Demo2Claim.sol",
+    "exportedSymbols": {
+      "Demo2Claim": [
+        157
+      ]
+    },
+    "id": 158,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".22"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:0"
+      },
+      {
+        "absolutePath": "/home/jordi/ws/bloomen-registry-claim-prototype/ethereum/contracts/Ownable.sol",
+        "file": "./Ownable.sol",
+        "id": 2,
+        "nodeType": "ImportDirective",
+        "scope": 158,
+        "sourceUnit": 1015,
+        "src": "26:23:0",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/jordi/ws/bloomen-registry-claim-prototype/ethereum/contracts/SafeMath.sol",
+        "file": "./SafeMath.sol",
+        "id": 3,
+        "nodeType": "ImportDirective",
+        "scope": 158,
+        "sourceUnit": 1113,
+        "src": "50:24:0",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/jordi/ws/bloomen-registry-claim-prototype/ethereum/contracts/Demo2Task.sol",
+        "file": "./Demo2Task.sol",
+        "id": 4,
+        "nodeType": "ImportDirective",
+        "scope": 158,
+        "sourceUnit": 476,
+        "src": "75:25:0",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/jordi/ws/bloomen-registry-claim-prototype/ethereum/contracts/Structs.sol",
+        "file": "./Structs.sol",
+        "id": 5,
+        "nodeType": "ImportDirective",
+        "scope": 158,
+        "sourceUnit": 2855,
+        "src": "101:23:0",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/jordi/ws/bloomen-registry-claim-prototype/ethereum/contracts/Demo2Wallet.sol",
+        "file": "./Demo2Wallet.sol",
+        "id": 6,
+        "nodeType": "ImportDirective",
+        "scope": 158,
+        "sourceUnit": 639,
+        "src": "125:27:0",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 7,
+              "name": "Ownable",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1014,
+              "src": "177:7:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Ownable_$1014",
+                "typeString": "contract Ownable"
+              }
+            },
+            "id": 8,
+            "nodeType": "InheritanceSpecifier",
+            "src": "177:7:0"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 9,
+              "name": "Structs",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 2854,
+              "src": "186:7:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Structs_$2854",
+                "typeString": "contract Structs"
+              }
+            },
+            "id": 10,
+            "nodeType": "InheritanceSpecifier",
+            "src": "186:7:0"
+          }
+        ],
+        "contractDependencies": [
+          1014,
+          2854
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 157,
+        "linearizedBaseContracts": [
+          157,
+          2854,
+          1014
+        ],
+        "name": "Demo2Claim",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "id": 13,
+            "libraryName": {
+              "contractScope": null,
+              "id": 11,
+              "name": "SafeMath",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1112,
+              "src": "207:8:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_SafeMath_$1112",
+                "typeString": "library SafeMath"
+              }
+            },
+            "nodeType": "UsingForDirective",
+            "src": "201:27:0",
+            "typeName": {
+              "id": 12,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "220:7:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            }
+          },
+          {
+            "constant": false,
+            "id": 17,
+            "name": "claims",
+            "nodeType": "VariableDeclaration",
+            "scope": 157,
+            "src": "234:40:0",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Claim_$2840_storage_$",
+              "typeString": "mapping(uint256 => struct Structs.Claim)"
+            },
+            "typeName": {
+              "id": 16,
+              "keyType": {
+                "id": 14,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "243:7:0",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "234:26:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Claim_$2840_storage_$",
+                "typeString": "mapping(uint256 => struct Structs.Claim)"
+              },
+              "valueType": {
+                "contractScope": null,
+                "id": 15,
+                "name": "Claim",
+                "nodeType": "UserDefinedTypeName",
+                "referencedDeclaration": 2840,
+                "src": "254:5:0",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Claim_$2840_storage_ptr",
+                  "typeString": "struct Structs.Claim"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 19,
+            "name": "claimsNumber",
+            "nodeType": "VariableDeclaration",
+            "scope": 157,
+            "src": "280:27:0",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 18,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "280:7:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 21,
+            "name": "eventManager_",
+            "nodeType": "VariableDeclaration",
+            "scope": 157,
+            "src": "314:33:0",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_Demo2Wallet_$638",
+              "typeString": "contract Demo2Wallet"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 20,
+              "name": "Demo2Wallet",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 638,
+              "src": "314:11:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Demo2Wallet_$638",
+                "typeString": "contract Demo2Wallet"
+              }
+            },
+            "value": null,
+            "visibility": "private"
+          },
+          {
+            "body": {
+              "id": 30,
+              "nodeType": "Block",
+              "src": "400:46:0",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 28,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 26,
+                      "name": "eventManager_",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 21,
+                      "src": "410:13:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_Demo2Wallet_$638",
+                        "typeString": "contract Demo2Wallet"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 27,
+                      "name": "_eventManager",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 23,
+                      "src": "426:13:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_Demo2Wallet_$638",
+                        "typeString": "contract Demo2Wallet"
+                      }
+                    },
+                    "src": "410:29:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_Demo2Wallet_$638",
+                      "typeString": "contract Demo2Wallet"
+                    }
+                  },
+                  "id": 29,
+                  "nodeType": "ExpressionStatement",
+                  "src": "410:29:0"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 31,
+            "implemented": true,
+            "isConstructor": true,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 24,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 23,
+                  "name": "_eventManager",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 31,
+                  "src": "366:25:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_Demo2Wallet_$638",
+                    "typeString": "contract Demo2Wallet"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 22,
+                    "name": "Demo2Wallet",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 638,
+                    "src": "366:11:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_Demo2Wallet_$638",
+                      "typeString": "contract Demo2Wallet"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "365:27:0"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 25,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "400:0:0"
+            },
+            "scope": 157,
+            "src": "354:92:0",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 96,
+              "nodeType": "Block",
+              "src": "550:471:0",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 47,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 42,
+                      "name": "claimsNumber",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 19,
+                      "src": "560:12:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "arguments": [
+                        {
+                          "argumentTypes": null,
+                          "hexValue": "31",
+                          "id": 45,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "kind": "number",
+                          "lValueRequested": false,
+                          "nodeType": "Literal",
+                          "src": "592:1:0",
+                          "subdenomination": null,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_rational_1_by_1",
+                            "typeString": "int_const 1"
+                          },
+                          "value": "1"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_rational_1_by_1",
+                            "typeString": "int_const 1"
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 43,
+                          "name": "claimsNumber",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 19,
+                          "src": "575:12:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "id": 44,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "add",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 1111,
+                        "src": "575:16:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
+                          "typeString": "function (uint256,uint256) pure returns (uint256)"
+                        }
+                      },
+                      "id": 46,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "functionCall",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "575:19:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "src": "560:34:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 48,
+                  "nodeType": "ExpressionStatement",
+                  "src": "560:34:0"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 60,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "baseExpression": {
+                        "argumentTypes": null,
+                        "id": 49,
+                        "name": "claims",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 17,
+                        "src": "604:6:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Claim_$2840_storage_$",
+                          "typeString": "mapping(uint256 => struct Structs.Claim storage ref)"
+                        }
+                      },
+                      "id": 51,
+                      "indexExpression": {
+                        "argumentTypes": null,
+                        "id": 50,
+                        "name": "claimsNumber",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 19,
+                        "src": "611:12:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "nodeType": "IndexAccess",
+                      "src": "604:20:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Claim_$2840_storage",
+                        "typeString": "struct Structs.Claim storage ref"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "arguments": [
+                        {
+                          "argumentTypes": null,
+                          "id": 53,
+                          "name": "_assetId",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 33,
+                          "src": "633:8:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        {
+                          "argumentTypes": null,
+                          "id": 54,
+                          "name": "_assetOwner",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 35,
+                          "src": "643:11:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        {
+                          "argumentTypes": null,
+                          "id": 55,
+                          "name": "_description",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 37,
+                          "src": "656:12:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_string_memory_ptr",
+                            "typeString": "string memory"
+                          }
+                        },
+                        {
+                          "argumentTypes": null,
+                          "id": 56,
+                          "name": "claimsNumber",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 19,
+                          "src": "670:12:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        {
+                          "argumentTypes": null,
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 57,
+                            "name": "msg",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 2869,
+                            "src": "684:3:0",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_magic_message",
+                              "typeString": "msg"
+                            }
+                          },
+                          "id": 58,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "sender",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": null,
+                          "src": "684:10:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          },
+                          {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          },
+                          {
+                            "typeIdentifier": "t_string_memory_ptr",
+                            "typeString": "string memory"
+                          },
+                          {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          },
+                          {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        ],
+                        "id": 52,
+                        "name": "Claim",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 2840,
+                        "src": "627:5:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_struct$_Claim_$2840_storage_ptr_$",
+                          "typeString": "type(struct Structs.Claim storage pointer)"
+                        }
+                      },
+                      "id": 59,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "structConstructorCall",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "627:68:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Claim_$2840_memory",
+                        "typeString": "struct Structs.Claim memory"
+                      }
+                    },
+                    "src": "604:91:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Claim_$2840_storage",
+                      "typeString": "struct Structs.Claim storage ref"
+                    }
+                  },
+                  "id": 61,
+                  "nodeType": "ExpressionStatement",
+                  "src": "604:91:0"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 65,
+                        "name": "_assetId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 33,
+                        "src": "736:8:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 66,
+                        "name": "_assetOwner",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 35,
+                        "src": "746:11:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 67,
+                        "name": "_description",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 37,
+                        "src": "759:12:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 68,
+                        "name": "claimsNumber",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 19,
+                        "src": "773:12:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 69,
+                          "name": "msg",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 2869,
+                          "src": "787:3:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_magic_message",
+                            "typeString": "msg"
+                          }
+                        },
+                        "id": 70,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "sender",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": null,
+                        "src": "787:10:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 62,
+                        "name": "eventManager_",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 21,
+                        "src": "705:13:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_Demo2Wallet_$638",
+                          "typeString": "contract Demo2Wallet"
+                        }
+                      },
+                      "id": 64,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "emitClaimCreated",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 798,
+                      "src": "705:30:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_nonpayable$_t_uint256_$_t_address_$_t_string_memory_ptr_$_t_uint256_$_t_address_$returns$__$",
+                        "typeString": "function (uint256,address,string memory,uint256,address) external"
+                      }
+                    },
+                    "id": 71,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "705:93:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 72,
+                  "nodeType": "ExpressionStatement",
+                  "src": "705:93:0"
+                },
+                {
+                  "assignments": [
+                    74
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 74,
+                      "name": "taskAddress",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 97,
+                      "src": "808:19:0",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      },
+                      "typeName": {
+                        "id": 73,
+                        "name": "address",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "808:7:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 79,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 77,
+                        "name": "_assetOwner",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 35,
+                        "src": "859:11:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 75,
+                        "name": "eventManager_",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 21,
+                        "src": "830:13:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_Demo2Wallet_$638",
+                          "typeString": "contract Demo2Wallet"
+                        }
+                      },
+                      "id": 76,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "getTaskAddress",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 637,
+                      "src": "830:28:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_view$_t_address_$returns$_t_address_$",
+                        "typeString": "function (address) view external returns (address)"
+                      }
+                    },
+                    "id": 78,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "830:41:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "808:63:0"
+                },
+                {
+                  "assignments": [
+                    81
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 81,
+                      "name": "taskContract",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 97,
+                      "src": "881:22:0",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_Demo2Task_$475",
+                        "typeString": "contract Demo2Task"
+                      },
+                      "typeName": {
+                        "contractScope": null,
+                        "id": 80,
+                        "name": "Demo2Task",
+                        "nodeType": "UserDefinedTypeName",
+                        "referencedDeclaration": 475,
+                        "src": "881:9:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_Demo2Task_$475",
+                          "typeString": "contract Demo2Task"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 85,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 83,
+                        "name": "taskAddress",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 74,
+                        "src": "916:11:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "id": 82,
+                      "name": "Demo2Task",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 475,
+                      "src": "906:9:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_contract$_Demo2Task_$475_$",
+                        "typeString": "type(contract Demo2Task)"
+                      }
+                    },
+                    "id": 84,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "typeConversion",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "906:22:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_Demo2Task_$475",
+                      "typeString": "contract Demo2Task"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "881:47:0"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 89,
+                        "name": "_description",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 37,
+                        "src": "962:12:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 90,
+                        "name": "_assetOwner",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 35,
+                        "src": "976:11:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 91,
+                        "name": "claimsNumber",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 19,
+                        "src": "989:12:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 92,
+                          "name": "msg",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 2869,
+                          "src": "1003:3:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_magic_message",
+                            "typeString": "msg"
+                          }
+                        },
+                        "id": 93,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "sender",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": null,
+                        "src": "1003:10:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        },
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 86,
+                        "name": "taskContract",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 81,
+                        "src": "938:12:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_Demo2Task_$475",
+                          "typeString": "contract Demo2Task"
+                        }
+                      },
+                      "id": 88,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "createTask",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 414,
+                      "src": "938:23:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_nonpayable$_t_string_memory_ptr_$_t_address_$_t_uint256_$_t_address_$returns$__$",
+                        "typeString": "function (string memory,address,uint256,address) external"
+                      }
+                    },
+                    "id": 94,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "938:76:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 95,
+                  "nodeType": "ExpressionStatement",
+                  "src": "938:76:0"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 97,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [
+              {
+                "arguments": null,
+                "id": 40,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 39,
+                  "name": "onlyOwner",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 988,
+                  "src": "540:9:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$__$",
+                    "typeString": "modifier ()"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "540:9:0"
+              }
+            ],
+            "name": "createClaim",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 38,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 33,
+                  "name": "_assetId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 97,
+                  "src": "473:16:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 32,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "473:7:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 35,
+                  "name": "_assetOwner",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 97,
+                  "src": "491:19:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 34,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "491:7:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 37,
+                  "name": "_description",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 97,
+                  "src": "512:19:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 36,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "512:6:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "472:60:0"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 41,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "550:0:0"
+            },
+            "scope": 157,
+            "src": "452:569:0",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 155,
+              "nodeType": "Block",
+              "src": "1143:327:0",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "commonType": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        "id": 113,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "argumentTypes": null,
+                          "id": 111,
+                          "name": "_claimId",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 99,
+                          "src": "1161:8:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": ">",
+                        "rightExpression": {
+                          "argumentTypes": null,
+                          "hexValue": "30",
+                          "id": 112,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "kind": "number",
+                          "lValueRequested": false,
+                          "nodeType": "Literal",
+                          "src": "1172:1:0",
+                          "subdenomination": null,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_rational_0_by_1",
+                            "typeString": "int_const 0"
+                          },
+                          "value": "0"
+                        },
+                        "src": "1161:12:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      ],
+                      "id": 110,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        2872,
+                        2873
+                      ],
+                      "referencedDeclaration": 2872,
+                      "src": "1153:7:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
+                        "typeString": "function (bool) pure"
+                      }
+                    },
+                    "id": 114,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1153:21:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 115,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1153:21:0"
+                },
+                {
+                  "assignments": [
+                    117
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 117,
+                      "name": "claim",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 156,
+                      "src": "1184:19:0",
+                      "stateVariable": false,
+                      "storageLocation": "storage",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Claim_$2840_storage_ptr",
+                        "typeString": "struct Structs.Claim"
+                      },
+                      "typeName": {
+                        "contractScope": null,
+                        "id": 116,
+                        "name": "Claim",
+                        "nodeType": "UserDefinedTypeName",
+                        "referencedDeclaration": 2840,
+                        "src": "1184:5:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Claim_$2840_storage_ptr",
+                          "typeString": "struct Structs.Claim"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 121,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "baseExpression": {
+                      "argumentTypes": null,
+                      "id": 118,
+                      "name": "claims",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 17,
+                      "src": "1206:6:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Claim_$2840_storage_$",
+                        "typeString": "mapping(uint256 => struct Structs.Claim storage ref)"
+                      }
+                    },
+                    "id": 120,
+                    "indexExpression": {
+                      "argumentTypes": null,
+                      "id": 119,
+                      "name": "_claimId",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 99,
+                      "src": "1213:8:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "IndexAccess",
+                    "src": "1206:16:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Claim_$2840_storage",
+                      "typeString": "struct Structs.Claim storage ref"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "1184:38:0"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 126,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 122,
+                        "name": "claim",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 117,
+                        "src": "1232:5:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Claim_$2840_storage_ptr",
+                          "typeString": "struct Structs.Claim storage pointer"
+                        }
+                      },
+                      "id": 124,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "memberName": "assetId",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 2831,
+                      "src": "1232:13:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 125,
+                      "name": "_assetId",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 101,
+                      "src": "1248:8:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "src": "1232:24:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 127,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1232:24:0"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 132,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 128,
+                        "name": "claim",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 117,
+                        "src": "1266:5:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Claim_$2840_storage_ptr",
+                          "typeString": "struct Structs.Claim storage pointer"
+                        }
+                      },
+                      "id": 130,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "memberName": "assetOwner",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 2833,
+                      "src": "1266:16:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 131,
+                      "name": "_assetOwner",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 103,
+                      "src": "1285:11:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "src": "1266:30:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "id": 133,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1266:30:0"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 138,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 134,
+                        "name": "claim",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 117,
+                        "src": "1306:5:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Claim_$2840_storage_ptr",
+                          "typeString": "struct Structs.Claim storage pointer"
+                        }
+                      },
+                      "id": 136,
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "memberName": "description",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 2835,
+                      "src": "1306:17:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_storage",
+                        "typeString": "string storage ref"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 137,
+                      "name": "_description",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 105,
+                      "src": "1326:12:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_string_memory_ptr",
+                        "typeString": "string memory"
+                      }
+                    },
+                    "src": "1306:32:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage",
+                      "typeString": "string storage ref"
+                    }
+                  },
+                  "id": 139,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1306:32:0"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 143,
+                          "name": "claim",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 117,
+                          "src": "1379:5:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_struct$_Claim_$2840_storage_ptr",
+                            "typeString": "struct Structs.Claim storage pointer"
+                          }
+                        },
+                        "id": 144,
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "assetId",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 2831,
+                        "src": "1379:13:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 145,
+                          "name": "claim",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 117,
+                          "src": "1394:5:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_struct$_Claim_$2840_storage_ptr",
+                            "typeString": "struct Structs.Claim storage pointer"
+                          }
+                        },
+                        "id": 146,
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "assetOwner",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 2833,
+                        "src": "1394:16:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 147,
+                          "name": "claim",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 117,
+                          "src": "1412:5:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_struct$_Claim_$2840_storage_ptr",
+                            "typeString": "struct Structs.Claim storage pointer"
+                          }
+                        },
+                        "id": 148,
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "description",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 2835,
+                        "src": "1412:17:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_storage",
+                          "typeString": "string storage ref"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 149,
+                          "name": "claim",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 117,
+                          "src": "1431:5:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_struct$_Claim_$2840_storage_ptr",
+                            "typeString": "struct Structs.Claim storage pointer"
+                          }
+                        },
+                        "id": 150,
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "claimId",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 2837,
+                        "src": "1431:13:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 151,
+                          "name": "claim",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 117,
+                          "src": "1446:5:0",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_struct$_Claim_$2840_storage_ptr",
+                            "typeString": "struct Structs.Claim storage pointer"
+                          }
+                        },
+                        "id": 152,
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "claimOwner",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 2839,
+                        "src": "1446:16:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        {
+                          "typeIdentifier": "t_string_storage",
+                          "typeString": "string storage ref"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 140,
+                        "name": "eventManager_",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 21,
+                        "src": "1348:13:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_Demo2Wallet_$638",
+                          "typeString": "contract Demo2Wallet"
+                        }
+                      },
+                      "id": 142,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "emitClaimUpdated",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 820,
+                      "src": "1348:30:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_nonpayable$_t_uint256_$_t_address_$_t_string_memory_ptr_$_t_uint256_$_t_address_$returns$__$",
+                        "typeString": "function (uint256,address,string memory,uint256,address) external"
+                      }
+                    },
+                    "id": 153,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1348:115:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 154,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1348:115:0"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 156,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [
+              {
+                "arguments": null,
+                "id": 108,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 107,
+                  "name": "onlyOwner",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 988,
+                  "src": "1133:9:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$__$",
+                    "typeString": "modifier ()"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "1133:9:0"
+              }
+            ],
+            "name": "updateClaim",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 106,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 99,
+                  "name": "_claimId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 156,
+                  "src": "1048:16:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 98,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1048:7:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 101,
+                  "name": "_assetId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 156,
+                  "src": "1066:16:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 100,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1066:7:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 103,
+                  "name": "_assetOwner",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 156,
+                  "src": "1084:19:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 102,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1084:7:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 105,
+                  "name": "_description",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 156,
+                  "src": "1105:19:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 104,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1105:6:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1047:78:0"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 109,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1143:0:0"
+            },
+            "scope": 157,
+            "src": "1027:443:0",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 158,
+        "src": "154:1319:0"
+      }
+    ],
+    "src": "0:1474:0"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.1",
+  "updatedAt": "2019-01-09T13:49:51.670Z"
+}
