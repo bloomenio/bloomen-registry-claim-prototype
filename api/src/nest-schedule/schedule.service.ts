@@ -61,12 +61,12 @@ export class ScheduleService extends NestSchedule {
     async syncData() {
         console.log('Syncing blocks ...');
 
-        let latest_block: any = await web3.eth.getBlock('latest');
+        const latest_block: number = await web3.eth.getBlockNumber();
 
-        if (latest_block.number > this.last_block_number) {
+        if (latest_block > this.last_block_number) {
             walletContract.getPastEvents('AssetCreated', { fromBlock: this.last_block_number + 1, toBlock: latest_block.number })
                 .then(async events => {
-                    this.last_block_number = latest_block.number;
+                    this.last_block_number = latest_block;
                     if (events.length > 0) {
                         console.log(events.length + " new events.");
                         console.log('Saving to Solr ...');
