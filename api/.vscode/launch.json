@@ -18,6 +18,22 @@
         {
             "type": "node",
             "request": "launch",
+            "name": "Debug API",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": [
+                "run-script",
+                "start:dev"
+            ],
+            "protocol": "auto",
+            "restart": true,
+            "sourceMaps": true,
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "openOnSessionStart",
+            "port": 9229
+        },
+        {
+            "type": "node",
+            "request": "launch",
             "name": "test",
             "runtimeArgs": [
                 "-r",
